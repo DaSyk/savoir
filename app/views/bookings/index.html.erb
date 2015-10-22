@@ -1,0 +1,95 @@
+<%- model_class = Booking -%>
+
+<div class="page-header">
+  <h3>Buchungsanfragen für "<%= @house.name %>"</h3>
+</div>
+
+
+<ul class="nav nav-tabs" role="tablist">
+  <li role="presentation" class="active"><a href="#open" aria-controls="open" role="tab" data-toggle="tab">Offen</a></li>
+  <li role="presentation"><a href="#accepted" aria-controls="accepted" role="tab" data-toggle="tab">Angenommen</a></li>
+</ul>
+
+<div class="tab-content">
+  <div role="tabpanel" class="tab-pane fade in active" id="open">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Start</th>
+          <th>Ende</th>
+          <th>Nachname</th>
+          <th>Datum</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @bookings.where(accepted: false).each do |booking| %>
+          <tr>
+            <td><%= booking.id %></td>
+            <td><%= booking.start_date %></td>
+            <td><%= booking.end_date %></td>
+            <td><%= booking.lastname %></td>
+            <td><%=l booking.created_at, format: :short %></td>
+            <td>
+              <%= link_to house_booking_path(@house,booking), :class => 'btn btn-primary', :title => "Anzeigen" do %>
+                <%= glyph 'search' %>
+              <%- end -%>
+              <%= link_to edit_house_booking_path(@house,booking), :class => 'btn btn-warning', :title => "Bearbeiten" do %>
+                <%= glyph 'pencil' %>
+              <%- end -%>
+              <%= link_to house_booking_path(@house,booking), :method => :delete, :data => { :confirm => "Sicher?" }, :class => 'btn btn-danger', :title => "Löschen" do %>
+                <%= glyph 'remove' %>
+              <%- end -%>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div role="tabpanel" class="tab-pane fade" id="accepted">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Start</th>
+        <th>Ende</th>
+        <th>Nachname</th>
+        <th>Datum</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @bookings.where(accepted: true).each do |booking| %>
+          <tr>
+            <td><%= booking.id %></td>
+            <td><%= booking.start_date %></td>
+            <td><%= booking.end_date %></td>
+            <td><%= booking.lastname %></td>
+            <td><%=l booking.created_at, format: :short %></td>
+            <td>
+              <%= link_to house_booking_path(@house,booking), :class => 'btn btn-primary', :title => "Anzeigen" do %>
+                  <%= glyph 'search' %>
+              <%- end -%>
+              <%= link_to edit_house_booking_path(@house,booking), :class => 'btn btn-warning', :title => "Bearbeiten" do %>
+                  <%= glyph 'pencil' %>
+              <%- end -%>
+              <%= link_to house_booking_path(@house,booking), :method => :delete, :data => { :confirm => "Sicher?" }, :class => 'btn btn-danger', :title => "Löschen" do %>
+                  <%= glyph 'remove' %>
+              <%- end -%>
+            </td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<hr>
+
+<%= link_to new_house_booking_path(@house), :title => "Neue Buchung", :class => 'btn btn-primary' do %>
+    <%= glyph 'plus' %> Buchung hinzufügen
+<% end %>
+
+<%= link_to "Zurück", houses_path, :class => 'btn btn-default' %>

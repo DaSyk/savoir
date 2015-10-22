@@ -1,0 +1,7 @@
+# encoding: UTF-8
+
+<% if @picture.new_record? %>
+    alert("Das Dateiformat wird nicht unterstützt!")
+<% else %>
+    $("#pictures").append("<%= j render (@picture) %>");
+<% end %>

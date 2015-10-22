@@ -1,0 +1,11 @@
+# encoding: UTF-8
+
+<div class="picture">
+    <%= link_to "X", house_picture_path(@house, picture), :confirm => 'Are you sure?', :method => :delete, :class => "close-image" %>
+    <%= image_tag picture.image_url(:thumb).to_s if picture.image? %>
+    <div class="name"><%= picture.name %></div>
+    <div class="actions">
+
+    </div>
+
+</div>

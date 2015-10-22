@@ -1,0 +1,28 @@
+# encoding: UTF-8
+
+<h2>Bilder für das Haus "<%= @house.name %>":</h2>
+
+<hr>
+
+<div id="pictures">
+  <%= render @pictures %>
+</div>
+
+<%= form_for [@house, @house.pictures.new] do |f| %>
+    <%= f.label :image, "Upload" %>
+    <%= f.file_field :image, multiple: true, name: "picture[image]" %>
+<% end %>
+
+<script id="template-upload" type="text/x-tmpl">
+<div class="upload">
+    {%=o.name%}
+  <div class="progress"><div class="bar" style="width: 0%"></div></div>
+</div>
+</script>
+
+<hr>
+
+<div class="form-group">
+<%= link_to "Zurück",
+            houses_path, :class => 'btn btn-default'  %>
+</div>

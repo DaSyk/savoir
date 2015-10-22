@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  pets: MyString
+  allergic: MyString
+  family: MyString
+  horse: MyString
+  dog: MyString
+  senior: MyString
+  baby: MyString
+  monteur: MyString
+  nsmoker: MyString
+  longtime: MyString
+  disability: MyString
+
+two:
+  pets: MyString
+  allergic: MyString
+  family: MyString
+  horse: MyString
+  dog: MyString
+  senior: MyString
+  baby: MyString
+  monteur: MyString
+  nsmoker: MyString
+  longtime: MyString
+  disability: MyString

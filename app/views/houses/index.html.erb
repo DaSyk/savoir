@@ -1,0 +1,59 @@
+<%- model_class = House -%>
+<div class="page-header">
+  <h1>Häuserliste</h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:region_id) %></th>
+      <th>Land</th>
+      <th>Buchungen/Neue</th>
+      <th>Aktiv?</th>
+      <th>Letzte Bearbeitung</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @houses.each do |house| %>
+      <tr>
+          <td><%= house.name %></td>
+          <td><%= house.region.name if house.region_id %></td>
+          <td><%= house.region.country.name if house.region_id %></td>
+          <td><%= link_to "#{house.bookings.count} - 0", house_bookings_path(house), :class => "btn btn-default" %></td>
+          <td><%= house.activated %></td>
+        <td><%=l house.updated_at, format: :short %></td>
+        <td>
+          <%= link_to house_path(house), :class => 'btn btn-primary', :title => "Anzeigen" do %>
+              <%= glyph 'search' %>
+          <%- end -%>
+          <%= link_to house_pictures_path(house), :class => 'btn btn-default', :title => "Bilder" do %>
+              <%= glyph 'picture' %>
+          <% end %>
+          <%= link_to edit_house_path(house), :class => 'btn btn-warning', :title => "Bearbeiten", data: {no_turbolink: true } do %>
+              <%= glyph 'pencil' %>
+          <% end %>
+          <%= link_to house_path(house), :method => :delete, :data => { :confirm => 'Sicher?' }, :class => 'btn btn-danger', :title => "Löschen" do %>
+              <%= glyph 'remove' %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<hr>
+<%= link_to houses_path, method: :post, :class => 'btn btn-primary', :title => 'Haus hinzufügen' do %>
+    <%= glyph 'plus' %> Haus hinzufügen
+<% end %>
+
+<%= link_to edit_place_path, :class => 'btn btn-default', :title => 'Länder/Regionen bearbeiten' do %>
+    <%= glyph 'pencil' %> Länder/Regionen bearbeiten
+<% end %>
+
+<%= link_to edit_page_config_path, :class => 'btn btn-default', :title => 'Texte bearbeiten' do %>
+    <%= glyph 'pencil' %> Texte bearbeiten
+<% end %>
+
+<%= link_to edit_admin_registration_path, :class => 'btn btn-default', :title => 'Adminprofil bearbeiten' do %>
+    <%= glyph 'pencil' %> Adminprofil bearbeiten
+<% end %>

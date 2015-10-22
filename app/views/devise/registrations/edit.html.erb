@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 jumbotron">
+    <h3 style="text-align: center;">Adminprofil bearbeiten</h3><hr>
+
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= f.error_notification %>
+
+      <div class="form-inputs">
+        <%= f.input :email, required: true, autofocus: true %><hr>
+        <%= f.input :password, label: 'Neues Passwort', autocomplete: "off", required: false %>
+        <%= f.input :password_confirmation, label: 'Neues Passwort bestätigen', hint: "Beide Felder frei lassen, wenn das Passwort nicht geändert werden soll.", required: false %><hr>
+        <%= f.input :current_password, label: 'Aktuelles Passwort', hint: "Das Passwort wird zur Bestätigung aller Änderungen benötigt.", required: true %>
+      </div>
+      <hr>
+      <div class="center-block">
+        <div class="form-group text-center">
+          <%= f.button :submit, "Speichern", class: 'btn btn-primary' %> oder
+          <%= link_to "Zurück", :back, class: 'btn btn-default' %>
+        </div>
+      </div>
+
+    <% end %>
+  </div>
+</div>

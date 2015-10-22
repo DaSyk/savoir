@@ -1,0 +1,145 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require jquery-ui/datepicker
+ */
+
+@import "bootstrap-sprockets";
+@import 'bootstrap-custom';
+@import 'daterangepicker-bs3';
+
+.navbar-brand {
+  font-family: 'Matura MT Script Capitals', arial;
+  font-size: 1.8em;
+}
+
+body {
+  background-color: #C0C0C0;
+  padding-top: 55px;
+}
+
+.container {
+  background-color: white;
+}
+
+#new_picture {
+  clear: both;
+}
+
+.picture {
+  border: solid 1px #CCC;
+  padding: 10px;
+  float: left;
+  margin-right: 20px;
+  margin-bottom: 20px;
+
+  .name {
+    padding-top: 5px;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .actions {
+    font-size: 10px;
+    text-align: center;
+    color: #777;
+  }
+}
+
+.upload {
+  border-top: solid 1px #CCC;
+  width: 400px;
+  padding-top: 10px;
+  margin-top: 10px;
+
+  .progress {
+    margin-top: 8px;
+    border: solid 1px #555;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    .bar {
+      height: 10px;
+      background: #3EC144;
+    }
+  }
+}
+
+.close-image {
+  display: block;
+  float:right;
+  position:relative;
+  top:-10px;
+  right: -10px;
+  height: 20px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+ul.nav-tabs {
+  color: black;
+  font-size: 1.2em;
+}
+
+/* Tab Navigation */
+.nav-tabs {
+  padding: 0;
+  border: 0;
+}
+
+form > ul.nav-tabs {
+  margin-bottom: -20px;
+}
+
+.nav-tabs > li > a,
+.nav-tabs > li > a:visited {
+  background: #DADADA;
+  border-radius: 0;
+  margin-right: 4px;
+  color: black;
+}
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover {
+  background: #F5F5F5;
+  border-radius: 0;
+}
+
+/* Tab Content */
+.tab-pane {
+  background: #F5F5F5;
+  padding: 10px;
+  border-width: 1px;
+  border-color: #ddd #ddd transparent !important;
+}
+
+td > div.form-group > input,
+td > div.form-group > select,
+td > div.form-group > .btn {
+  margin-bottom: -14px;
+}
+
+.jumbotron p {
+  font-size: 15px;
+}
+
+.help-block {
+  clear: left;
+  color: #555;
+  display: block;
+  font-style: italic;
+}
+
+.jumbotron > form > div > hr,
+.jumbotron > form > hr {
+  border-top-color: #d5d5d5;
+}
