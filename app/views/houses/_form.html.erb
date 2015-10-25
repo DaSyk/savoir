@@ -1,17 +1,18 @@
 <%= simple_nested_form_for @house, :html => { :class => 'form-vertical' }, wrapper: :vertical_form, wrapper_mappings: { check_boxes: :horizontal_radio_and_checkboxes, radio_buttons: :horizontal_radio_and_checkboxes, file: :horizontal_file_input, boolean: :horizontal_boolean } do |f| %>
 
-    <ul class="nav nav-tabs" role="tablist">
-      <li role="presentation" class="active"><a href="#allgemein" aria-controls="allgemein" role="tab" data-toggle="tab">Allgemein</a></li>
-      <li role="presentation"><a href="#reqs" aria-controls="reqs" role="tab" data-toggle="tab">Eignungen</a></li>
-      <li role="presentation"><a href="#pricing" aria-controls="pricing" role="tab" data-toggle="tab">Preisliste</a></li>
-      <li role="presentation"><a href="#prices" aria-controls="prices" role="tab" data-toggle="tab">Zusatzkosten</a></li>
+    <ul class='nav nav-tabs' role='tablist'>
+      <li role='presentation' class='active'><a href='#allgemein' aria-controls='allgemein' role='tab' data-toggle='tab'>Allgemein</a></li>
+      <li role='presentation'><a href='#reqs' aria-controls='reqs' role='tab' data-toggle='tab'>Eignung</a></li>
+      <li role='presentation'><a href='#facility' aria-controls='facility' role='tab' data-toggle='tab'>Ausstattung</a></li>
+      <li role='presentation'><a href='#pricing' aria-controls='pricing' role='tab' data-toggle='tab'>Preisliste</a></li>
+      <li role='presentation'><a href='#prices' aria-controls='prices' role='tab' data-toggle='tab'>Zusatzkosten</a></li>
     </ul>
 
     <br>
 
-    <div class="tab-content">
-      <div role="tabpanel" class="tab-pane fade in active" id="allgemein">
-        <h3 style="text-align: center;">Allgemeine Informationen</h3><hr>
+    <div class='tab-content'>
+      <div role='tabpanel' class='tab-pane fade in active' id='allgemein'>
+        <h3 style='text-align: center;'>Allgemeine Informationen</h3><hr>
             <div class='row'>
               <div class='col-md-4'>
                 <%= f.input :name %>
@@ -20,42 +21,42 @@
                 <%= f.association :region, prompt: 'Wähle eine Region', collection: Region.order('country_id'), :label_method => lambda { |region| "#{region.name} in #{region.country.name}" } %>
               </div>
               <div class='col-md-4'>
-                <%= f.input :htype, placeholder: 'Typ', label: "Typ" %>
+                <%= f.input :htype, placeholder: 'Typ', label: 'Typ' %>
               </div>
             </div>
 
             <div class='row'>
               <div class='col-md-4'>
-                <%= f.input :size, label: 'Größe in m²', placeholder: "Größe in m²" %>
+                <%= f.input :size, label: 'Größe in m²', placeholder: 'Größe in m²' %>
               </div>
               <div class='col-md-4'>
-                <%= f.input :size, label: 'Optimale Anzahl an Personen', placeholder: "Opt. Anzahl an Personen" %>
+                <%= f.input :n_people, label: 'Optimale Anzahl an Personen', placeholder: 'Opt. Anzahl an Personen' %>
               </div>
               <div class='col-md-4'>
-                <%= f.input :size, label: 'Zusätzliche Schlafmöglichkeiten', placeholder: "Zusätzliche Schlafmöglichkeiten" %>
+                <%= f.input :add_n_people, label: 'Zusätzliche Schlafmöglichkeiten', placeholder: 'Zusätzliche Schlafmöglichkeiten' %>
               </div>
             </div>
 
             <div class='row'>
               <div class='col-md-12'>
-                <%= f.input :description, :as => :ckeditor, :input_html => { :ckeditor => {:toolbar => 'mini'}}, label: "Beschreibung" %>
+                <%= f.input :description, :as => :ckeditor, :input_html => { :ckeditor => {:toolbar => 'mini'}}, label: 'Beschreibung' %>
               </div>
             </div>
       </div>
 
 
       <!-- tab2 -->
-      <div role="tabpanel" class="tab-pane fade" id="reqs">
+      <div role='tabpanel' class='tab-pane fade' id='reqs'>
         <%= f.fields_for :suitability do |s| %>
             <div class='row'>
               <div class='col-md-4 no_padding'>
-                <h3 style="text-align: center;"> Geeignet als:</h3><hr>
-                <div class="hallo"><%= s.input :family, collection: ['deaktiviert', 'ja', 'nein', 'auf Anfrage'], :include_blank => false, label: 'Familienurlaub' %></div>
+                <h3 style='text-align: center;'> Geeignet als:</h3><hr>
+                <%= s.input :family, collection: ['deaktiviert', 'ja', 'nein', 'auf Anfrage'], :include_blank => false, label: 'Familienurlaub' %>
                 <%= s.input :longtime, collection: ['deaktiviert', 'ja', 'nein', 'auf Anfrage'], :include_blank => false, label: 'Langzeiturlaub' %>
                 <%= s.input :horse, collection: ['deaktiviert', 'ja', 'nein', 'auf Anfrage'], :include_blank => false, label: 'Urlaub mit Pferden' %>
               </div>
               <div class='col-md-4'>
-                <h3 style="text-align: center;"> Geeignet für:</h3><hr>
+                <h3 style='text-align: center;'> Geeignet für:</h3><hr>
                 <%= s.input :allergic, collection: ['deaktiviert', 'ja', 'nein', 'auf Anfrage'], :include_blank => false, label: 'Allergiker' %>
                 <%= s.input :disability, collection: ['deaktiviert', 'ja', 'nein', 'auf Anfrage'], :include_blank => false, label: 'Behinderte' %>
                 <%= s.input :senior, collection: ['deaktiviert', 'ja', 'nein', 'auf Anfrage'], :include_blank => false, label: 'Senioren' %>
@@ -63,7 +64,7 @@
                 <%= s.input :monteur, collection: ['deaktiviert', 'ja', 'nein', 'auf Anfrage'], :include_blank => false, label: 'Monteure' %>
               </div>
               <div class='col-md-4'>
-                <h3 style="text-align: center;"> Erlaubt für:</h3><hr>
+                <h3 style='text-align: center;'> Erlaubt für:</h3><hr>
                 <%= s.input :nsmoker, collection: ['deaktiviert', 'ja', 'nein', 'auf Anfrage'], :include_blank => false, label: 'Raucher' %>
                 <%= s.input :dog, collection: ['deaktiviert', 'ja', 'nein', 'auf Anfrage'], :include_blank => false , label: 'Hunde' %>
                 <%= s.input :pets, collection: ['deaktiviert', 'ja', 'nein', 'auf Anfrage'], :include_blank => false, label: 'Andere Haustiere' %>
@@ -72,11 +73,34 @@
         <% end %>
       </div>
 
+      <div role='tabpanel' class='tab-pane fade' id='facility'>
+        <%= f.fields_for :facility do |fa| %>
+            <div class='row'>
+              <h3 style='text-align: center;'>Ausstattung</h3><hr>
+              <div class="col-md-4">
+                  <%= fa.input :internet, collection: ['deaktiviert', 'ja', 'nein'], :include_blank => false, label: 'Internet/WLAN' %>
+                  <%= fa.input :tv, collection: ['deaktiviert', 'ja', 'nein'], :include_blank => false, label: 'TV' %>
+                  <%= fa.input :pool, collection: ['deaktiviert', 'ja', 'nein'], :include_blank => false, label: 'Pool/Schwimmbad' %>
+                  <%= fa.input :garden, collection: ['deaktiviert', 'ja', 'nein'], :include_blank => false, label: 'Garten' %>
+              </div>
+              <div class="col-md-4">
+                  <%= fa.input :terrace, collection: ['deaktiviert', 'ja', 'nein'], :include_blank => false, label: 'Terrasse' %>
+                  <%= fa.input :grill, collection: ['deaktiviert', 'ja', 'nein'], :include_blank => false, label: 'Grill' %>
+                  <%= fa.input :balcony, collection: ['deaktiviert', 'ja', 'nein'], :include_blank => false, label: 'Balkon' %>
+              </div>
+              <div class="col-md-4">
+                  <%= fa.input :washingmachine, collection: ['deaktiviert', 'ja', 'nein'], :include_blank => false, label: 'Waschmaschine' %>
+                  <%= fa.input :dishwasher, collection: ['deaktiviert', 'ja', 'nein'], :include_blank => false, label: 'Spülmaschine' %>
+                  <%= fa.input :babybed, collection: ['deaktiviert', 'ja', 'nein'], :include_blank => false, label: 'Babybett' %>
+              </div>
+            </div>
+        <% end %>
+      </div>
 
       <!-- tab3 -->
-      <div role="tabpanel" class="tab-pane fade" id="pricing">
+      <div role='tabpanel' class='tab-pane fade' id='pricing'>
         <%= f.fields_for :pricing do |pr| %>
-            <h3 style="text-align: center;">Buchungszeiträume
+            <h3 style='text-align: center;'>Buchungszeiträume
               <%= pr.link_to_add :periods, :title => 'Zeitraum hinzufügen', :data => { :target => '#periods' }, :class => 'btn btn-primary pull-right' do %>
                 <%= glyph 'plus' %> Zeitraum hinzufügen
               <% end %>
@@ -94,11 +118,11 @@
               <%= pr.fields_for :periods, :wrapper => false do |p| %>
                   <tr class='fields'>
                     <td><%= p.input :from, as: :string,
-                                    :placeholder => 'Von', input_html: {class: "date datepicker"}, label: false %></td>
+                                    :placeholder => 'Von', input_html: {class: 'date datepicker'}, label: false %></td>
                     <td><%= p.input :to, as: :string,
-                                    :placeholder => 'Bis', input_html: {class: "date datepicker"}, label: false %></td>
+                                    :placeholder => 'Bis', input_html: {class: 'date datepicker'}, label: false %></td>
                     <td><%= p.input :min, label: false, :placeholder => 'Min' %></td>
-                    <td><%= p.input :min_type, label: false, collection: ["Tage","Wochen"], default: 1 %></td>
+                    <td><%= p.input :min_type, label: false, collection: ['Tage','Wochen'], default: 1 %></td>
                     <td><%= p.input :cost_per_night, label: false, :placeholder => 'Kosten in EUR'  %></td>
                     <td><%= p.input :cost_per_week, label: false, :placeholder => 'Kosten in EUR' %></td>
                     <td><%= p.input :cost_add_nights, label: false, :placeholder => 'Kosten in EUR' %></td>
@@ -115,9 +139,9 @@
 
 
       <!-- tab4 -->
-      <div role="tabpanel" class="tab-pane fade" id="prices">
+      <div role='tabpanel' class='tab-pane fade' id='prices'>
         <%= f.fields_for :pricing do |pr| %>
-            <h3 style="text-align: center;">Zusatzkosten
+            <h3 style='text-align: center;'>Zusatzkosten
               <%= pr.link_to_add :costs, :title => 'Posten hinzufügen', :data => { :target => '#costs' }, :class => 'btn btn-primary pull-right' do %>
                 <%= glyph 'plus' %> Posten hinzufügen
               <% end %>
@@ -133,10 +157,10 @@
               </tr>
               <%= pr.fields_for :costs, :wrapper => false do |c| %>
                   <tr class='fields'>
-                    <td><%= c.input :name, label: false, placeholder: "Bezeichung" %></td>
-                    <td><%= c.input :amount, label: false, placeholder: "Preis in EUR"  %></td>
+                    <td><%= c.input :name, label: false, placeholder: 'Bezeichung' %></td>
+                    <td><%= c.input :amount, label: false, placeholder: 'Preis in EUR'  %></td>
                     <td><%= c.input :ctype, label: false, default: 1,  collection: [ 'inklusive', 'einmalig', 'pro Person', 'pro Nacht', 'pro kWh', 'pro Liter'] %></td>
-                    <td><%= c.input :optional, as: :select, default: 1, collection: [["ja",true],["nein",false]], label: false %></td>
+                    <td><%= c.input :optional, as: :select, default: 1, collection: [['ja',true],['nein',false]], label: false %></td>
                     <td>
                       <%= c.link_to_remove :title => '[-] Löschen', :class => 'btn btn-danger pull-right' ,:data => { :confirm => 'Sicher?' } do %>
                           <%= glyph 'remove' %> Löschen
@@ -151,10 +175,10 @@
 
     <hr>
 
-    <div class="center-block">
-    <div class="form-group text-center">
-      <%= f.button :submit, "Speichern", :class => 'btn-primary' %> oder
-      <%= link_to "Abbrechen", houses_path, :class => 'btn btn-default', :data => { :confirm => 'Änderungen werden nicht gespeichert!'} %>
-    </div>
+    <div class='center-block'>
+        <div class='form-group text-center'>
+          <%= f.button :submit, 'Speichern', :class => 'btn-primary' %> oder
+          <%= link_to 'Abbrechen', houses_path, :class => 'btn btn-default', :data => { :confirm => 'Änderungen werden nicht gespeichert!'} %>
+        </div>
     </div>
 <% end %>

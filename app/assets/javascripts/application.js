@@ -64,5 +64,16 @@ $(function() {
             $("#booking_end_date").val(end.format("DD.MM.YYYY"));
 
     });
+    $('#houses_search input').change(function(){
+        $.get($('#houses_serch').attr('action'), $('#houses_search').serialize(), null, "script");
+        return false;
+    });
+    $('#selectAll').click(function() {
+        $('#houses_search input').each(function() {
+            this.checked = false;
+        });
+        $.get($('#houses_serch').attr('action'), $('#houses_search').serialize(), null, "script");
+        return false;
+    });
 });
 

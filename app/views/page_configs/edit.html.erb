@@ -3,15 +3,19 @@
 </div>
 
 <%= simple_nested_form_for @page_config, url: edit_page_config_path, :html => { :class => 'form-vertical' } do |f| %>
-    <% @page_config.pages.each do |pp| %>
+    <% @page_config.pages.order(:title).each do |pp| %>
         <%= f.fields_for :pages, pp do |p| %>
             <label class="string optional control-label" for="house_name"><%= pp.title %></label>
             <%= p.input :content, label: false, :as => :ckeditor, :input_html => { :ckeditor => {:toolbar => 'mini'}} %>
         <% end %>
     <% end %>
 
-    <div class="form-group">
-      <%= f.button :submit, "Speichern", :class => 'btn-primary', :data => { :confirm => 'Achtung: Änderungen werden gespeichert!'} %>
-      <%= link_to "Abbrechen", houses_path, :class => 'btn btn-default' %>
+    <div class='center-block'>
+      <div class='form-group text-center'>
+          <%= f.button :submit, "Speichern", :class => 'btn-primary', :data => { :confirm => 'Achtung: Änderungen werden gespeichert!'} %>
+          <%= link_to "Abbrechen", houses_path, :class => 'btn btn-default' %>
+    </div>
     </div>
 <% end %>
+
+

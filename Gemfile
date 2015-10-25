@@ -59,5 +59,8 @@ gem 'jquery-turbolinks'
 
 gem 'devise'
 
+gem 'ransack'
+gem 'will_paginate'
+
 gem 'rails_12factor'
 gem 'pg', '~> 0.18.3'

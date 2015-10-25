@@ -1,9 +1,14 @@
 # encoding: UTF-8
 
-<div class="picture">
-    <%= link_to "X", house_picture_path(@house, picture), :confirm => 'Are you sure?', :method => :delete, :class => "close-image" %>
+<div class="jumbotron picture">
+    <%= link_to house_picture_path(@house, picture), :confirm => 'Are you sure?', :method => :delete do %>
+      <div class="imgtxt-right" style="height: 25px; padding: 4px;">
+           <%= glyph 'remove' %>
+      </div>
+    <% end %>
+
     <%= image_tag picture.image_url(:thumb).to_s if picture.image? %>
-    <div class="name"><%= picture.name %></div>
+    <div class="name" style="text-align: center; padding-left:0;"><%= picture.name %></div>
     <div class="actions">
 
     </div>

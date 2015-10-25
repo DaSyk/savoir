@@ -56,9 +56,9 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="navbar-collapse collapse navbar-responsive-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="/">Startseite</a></li>
-            <li><a href="/">Angebot</a></li>
-            <li> <a href="/notes">Buchungshinweise</a></li>
+            <li class="<%= 'active' if params[:action]=='home' %>"><a href="/">STARTSEITE</a></li>
+            <li class="<%= 'active' if params[:controller]=='houses' %>"><a href="/list">FERIENDOMIZILE</a></li>
+            <li class="<%= 'active' if params[:action]=='notes' %>"><a href="/notes">HINWEISE</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <% if admin_signed_in? %>

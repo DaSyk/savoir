@@ -128,10 +128,6 @@ td > div.form-group > .btn {
   margin-bottom: -14px;
 }
 
-.jumbotron p {
-  font-size: 15px;
-}
-
 .help-block {
   clear: left;
   color: #555;
@@ -139,7 +135,67 @@ td > div.form-group > .btn {
   font-style: italic;
 }
 
+.jumbotron.lowpad {
+  padding: 10px;
+}
+
+.jumbotron p {
+  font-size: 15px;
+}
+
+
 .jumbotron > form > div > hr,
 .jumbotron > form > hr {
   border-top-color: #d5d5d5;
+}
+
+img {
+  border-radius: 4px;
+  opacity: 1;
+}
+
+
+div.jumbotron.picture {
+  border-radius: 4px;
+  padding: 0;
+  float: left;
+  margin-left: 11px;
+  margin-right: 11px;
+  margin-bottom: 22px;
+  font-weight: bold;
+  position:relative;
+  .name {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 20px;
+    text-align: left;
+  }
+  .price {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 20px;
+    text-align: right;
+  }
+  .imgtxt-left {
+    position: absolute;
+    width: auto;
+    top: 228px;
+    left: 5px;
+    margin: 0 auto;
+    height: 30px;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    padding: 5px;
+  }
+  .imgtxt-right {
+    position: absolute;
+    width: auto;
+    top: 5px;
+    right: 5px;
+    margin: 0 auto;
+    height: 30px;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    padding: 5px;
+  }
 }

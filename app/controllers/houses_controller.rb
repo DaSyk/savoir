@@ -10,6 +10,14 @@ class HousesController < ApplicationController
     respond_with(@houses)
   end
 
+  def f_index
+    @search = House.search(params[:q])
+    @houses = @search.result(distinct: true)
+    params.each do |key,value|
+      Rails.logger.warn "Param #{key}: #{value}"
+    end
+  end
+
   def show
     respond_with(@house)
   end
@@ -21,6 +29,7 @@ class HousesController < ApplicationController
     @house = House.new(name: "new house")
     @suitability = @house.build_suitability
     @pricing = @house.build_pricing
+    @facility = @house.build_facility
     @pricing.periods.build
     @pricing.costs.build
     @house.save
@@ -60,13 +69,14 @@ class HousesController < ApplicationController
   end
 
     def house_params
-      params.require(:house).permit(:name, :description, :region_id, :size, :n_people, :add_n_people, 
+      params.require(:house).permit(:id, :name, :description, :region_id, :size, :n_people, :add_n_people, :htype,
 	    suitability_attributes: [:id, :pets, :allergic, :family, :horse, :dog, :senior, :baby, :monteur, :nsmoker, :longtime, :disability, :house_id], 
 		pricing_attributes: [:id, :n_people, :surcharge_night, :surcharge_week, :house_id, 
 		  periods_attributes: [:id, :from, :to, :min, :min_type, :cost_per_night, :cost_per_week, :cost_add_night, :pricing_id, :_destroy], 
 	      costs_attributes: [:id, :name, :ctype, :amount, :optional, :pricing_id, :_destroy]
 		],
-		pictures_attributes: [:id, :name, :house_id, :image, :_destroy]
+		pictures_attributes: [:id, :name, :house_id, :image, :_destroy],
+		pictures_attributes: [:id, :house_id, :internet, :tv, :pool, :garden, :terrasse, :grill, :balcony, :washingmachine, :dishwasher, :babybed, :_destroy]
 	  )
     end
 end

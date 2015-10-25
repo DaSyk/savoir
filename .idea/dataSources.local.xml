@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="Rails savoir: development" uuid="0026dba1-9b8c-4742-b4e4-a52f6477b2f8">
+      <user-name>postgres</user-name>
+      <user-password>dfd8dfc5dfc5dfde</user-password>
+      <schema-pattern>savoir_development.pg_catalog savoir_development.public</schema-pattern>
+      <default-schemas>savoir_development.pg_catalog savoir_development.public</default-schemas>
+    </data-source>
+    <data-source name="Rails savoir: test" uuid="fc9a501c-0b75-42bf-9d93-0ca46b472a36">
+      <user-name>postgres</user-name>
+      <user-password>dfd8dfc5dfc5dfde</user-password>
+      <schema-pattern>savoir_test.pg_catalog savoir_test.public</schema-pattern>
+      <default-schemas>savoir_test.pg_catalog savoir_test.public</default-schemas>
+    </data-source>
+    <data-source name="Rails savoir: production" uuid="15684c39-117e-4664-af57-9269891a486a">
+      <user-name>postgres</user-name>
+      <user-password>dfd8dfc5dfc5dfde</user-password>
+      <schema-pattern>savoir_production.pg_catalog savoir_production.public</schema-pattern>
+      <default-schemas>savoir_production.pg_catalog savoir_production.public</default-schemas>
+    </data-source>
+  </component>
+</project>
