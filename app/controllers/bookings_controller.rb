@@ -27,8 +27,12 @@ class BookingsController < ApplicationController
   def create
     @booking = @house.bookings.build(booking_params)
     @booking.save
-    flash[:notice] = "Die Buchung wurde erstellt!"
-    redirect_to house_bookings_path(@house)
+    flash[:notice] = "Die Buchungsanfrage wurde erfolgreich erstellt!"
+    if admin_signed_in?
+      redirect_to house_bookings_path(@house)
+    else
+      redirect_to houses_list_path
+    end
   end
 
   def update

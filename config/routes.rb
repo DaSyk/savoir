@@ -10,8 +10,9 @@ Rails.application.routes.draw do
       resources :bookings
   end
 
+  put '/houses', :to => 'houses#activate'
+  put '/houses/:house_id/pictures', :to => 'pictures#set_default'
   get '/list', :to => 'houses#f_index', :as => 'houses_list'
-
 
   get '/places', :to => 'places#edit', :as => 'edit_place'
   patch '/places', :to => 'places#update'

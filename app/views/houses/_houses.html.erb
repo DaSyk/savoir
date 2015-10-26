@@ -5,10 +5,10 @@
               <div class="imgtxt-left"><%= h.region.name %> in <%= h.region.country.name %></div>
           <% end %>
           <div class="imgtxt-right"><%= h.name %></div>
-          <%= image_tag h.pictures.first.image_url(:thumb).to_s if h.pictures.first %>
+          <%= image_tag h.pictures.where(:default_pic => true).first.image_url(:thumb).to_s if h.pictures.where(:default_pic => true).first %>
           <div class="row">
             <div class="name col-md-8"><%= h.n_people if h.n_people %> Personen/Woche</div>
-            <div class="price col-md-4">ab 500€</div>
+            <div class="price col-md-4">ab x€</div>
           </div>
         </div>
     <% end %>

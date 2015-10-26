@@ -6,16 +6,22 @@ class HousesController < ApplicationController
   respond_to :html
 
   def index
-    @houses = House.all
+    @houses = House.all.order(:id)
     respond_with(@houses)
   end
 
   def f_index
-    @search = House.search(params[:q])
+    @search = House.where(activated: true).search(params[:q])
     @houses = @search.result(distinct: true)
     params.each do |key,value|
       Rails.logger.warn "Param #{key}: #{value}"
     end
+  end
+
+  def activate
+    @house = House.find(params[:h])
+    @house.change_activate
+    redirect_to houses_path
   end
 
   def show

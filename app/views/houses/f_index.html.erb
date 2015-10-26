@@ -10,7 +10,7 @@
 
             <label class="string optional control-label" for="booking_lastname">Personen</label><br>
             <div class="checkbox">
-                <% House.all.order(:n_people).pluck(:n_people).to_a.uniq.compact.each do |n| %>
+                <% House.where(activated: true).order(:n_people).pluck(:n_people).to_a.uniq.compact.each do |n| %>
                   <label class="checkbox-inline">
                     <%= check_box_tag('q[n_people_eq_any][]', n) %>
                     <%= n %>
@@ -60,7 +60,7 @@
 
             <label class="string optional control-label" for="booking_lastname">Objekttyp</label>
             <div class="checkbox">
-                <% House.pluck(:htype).to_a.uniq.compact.each do |t| %>
+                <% House.where(activated: true).pluck(:htype).to_a.uniq.compact.each do |t| %>
                   <label>
                     <%= check_box_tag('q[htype_eq_any][]', t) %> <%= t %>
                   </label><br>

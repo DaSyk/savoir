@@ -8,4 +8,13 @@ class House < ActiveRecord::Base
 	has_many :bookings, :dependent => :destroy
 	accepts_nested_attributes_for :suitability, :pricing, :pictures, :facility
 
+	def change_activate
+		if self.activated?
+			self.update_attributes(:activated => false)
+		else
+			self.update_attributes(:activated => true)
+		end
+	end
+
+
 end

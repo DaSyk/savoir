@@ -44,7 +44,6 @@ function unavailable(date) {
 }
 
 $(function() {
-
     $('.datepicker').datepicker({
             dateFormat: 'dd.mm.yy'
     });
@@ -75,5 +74,8 @@ $(function() {
         $.get($('#houses_serch').attr('action'), $('#houses_search').serialize(), null, "script");
         return false;
     });
+    $('.carousel').carousel({
+        interval: 4000
+    })
 });
 
