@@ -11,6 +11,11 @@ Region.create(name: 'Lombardei', country_id: 2)
 
 Region.create(name: 'Andalusien', country_id: 3)
 
+Location.create(name:'', region_id: 1)
+Location.create(name:'', region_id: 2)
+Location.create(name:'', region_id: 3)
+Location.create(name:'', region_id: 4)
+
 PageConfig.create()
 
 Page.create(title: 'Startseite', page_config_id: 1, content: '')

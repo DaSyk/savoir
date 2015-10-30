@@ -1,21 +1,12 @@
-// This is a manifest file that'll be compiled into application.js, which will include all the files
-// listed below.
-//
-// Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
-// or vendor/assets/javascripts of plugins, if any, can be referenced here using a relative path.
-//
-// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
-// compiled file.
-//
-// Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
-// about supported directives.
-//
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require bootstrap-sprockets
+//= require bootstrap-datepicker/core
+//= require bootstrap-datepicker//locales/bootstrap-datepicker.de.js
 //= require moment
-//= require jquery-ui/datepicker
+//= require underscore
+//= require gmaps/google
 //= require jquery-fileupload/basic
 //= require jquery-fileupload/vendor/tmpl
 //= require jquery_nested_form
@@ -30,24 +21,18 @@ $(document).on('nested:fieldAdded', function(event){
     var dateField = field.find('.date');
     // and activate datepicker on it
     dateField.datepicker({
-        dateFormat: 'dd.mm.yy'
+        language: "de-DE"
     });
 });
 
-function unavailable(date) {
-    dmy = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
-    if($.inArray(dmy, gon.dates) == -1) {
-        return [true, ""];
-    }else {
-        return [false, "", "Unavailable"];
-    }
-}
-
 $(function() {
     $('.datepicker').datepicker({
-            dateFormat: 'dd.mm.yy'
+            language: "de-DE"
     });
     $('.daterange').daterangepicker({
+            'startDate': false,
+            'endDate': false,
+            'minDate': setDate(),
             'autoApply': true,
             "opens": "center",
             "locale": {
@@ -79,3 +64,21 @@ $(function() {
     })
 });
 
+//call functions
+
+function setDate() {
+    var d = new Date();
+    var month = d.getMonth() + 1;
+    var day = d.getDate();
+    var output = (('' + day).length < 2 ? '0' : '') + day + '.' + (('' + month).length < 2 ? '0' : '') + month + '.' + d.getFullYear();
+    return output;
+}
+
+function unavailable(date) {
+    dmy = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+    if($.inArray(dmy, gon.dates) == -1) {
+        return [true, ""];
+    }else {
+        return [false, "", "Unavailable"];
+    }
+}

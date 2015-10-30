@@ -18,22 +18,28 @@
                 <%= f.input :name %>
               </div>
               <div class='col-md-4'>
-                <%= f.association :region, prompt: 'Wähle eine Region', collection: Region.order('country_id'), :label_method => lambda { |region| "#{region.name} in #{region.country.name}" } %>
+                <%= f.association :location, prompt: 'Wähle einen Ort', collection: Location.order('region_id'), :label_method => lambda { |l| "#{l.name} in #{l.region.name}" } %>
               </div>
               <div class='col-md-4'>
-                <%= f.input :htype, placeholder: 'Typ', label: 'Typ' %>
+                <%= f.input :address, label: 'Adresse', placeholder: 'Straße, Ort, Land' %>
               </div>
             </div>
 
             <div class='row'>
-              <div class='col-md-4'>
+              <div class='col-md-3'>
+				<%= f.input :htype, placeholder: 'Typ', label: 'Typ' %>
+			  </div>	
+			  <div class='col-md-3'>
+				<%= f.input :movie_url, placeholder: '/xyz', label: 'Youtube-Video' %>
+			  </div>	
+              <div class='col-md-2'>
                 <%= f.input :size, label: 'Größe in m²', placeholder: 'Größe in m²' %>
               </div>
-              <div class='col-md-4'>
-                <%= f.input :n_people, label: 'Optimale Anzahl an Personen', placeholder: 'Opt. Anzahl an Personen' %>
+              <div class='col-md-2'>
+                <%= f.input :n_people, label: 'Opt. Personenzahl', placeholder: 'Opt. Personenzahl' %>
               </div>
-              <div class='col-md-4'>
-                <%= f.input :add_n_people, label: 'Zusätzliche Schlafmöglichkeiten', placeholder: 'Zusätzliche Schlafmöglichkeiten' %>
+              <div class='col-md-2'>
+                <%= f.input :add_n_people, label: 'Zusätz. Betten', placeholder: 'Zusätz.Betten' %>
               </div>
             </div>
 
@@ -112,20 +118,20 @@
                 <th colspan='2'>Mindestaufenthalt</th>
                 <th>Kosten/Nacht</th>
                 <th>Kosten/Woche</th>
-                <th>Kosten/zus. Nacht</th>
+				<th>Typ</th>
+                <th>Saison</th>
                 <th></th>
               </tr>
               <%= pr.fields_for :periods, :wrapper => false do |p| %>
                   <tr class='fields'>
-                    <td><%= p.input :from, as: :string,
-                                    :placeholder => 'Von', input_html: {class: 'date datepicker'}, label: false %></td>
-                    <td><%= p.input :to, as: :string,
-                                    :placeholder => 'Bis', input_html: {class: 'date datepicker'}, label: false %></td>
+                    <td><%= p.input :from, as: :string, :placeholder => 'Von', input_html: { class: 'date datepicker', value: p.object.from.to_s }, label: false  %></td>
+                    <td><%= p.input :to, as: :string, :placeholder => 'Bis', input_html: { class: 'date datepicker', value: p.object.to.to_s}, label: false %></td>
                     <td><%= p.input :min, label: false, :placeholder => 'Min' %></td>
                     <td><%= p.input :min_type, label: false, collection: ['Tage','Wochen'], default: 1 %></td>
                     <td><%= p.input :cost_per_night, label: false, :placeholder => 'Kosten in EUR'  %></td>
                     <td><%= p.input :cost_per_week, label: false, :placeholder => 'Kosten in EUR' %></td>
-                    <td><%= p.input :cost_add_nights, label: false, :placeholder => 'Kosten in EUR' %></td>
+					<td><%= p.input :ptype, label: false, collection: ['geöffnet', 'geschlossen', 'auf Anfrage', 'Sonderangebot'], default: 1 %></td>
+                    <td><%= p.input :season, label: false, :placeholder => 'Saison' %></td>
                     <td>
                       <%= p.link_to_remove :title => '[-] Löschen', :class => 'btn btn-danger pull-right', :data => { :confirm => 'Sicher?' } do %>
                         <%= glyph 'remove' %> Löschen

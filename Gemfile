@@ -41,6 +41,7 @@ gem 'bootstrap-sass', '~> 3.3.5.1'
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass-extras'
 gem 'bootstrap-daterangepicker-rails'
+gem 'bootstrap-datepicker-rails'
 
 gem 'simple_form'
 gem 'nested_form'
@@ -64,3 +65,7 @@ gem 'will_paginate'
 
 gem 'rails_12factor'
 gem 'pg', '~> 0.18.3'
+
+gem 'geocoder'
+gem 'gmaps4rails'
+gem 'underscore-rails'

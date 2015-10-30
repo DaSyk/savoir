@@ -18,8 +18,8 @@
     <% @houses.each do |house| %>
       <tr>
           <td><%= house.name %></td>
-          <td><%= house.region.name if house.region_id %></td>
-          <td><%= house.region.country.name if house.region_id %></td>
+          <td><%= house.location.name if house.location_id %></td>
+          <td><%= house.location.region.name if house.location_id %></td>
           <td><%= link_to "#{house.bookings.count} - #{house.bookings.where.not('created_at > ?', current_admin.last_sign_in_at).count}", house_bookings_path(house), :class => "btn btn-default" %></td>
           <td>
             <% if house.activated? %>
@@ -53,7 +53,7 @@
 <% end %>
 
 <%= link_to edit_place_path, :class => 'btn btn-default', :title => 'Länder/Regionen bearbeiten' do %>
-    <%= glyph 'pencil' %> Länder/Regionen bearbeiten
+    <%= glyph 'pencil' %> Länder/Regionen/Orte bearbeiten
 <% end %>
 
 <%= link_to edit_page_config_path, :class => 'btn btn-default', :title => 'Texte bearbeiten', data: {no_turbolink: true } do %>

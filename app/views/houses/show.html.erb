@@ -1,73 +1,87 @@
-<h3 style='text-align: center;'><%=@house.name%> in <%=@house.region.name if @house.region%> (<%= @house.region.country.name if @house.region%>)</h3><hr>
+<h3 style='text-align: center;'><%=@house.name%> (<%=@house.location.name if @house.location%>, <%= @house.location.region.name if @house.location%>)</h3><hr>
 
-    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-      <ol class="carousel-indicators">
-        <% count = 0 %>
-        <% @house.pictures.each do |p| %>
-            <% if count == 0 %>
-                <li data-target="#carousel-example-generic" data-slide-to="<%= count %>" class="active"></li>
-            <% else %>
-                <li data-target="#carousel-example-generic" data-slide-to="<%= count %>"></li>
-            <% end %>
-            <% count+=1 %>
-        <% end %>
-      </ol>
-
-      <div class="carousel-inner">
-        <% count = 0 %>
-        <% @house.pictures.each do |p| %>
-            <% if count == 0 %>
-                <div class="active item">
-                  <%= image_tag p.image %>
-                  <div class="carousel-caption">
-                    <%= p.name %>
-                  </div>
-                </div>
-            <% else %>
-                <div class="item">
-                  <%= image_tag p.image %>
-                  <div class="carousel-caption">
-                    <%= p.name %>
-                  </div>
-                </div>
-            <% end %>
-            <% count+=1 %>
-        <% end %>
-      </div>
-
-      <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
-    </div>
-
-
-<hr>
 
 <ul class='nav nav-tabs' role='tablist'>
   <li role='presentation' class='active'><a href='#allgemein' aria-controls='allgemein' role='tab' data-toggle='tab'>Allgemein</a></li>
-  <li role='presentation'><a href='#reqs' aria-controls='reqs' role='tab' data-toggle='tab'>Verfügbarkeit</a></li>
-  <li role='presentation'><a href='#facility' aria-controls='facility' role='tab' data-toggle='tab'>Preisliste</a></li>
+  <li role='presentation'><a href='#images' aria-controls='images' role='tab' data-toggle='tab'>Bilder</a></li>
+  <li role='presentation'><a href='#availability' aria-controls='availability' role='tab' data-toggle='tab'>Verfügbarkeit</a></li>
+  <li role='presentation'><a href='#prices' aria-controls='prices' role='tab' data-toggle='tab'>Preisliste</a></li>
+  <% if @house.movie_url %>
+	<li role='presentation'><a href='#video' aria-controls='video' role='tab' data-toggle='tab'>Video</a></li>
+  <% end %>	
 </ul>
 
 
 
 <div class='tab-content'>
   <div role='tabpanel' class='tab-pane fade in active' id='allgemein'>
+	HIER KOMMEN DIE ALLGEMEINEN INFORMATIONEN UND DER TEXT NOCH HIN!
+	<hr>
+	<div style='width: 800px;'>
+	  <div id="map" style='width: 800px; height: 400px;'></div>
+	</div>  
+	<script type="text/javascript">
+	  handler = Gmaps.build('Google');
+	  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+	    markers = handler.addMarkers(<%=raw @hash.to_json %>);
+	    handler.bounds.extendWith(markers);
+	    handler.fitMapToBounds();
+	  });
+	</script>	
+  </div>
+  
+  <div role='tabpanel' class='tab-pane fade' id='images'>
+	<% @house.pictures.each do |picture| %>	
+	  <div class="jumbotron picture">
+		<%= image_tag picture.image if picture.image? %>
+		<h4 style='text-align: center;'><%= picture.name %></h4><hr style="margin: 0;">
+		<div class="row">
+		  <div class="col-md-12" style='text-align: center;font-weight: normal;'>
+			<%= picture.description %>
+		  </div>	
+		</div>	
+	  </div>
+	<% end %>
   </div>
 
-
-  <!-- tab2 -->
-  <div role='tabpanel' class='tab-pane fade' id='reqs'>
+  <div role='tabpanel' class='tab-pane fade' id='availability'>
+     <table class="calendar">
+      <% cnt=0 %>
+      <% while cnt < 18 %>
+        <% if cnt== 0 || (Date.today+cnt.month).month==1 %>
+          <tr><th><%= (Date.today+cnt.month).year %></th></tr>
+        <% end %>
+        <tr>
+          <th><%= I18n.l((Date.today+cnt.month), format: "%B") %></th>
+          <% (Date.today.beginning_of_month+cnt.month..Date.today.beginning_of_month+1.month-1+cnt.month).each do |d| %>
+            <% if @closed_dates.include? d %>			
+			  <td class="closed">
+			<% elsif @busy_dates.include? d %>
+              <td class="busy">
+			<% elsif @request_dates.include? d %>
+              <td class="request">
+			<% elsif @special_dates.include? d %>
+              <td class="special">  
+            <% else %>
+              <td class="free">
+            <% end %>
+              <%= "0" if d.day < 10 %><%= d.day %></td>
+          <% end %>
+        </tr>
+        <% cnt+=1 %>
+      <% end %>
+    </table>
   </div>
 
-  <div role='tabpanel' class='tab-pane fade' id='facility'>
+  <div role='tabpanel' class='tab-pane fade' id='prices'>
+  preise
   </div>
-
+	
+<% if @house.movie_url %>	
+  <div role='tabpanel' class='tab-pane fade' id='video'>
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/<%= @house.movie_url%>" frameborder="0" allowfullscreen></iframe>
+  </div>
+<% end %> 
 </div>
 
 <hr>
@@ -77,9 +91,4 @@
     <%= link_to 'Buchungsanfragen stellen', new_house_booking_path(@house), :class => 'btn btn-primary' %> oder
     <%= link_to 'Zurück', :back, :class => 'btn btn-default'  %>
   </div>
-</div>
-
-<div class="form-group">
-
-
 </div>

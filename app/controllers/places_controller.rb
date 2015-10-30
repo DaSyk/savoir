@@ -22,7 +22,9 @@ class PlacesController < ApplicationController
     def place_params
       params.require(:place).permit(:id,
         countries_attributes: [:id, :name, :place_id, :_destroy,
-          regions_attributes: [:id, :name, :country_id, :_destroy]
+          regions_attributes: [:id, :name, :country_id, :_destroy,
+            locations_attributes: [:id, :name, :region_id, :_destroy]
+          ]
         ]
       )
     end

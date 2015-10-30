@@ -31,6 +31,9 @@
             <td><%= booking.end_date %></td>
             <td><%= booking.lastname %></td>
             <td><%=l booking.created_at, format: :short %></td>
+			<td>
+			  <%= link_to "aktivieren", { :controller => 'bookings', :action => 'change_accepted', :b => booking.id }, { :method => :put, :class => 'btn btn-success' } %>	
+			</td>
             <td>
               <%= link_to house_booking_path(@house,booking), :class => 'btn btn-primary', :title => "Anzeigen" do %>
                 <%= glyph 'search' %>
@@ -42,6 +45,7 @@
                 <%= glyph 'remove' %>
               <%- end -%>
             </td>
+
           </tr>
         <% end %>
       </tbody>
@@ -69,6 +73,9 @@
             <td><%= booking.lastname %></td>
             <td><%=l booking.created_at, format: :short %></td>
             <td>
+			  <%= link_to "deaktivieren", { :controller => 'bookings', :action => 'change_accepted', :b => booking.id }, { :method => :put, :class => 'btn btn-danger' } %>	
+			</td>
+			<td>
               <%= link_to house_booking_path(@house,booking), :class => 'btn btn-primary', :title => "Anzeigen" do %>
                   <%= glyph 'search' %>
               <%- end -%>

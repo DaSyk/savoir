@@ -12,6 +12,8 @@ Rails.application.routes.draw do
 
   put '/houses', :to => 'houses#activate'
   put '/houses/:house_id/pictures', :to => 'pictures#set_default'
+  put '/houses/:house_id/bookings', :to => 'bookings#change_accepted'
+  
   get '/list', :to => 'houses#f_index', :as => 'houses_list'
 
   get '/places', :to => 'places#edit', :as => 'edit_place'

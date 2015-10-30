@@ -1,0 +1,8 @@
+<%= simple_form_for [@house,@picture], :html => { :class => 'form-vertical' } do |f| %>
+
+<%= f.input :name %>
+<%= f.input :description %>
+
+<%= f.button :submit, "Speichern" %>
+
+<% end %>

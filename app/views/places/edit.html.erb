@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h2>Länder/Regionen bearbeiten:</h2>
+  <h2>Länder/Regionen/Orte bearbeiten:</h2>
 </div>
 
 <%= simple_nested_form_for @place, url: edit_place_path, :html => { :class => 'form-vertical' } do |f| %>
@@ -14,6 +14,7 @@
             <% end %>
           </div>
         </div>
+
         <%= c.fields_for :regions do |r| %>
           <div class="row">
             <div class="col-md-5 col-md-offset-1 "><%= r.input :name, label: false, placeholder: "Name der Region" %></div>
@@ -23,7 +24,21 @@
               <% end %>
             </div>
           </div>
-        <% end %>
+            <%= r.fields_for :locations do |l| %>
+              <div class="row">
+                <div class="col-md-5 col-md-offset-2 "><%= l.input :name, label: false, placeholder: "Name des Ortes" %></div>
+                <div class="col-md-3">
+                  <%= l.link_to_remove :title => "Ort löschen", class: "btn btn-danger" do %>
+                      <%= glyph 'remove' %> Ort löschen
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+            <%= r.link_to_add :locations, class: "btn btn-primary", :title => "Ort hinzufügen" do %>
+                <%= glyph 'plus' %> Ort hinzufügen
+            <% end %>
+            <hr>
+            <% end %>
        <%= c.link_to_add :regions, class: "btn btn-primary", :title => "Region hinzufügen" do %>
           <%= glyph 'plus' %> Region hinzufügen
        <% end %>
@@ -38,4 +53,5 @@
       <%= f.button :submit, "Speichern", :class => 'btn-primary', :data => { :confirm => 'Achtung: Änderungen werden gespeichert!'} %>
       <%= link_to "Abbrechen", houses_path, :class => 'btn btn-default' %>
     </div>
+
 <% end %>

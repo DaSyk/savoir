@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151026135618) do
+ActiveRecord::Schema.define(version: 20151030083938) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,7 +86,6 @@ ActiveRecord::Schema.define(version: 20151026135618) do
   create_table "houses", force: true do |t|
     t.string   "name"
     t.text     "description"
-    t.integer  "region_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "size"
@@ -94,6 +93,18 @@ ActiveRecord::Schema.define(version: 20151026135618) do
     t.integer  "add_n_people"
     t.boolean  "activated",    default: false
     t.string   "htype"
+    t.integer  "location_id"
+    t.string   "movie_url"
+    t.string   "address"
+    t.float    "latitude"
+    t.float    "longitude"
+  end
+
+  create_table "locations", force: true do |t|
+    t.string   "name"
+    t.string   "region_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "page_configs", force: true do |t|
@@ -116,10 +127,11 @@ ActiveRecord::Schema.define(version: 20151026135618) do
     t.string   "min_type"
     t.integer  "cost_per_night"
     t.integer  "cost_per_week"
-    t.integer  "cost_add_nights"
     t.integer  "pricing_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "season"
+    t.string   "ptype"
   end
 
   create_table "pictures", force: true do |t|
@@ -129,6 +141,7 @@ ActiveRecord::Schema.define(version: 20151026135618) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "default_pic"
+    t.text     "description"
   end
 
   create_table "places", force: true do |t|

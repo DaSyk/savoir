@@ -3,8 +3,6 @@ class BookingsController < ApplicationController
   before_action :set_house
   before_action :set_booking, only: [:show, :edit, :update, :destroy]
 
-
-
   respond_to :html
 
   def index
@@ -22,8 +20,15 @@ class BookingsController < ApplicationController
   end
 
   def edit
+    gon.bookingdate = "#{@booking.start_date} - #{@booking.end_date}"
   end
 
+  def change_accepted
+	@booking = Booking.find(params[:b])
+	@booking.change_accepted
+	redirect_to house_bookings_path
+  end
+  
   def create
     @booking = @house.bookings.build(booking_params)
     @booking.save

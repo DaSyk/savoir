@@ -25,6 +25,10 @@ class HousesController < ApplicationController
   end
 
   def show
+    @hash = Gmaps4rails.build_markers(@house) do |house, marker|
+      marker.lat house.latitude
+      marker.lng house.longitude
+    end
     respond_with(@house)
   end
 
@@ -46,7 +50,7 @@ class HousesController < ApplicationController
   def update
     if @house.update(house_params)
       flash[:notice] = "Die Änderungen wurden gespeichert!"
-      redirect_to @house
+      redirect_to houses_path
     else
       flash[:notice] = "Die Änderungen konnten nicht gespeichert werden."
       render :edit
@@ -65,20 +69,46 @@ class HousesController < ApplicationController
     end
 
   def set_dates
-    dates = []
+    disabled_dates = []
+    @busy_dates = []
+	@closed_dates = []
+	@request_dates = []
+	@special_dates = []
+	
+	@house.pricing.periods.where(ptype: "geschlossen").each do |p|
+	  (p.from..p.to).each do |d|
+		disabled_dates << d.to_s
+		@closed_dates << d
+	  end
+	end  
+		
     @house.bookings.each do |b|
       (b.start_date+1..b.end_date-1).each do |d|
-        dates << d.to_s
+        disabled_dates << d.to_s
+        @busy_dates << d
       end
     end
-    gon.dates = dates
+    gon.dates = disabled_dates
+	
+	@house.pricing.periods.where(ptype: "auf Anfrage").each do |p|
+	  (p.from..p.to).each do |d|
+		@request_dates << d
+	  end
+	end  
+	
+	@house.pricing.periods.where(ptype: "Sonderangebot").each do |p|
+	  (p.from..p.to).each do |d|
+		@special_dates << d
+	  end
+	end
   end
 
     def house_params
-      params.require(:house).permit(:id, :name, :description, :region_id, :size, :n_people, :add_n_people, :htype,
-	    suitability_attributes: [:id, :pets, :allergic, :family, :horse, :dog, :senior, :baby, :monteur, :nsmoker, :longtime, :disability, :house_id], 
+      params.require(:house).permit(:id, :name, :description, :location_id, :size, :n_people, :add_n_people, :htype, :movie_url, :address, :latitude, :longitude,
+	    suitability_attributes: [:id, :pets, :allergic, :family, :horse, :dog, :senior, :baby, :monteur, :nsmoker, :longtime, :disability, :house_id, :_destroy],
+      facility_attributes: [:id, :internet, :tv, :pool, :garden, :terrace, :grill, :balcony, :washingmachine, :dishwasher, :babybed, :house_id, :_destroy],
 		pricing_attributes: [:id, :n_people, :surcharge_night, :surcharge_week, :house_id, 
-		  periods_attributes: [:id, :from, :to, :min, :min_type, :cost_per_night, :cost_per_week, :cost_add_night, :pricing_id, :_destroy], 
+		  periods_attributes: [:id, :from, :to, :min, :min_type, :cost_per_night, :cost_per_week, :season, :pricing_id, :ptype, :_destroy],
 	      costs_attributes: [:id, :name, :ctype, :amount, :optional, :pricing_id, :_destroy]
 		],
 		pictures_attributes: [:id, :name, :house_id, :image, :_destroy],
