@@ -3,5 +3,4 @@ class Region < ActiveRecord::Base
 	belongs_to :country
 
 	accepts_nested_attributes_for :locations
-
 end
