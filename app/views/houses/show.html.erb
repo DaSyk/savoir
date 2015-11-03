@@ -9,9 +9,8 @@
   <% if @house.movie_url %>
 	<li role='presentation'><a href='#video' aria-controls='video' role='tab' data-toggle='tab'>Video</a></li>
   <% end %>	
+  <li role='presentation'><a href='#request' aria-controls='request' role='tab' data-toggle='tab'>Buchungsanfragen</a></li>
 </ul>
-
-
 
 <div class='tab-content'>
   <div role='tabpanel' class='tab-pane fade in active' id='allgemein'>
@@ -26,6 +25,7 @@
 	    markers = handler.addMarkers(<%=raw @hash.to_json %>);
 	    handler.bounds.extendWith(markers);
 	    handler.fitMapToBounds();
+		handler.getMap().setZoom(10);
 	  });
 	</script>	
   </div>
@@ -34,7 +34,6 @@
 	<% @house.pictures.each do |picture| %>	
 	  <div class="jumbotron picture">
 		<%= image_tag picture.image if picture.image? %>
-		<h4 style='text-align: center;'><%= picture.name %></h4><hr style="margin: 0;">
 		<div class="row">
 		  <div class="col-md-12" style='text-align: center;font-weight: normal;'>
 			<%= picture.description %>
@@ -82,13 +81,18 @@
 	<iframe width="560" height="315" src="https://www.youtube.com/embed/<%= @house.movie_url%>" frameborder="0" allowfullscreen></iframe>
   </div>
 <% end %> 
+
+
+	<div role='tabpanel' class='tab-pane fade' id='request'>
+		<%= render 'booking_form' %>
+	</div>
+
 </div>
 
 <hr>
 
 <div class='center-block'>
   <div class='form-group text-center'>
-    <%= link_to 'Buchungsanfragen stellen', new_house_booking_path(@house), :class => 'btn btn-primary' %> oder
     <%= link_to 'Zurück', :back, :class => 'btn btn-default'  %>
   </div>
 </div>

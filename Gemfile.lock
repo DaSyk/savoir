@@ -102,6 +102,7 @@ GEM
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     mime-types (2.6.2)
+    mini_magick (4.3.6)
     minitest (5.8.1)
     momentjs-rails (2.10.6)
       railties (>= 3.1)
@@ -205,6 +206,7 @@ DEPENDENCIES
   jquery-rails
   jquery-turbolinks
   jquery-ui-rails
+  mini_magick
   momentjs-rails
   nested_form
   pg (~> 0.18.3)

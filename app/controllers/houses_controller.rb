@@ -29,6 +29,7 @@ class HousesController < ApplicationController
       marker.lat house.latitude
       marker.lng house.longitude
     end
+	@booking = @house.bookings.build
     respond_with(@house)
   end
 

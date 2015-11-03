@@ -50,6 +50,7 @@ gem 'ckeditor'
 gem 'coffee-script-source', '1.8.0'
 gem 'carrierwave', github:'carrierwaveuploader/carrierwave'
 gem 'rmagick'
+gem 'mini_magick'
 
 gem 'momentjs-rails'
 gem 'gon'
