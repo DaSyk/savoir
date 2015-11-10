@@ -1,21 +1,19 @@
-<% @houses.each do |h| %>
-    <%= link_to house_path(h) do %>
-        <div class="jumbotron list">
-          <div class="row">
-			<div class="col-md-5">
-			  <%= image_tag h.pictures.where(:default_pic => true).first.image_url(:thumb).to_s if h.pictures.where(:default_pic => true).first %>
-			</div>
-			<div class="col-md-7">	
-			  <%= h.name %>
-			  <% if h.location %>
-			    <%= h.location.name %> in <%= h.location.region.name %>
-			  <% end %>
-			  <div class="row">
-				<div class="left col-md-8"><%= h.n_people if h.n_people %> Personen/Woche</div>
-				<div class="right col-md-4">ab X €</div>
-			  </div>
-			</div>  
-		  </div>	  
-        </div>
-    <% end %>
-<% end %>
+<ul>
+  <% Country.all.each do |c| %>
+    <li>Urlaubsregionen in <%= c.name.upcase %>
+      <ul>
+        <% c.regions.each do |r| %>
+          <li><%= r.name %>
+            <ul>
+              <% r.locations.each do |l| %>
+                <% l.houses.each do |h| %>
+                  <li><%= link_to h.name, house_path(h) %> (in <%= l.name %>)</li>
+                <% end %>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
+      </ul>
+    </li><br>
+  <% end %>
+</ul>

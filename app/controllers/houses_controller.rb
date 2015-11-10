@@ -72,43 +72,51 @@ class HousesController < ApplicationController
   def set_dates
     disabled_dates = []
     @busy_dates = []
-	@closed_dates = []
-	@request_dates = []
-	@special_dates = []
-	
-	@house.pricing.periods.where(ptype: "geschlossen").each do |p|
-	  (p.from..p.to).each do |d|
-		disabled_dates << d.to_s
-		@closed_dates << d
+	  @closed_dates = []
+	  @request_dates = []
+	  @special_dates = []
+
+	  @house.pricing.periods.where(ptype: "geschlossen").each do |p|
+	    if p.from && p.to
+        (p.from..p.to).each do |d|
+  		    disabled_dates << d.to_s
+  		    @closed_dates << d
+  	    end
+      end
 	  end
-	end  
-		
+
     @house.bookings.each do |b|
-      (b.start_date+1..b.end_date-1).each do |d|
-        disabled_dates << d.to_s
-        @busy_dates << d
+      if b.start_date && b.end_date
+        (b.start_date+1..b.end_date-1).each do |d|
+          disabled_dates << d.to_s
+          @busy_dates << d
+        end
       end
     end
     gon.dates = disabled_dates
-	
-	@house.pricing.periods.where(ptype: "auf Anfrage").each do |p|
-	  (p.from..p.to).each do |d|
-		@request_dates << d
+
+	  @house.pricing.periods.where(ptype: "auf Anfrage").each do |p|
+	    if p.from && p.to
+        (p.from..p.to).each do |d|
+  		    @request_dates << d
+  	    end
+      end
 	  end
-	end  
-	
-	@house.pricing.periods.where(ptype: "Sonderangebot").each do |p|
-	  (p.from..p.to).each do |d|
-		@special_dates << d
+
+	  @house.pricing.periods.where(ptype: "Sonderangebot").each do |p|
+	    if p.from && p.to
+        (p.from..p.to).each do |d|
+  		    @special_dates << d
+  	    end
+      end
 	  end
-	end
   end
 
     def house_params
       params.require(:house).permit(:id, :name, :description, :location_id, :size, :n_people, :add_n_people, :htype, :movie_url, :address, :latitude, :longitude,
 	    suitability_attributes: [:id, :pets, :allergic, :family, :horse, :dog, :senior, :baby, :monteur, :nsmoker, :longtime, :disability, :house_id, :_destroy],
       facility_attributes: [:id, :internet, :tv, :pool, :garden, :terrace, :grill, :balcony, :washingmachine, :dishwasher, :babybed, :house_id, :_destroy],
-		pricing_attributes: [:id, :n_people, :surcharge_night, :surcharge_week, :house_id, 
+		pricing_attributes: [:id, :n_people, :surcharge_night, :surcharge_week, :house_id,
 		  periods_attributes: [:id, :from, :to, :min, :min_type, :cost_per_night, :cost_per_week, :season, :pricing_id, :ptype, :_destroy],
 	      costs_attributes: [:id, :name, :ctype, :amount, :optional, :pricing_id, :_destroy]
 		],

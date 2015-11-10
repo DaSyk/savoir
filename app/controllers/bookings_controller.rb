@@ -28,15 +28,18 @@ class BookingsController < ApplicationController
 	@booking.change_accepted
 	redirect_to house_bookings_path
   end
-  
+
   def create
     @booking = @house.bookings.build(booking_params)
-    @booking.save
-    flash[:notice] = "Die Buchungsanfrage wurde erfolgreich erstellt!"
-    if admin_signed_in?
-      redirect_to house_bookings_path(@house)
+    if @booking.save
+      flash[:notice] = "Die Buchungsanfrage wurde erfolgreich erstellt!"
+      if admin_signed_in?
+        redirect_to house_bookings_path(@house)
+      else
+        redirect_to houses_list_path
+      end
     else
-      redirect_to houses_list_path
+      redirect_to @house, :flash => { :error => "Es wurden nicht alle Pflichtfelder ausgefüllt!" }
     end
   end
 

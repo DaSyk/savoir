@@ -2,23 +2,28 @@
 
 
 <ul class='nav nav-tabs' role='tablist'>
-  <li role='presentation' class='active'><a href='#allgemein' aria-controls='allgemein' role='tab' data-toggle='tab'>Allgemein</a></li>
+  <li role='presentation' class='<%= 'active' if flash[:error] == nil %>'><a href='#allgemein' aria-controls='allgemein' role='tab' data-toggle='tab'>Allgemein</a></li>
   <li role='presentation'><a href='#images' aria-controls='images' role='tab' data-toggle='tab'>Bilder</a></li>
   <li role='presentation'><a href='#availability' aria-controls='availability' role='tab' data-toggle='tab'>Verfügbarkeit</a></li>
   <li role='presentation'><a href='#prices' aria-controls='prices' role='tab' data-toggle='tab'>Preisliste</a></li>
   <% if @house.movie_url %>
-	<li role='presentation'><a href='#video' aria-controls='video' role='tab' data-toggle='tab'>Video</a></li>
-  <% end %>	
-  <li role='presentation'><a href='#request' aria-controls='request' role='tab' data-toggle='tab'>Buchungsanfragen</a></li>
+	  <li role='presentation'><a href='#video' aria-controls='video' role='tab' data-toggle='tab'>Video</a></li>
+  <% end %>
+  <li role='presentation' class="<%= 'active' if flash[:error] %>"><a href='#request' aria-controls='request' role='tab' data-toggle='tab'>Buchungsanfragen</a></li>
 </ul>
 
 <div class='tab-content'>
-  <div role='tabpanel' class='tab-pane fade in active' id='allgemein'>
-	HIER KOMMEN DIE ALLGEMEINEN INFORMATIONEN UND DER TEXT NOCH HIN!
+  <div role='tabpanel' class='tab-pane fade <%= 'in active' if flash[:error] == nil %>' id='allgemein'>
+	<div class="fieldset">
+	  <dl>
+        <dt class="label label-default">Name</dt>
+        <dd><pre class="prettyprint"><%= @house.name %></pre></dd>
+	  </dl>
+	</div>
 	<hr>
 	<div style='width: 800px;'>
 	  <div id="map" style='width: 800px; height: 400px;'></div>
-	</div>  
+	</div>
 	<script type="text/javascript">
 	  handler = Gmaps.build('Google');
 	  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
@@ -27,18 +32,18 @@
 	    handler.fitMapToBounds();
 		handler.getMap().setZoom(10);
 	  });
-	</script>	
+	</script>
   </div>
-  
+
   <div role='tabpanel' class='tab-pane fade' id='images'>
-	<% @house.pictures.each do |picture| %>	
+	<% @house.pictures.each do |picture| %>
 	  <div class="jumbotron picture">
 		<%= image_tag picture.image if picture.image? %>
 		<div class="row">
 		  <div class="col-md-12" style='text-align: center;font-weight: normal;'>
 			<%= picture.description %>
-		  </div>	
-		</div>	
+		  </div>
+		</div>
 	  </div>
 	<% end %>
   </div>
@@ -53,14 +58,14 @@
         <tr>
           <th><%= I18n.l((Date.today+cnt.month), format: "%B") %></th>
           <% (Date.today.beginning_of_month+cnt.month..Date.today.beginning_of_month+1.month-1+cnt.month).each do |d| %>
-            <% if @closed_dates.include? d %>			
+            <% if @closed_dates.include? d %>
 			  <td class="closed">
 			<% elsif @busy_dates.include? d %>
               <td class="busy">
 			<% elsif @request_dates.include? d %>
               <td class="request">
 			<% elsif @special_dates.include? d %>
-              <td class="special">  
+              <td class="special">
             <% else %>
               <td class="free">
             <% end %>
@@ -73,17 +78,33 @@
   </div>
 
   <div role='tabpanel' class='tab-pane fade' id='prices'>
-  preise
+	<table class="table table-striped">
+		<thead>
+		  <tr>
+			<th>Von</th>
+			<th>Bis</th>
+			<th>Preis/Woche</th>
+			<th>Saison</th>
+		</thead>
+		<tbody>
+		  <% @house.pricing.periods.order(:from).where(:ptype => ['geöffnet', 'Sonderangebot']).each do |p| %><tr>
+		    <td><%= p.from %></td>
+		    <td><%= p.to %></td>
+		    <td><%= p.cost_per_week %> €</td>
+		    <td><%= p.season %></td>
+		  </tr><% end %>
+		</tbody>
+	</table>
   </div>
-	
-<% if @house.movie_url %>	
+
+<% if @house.movie_url %>
   <div role='tabpanel' class='tab-pane fade' id='video'>
 	<iframe width="560" height="315" src="https://www.youtube.com/embed/<%= @house.movie_url%>" frameborder="0" allowfullscreen></iframe>
   </div>
-<% end %> 
+<% end %>
 
 
-	<div role='tabpanel' class='tab-pane fade' id='request'>
+	<div role='tabpanel' class='tab-pane fade <%= 'in active' if flash[:error] %>' id='request'>
 		<%= render 'booking_form' %>
 	</div>
 
