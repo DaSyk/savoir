@@ -99,6 +99,11 @@ GEM
     jquery-ui-rails (5.0.5)
       railties (>= 3.2.16)
     json (1.8.3)
+    judge (2.1.0)
+      rails (>= 3.1)
+    judge-simple_form (1.0.0)
+      judge (~> 2.0)
+      simple_form (>= 2.0)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     mime-types (2.6.2)
@@ -206,6 +211,8 @@ DEPENDENCIES
   jquery-rails
   jquery-turbolinks
   jquery-ui-rails
+  judge
+  judge-simple_form
   mini_magick
   momentjs-rails
   nested_form

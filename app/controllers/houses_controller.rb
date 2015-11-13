@@ -85,7 +85,7 @@ class HousesController < ApplicationController
       end
 	  end
 
-    @house.bookings.each do |b|
+    @house.bookings.where(accepted: true).each do |b|
       if b.start_date && b.end_date
         (b.start_date+1..b.end_date-1).each do |d|
           disabled_dates << d.to_s

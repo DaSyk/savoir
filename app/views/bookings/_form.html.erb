@@ -1,5 +1,19 @@
 <%= simple_nested_form_for [@house,@booking], :html => { :class => 'form-vertical' } do |f| %>
 
+    <% if @bookings.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@bookings.errors.count, "error") %> prohibited this widget from being saved:</h2>
+
+        <ul>
+        <% @bookings.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+
+
     <div class='row'>
       <div class='col-md-6'>
         <%= f.input :gender, :as => :radio_buttons, collection: ['Frau', 'Herr'], label: "Anrede" %>
@@ -31,7 +45,7 @@
         <div class="center-block">
           <div class="form-group text-center">
             <%= f.button :submit, "Abschicken", :class => 'btn-primary' %> oder
-            <%= link_to "Abbrechen", :back, :class => 'btn btn-default' %>
+            <%= link_to "Abbrechen", house_bookings_path(@house), :class => 'btn btn-default' %>
           </div>
         </div>
       </div>

@@ -51,7 +51,7 @@ $(function() {
         function(start, end, label) {
             $("#booking_start_date").val(start.format("DD.MM.YYYY"));
             $("#booking_end_date").val(end.format("DD.MM.YYYY"));
-			 
+
     });
     $('#houses_search input').change(function(){
         $.get($('#houses_search').attr('action'), $('#houses_search').serialize(), null, "script");

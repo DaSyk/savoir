@@ -44,9 +44,13 @@ class BookingsController < ApplicationController
   end
 
   def update
-    @booking.update(booking_params)
-    flash[:notice] = "Die Änderungen wurden gespeichert!"
-    redirect_to house_bookings_path(@house)
+    if @booking.update(booking_params)
+      flash[:notice] = "Die Änderungen wurden gespeichert!"
+      redirect_to house_bookings_path(@house)
+    else
+      flash[:error] = "Die Änderungen konnten nicht gespeichert werden!"
+      redirect_to :back
+    end
   end
 
   def destroy
