@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  mount Judge::Engine => '/judge'
+
   mount Ckeditor::Engine => '/ckeditor'
 
   root :to => 'pages#home'

@@ -49,6 +49,7 @@ gem 'nested_form'
 gem 'ckeditor'
 gem 'coffee-script-source', '1.8.0'
 gem 'carrierwave', github:'carrierwaveuploader/carrierwave'
+gem 'carrierwave-crop'
 gem 'rmagick'
 gem 'mini_magick'
 

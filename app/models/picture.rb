@@ -5,6 +5,7 @@ class Picture < ActiveRecord::Base
 	validates :name, uniqueness: true
 
 	before_create :default_name
+	#after_update :crop_image
 
 	def default_name
 		self.name ||= File.basename(image.filename, '.*').titleize if image
@@ -16,4 +17,9 @@ class Picture < ActiveRecord::Base
 		end
 		self.update_attribute(:default_pic, true)
 	end
+
+	# def crop_image
+	# 	image.recreate_versions! if params[:picture][:image_crop_x].present?
+	# end
+
 end

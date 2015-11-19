@@ -1,8 +1,42 @@
 <%= simple_form_for [@house,@picture], :html => { :class => 'form-vertical' } do |f| %>
 
-<%= f.input :name %>
-<%= f.input :description %>
+  <h2 style='text-align: center;'>Bild bearbeiten</h2><hr>
 
-<%= f.button :submit, "Speichern" %>
+  <div class="row">
+    <div class="col-md-12">
+      <%= f.input :name %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <%= f.input :description %>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row jumb">
+    <div class="col-md-7">
+      <%= image_tag @picture.image_url(:jumbo), id: 'cropbox' %>
+    </div>
+    <div class="col-md-5">
+      VOrschau
+      <%= f.previewbox :image, version: :jumbo %>
+    </div>
+  </div>
+
+  <% %w[x y w h].each do |a| %>
+    <%= text_field_tag "picture[image_crop_#{a}]" %><br>
+  <% end %>
+
+  <hr>
+
+  <div class='center-block'>
+    <div class='form-group text-center'>
+      <%= f.button :submit, 'Speichern', :class => 'btn-primary' %> oder
+      <%= link_to 'Abbrechen', house_pictures_path, :class => 'btn btn-default', :data => { :confirm => 'Änderungen werden nicht gespeichert!'} %>
+    </div>
+  </div>
 
 <% end %>

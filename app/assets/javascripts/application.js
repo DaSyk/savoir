@@ -7,6 +7,7 @@
 //= require moment
 //= require underscore
 //= require gmaps/google
+//= require jquery.jcrop
 //= require jquery-fileupload/basic
 //= require jquery-fileupload/vendor/tmpl
 //= require jquery_nested_form

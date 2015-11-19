@@ -7,24 +7,24 @@ class PicturesController < ApplicationController
     @pictures = @house.pictures.order(:id)
     respond_with(@pictures)
   end
-  
+
   def create
     @picture = @house.pictures.create(params[:picture].permit(:image))
     if @house.pictures.count == 1
       @picture.change_to_def
     end
   end
-    
+
   def set_default
     @pic = Picture.find(params[:p])
     @pic.change_to_def
     redirect_to house_pictures_path(@house)
   end
-  
+
   def edit
     @picture = Picture.find(params[:id])
-  end	
-  
+  end
+
   def update
     @picture = Picture.find(params[:id])
     if @picture.update(picture_params)

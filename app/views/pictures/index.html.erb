@@ -8,7 +8,6 @@
   <%= render @pictures %>
 </div>
 
-<hr>
 
 <%= form_for [@house, @house.pictures.new] do |f| %>
     <%= f.label :image, "Upload" %>
@@ -25,6 +24,5 @@
 <hr>
 
 <div class="form-group">
-<%= link_to "Zurück",
-            houses_path, :class => 'btn btn-default'  %>
+  <%= link_to "Zurück", houses_path, :class => 'btn btn-default'  %>
 </div>

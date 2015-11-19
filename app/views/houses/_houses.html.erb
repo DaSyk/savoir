@@ -1,19 +1,30 @@
-<ul>
-  <% Country.all.each do |c| %>
-    <li>Urlaubsregionen in <%= c.name.upcase %>
-      <ul>
-        <% c.regions.each do |r| %>
-          <li><%= r.name %>
-            <ul>
-              <% r.locations.each do |l| %>
-                <% l.houses.each do |h| %>
-                  <li><%= link_to h.name, house_path(h) %> (in <%= l.name %>)</li>
-                <% end %>
-              <% end %>
-            </ul>
-          </li>
-        <% end %>
-      </ul>
-    </li><br>
+<% @houses.pluck(:location_id).each do |l_id| %>
+  <% l = Location.find(l_id) %>
+
+  <%= l.region.country.name %> > <%= l.region.name %> > <%= l.name %>:
+  <% @houses.where(location_id: l_id).each do |h| %>
+
+    <%= link_to house_path(h) do %>
+      <div class="jumbotron list">
+        <div class="row">
+          <div class="col-md-4">
+            <% if h.pictures.where(default_pic: true).count > 0 %>
+              <%= image_tag h.pictures.where(default_pic: true).first.image_url(:jumbo), size: "270x270" %>
+            <% end %>
+          </div>
+          <div class="col-md-8">
+            <h3><%= h.name %></h3>
+            <p>
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+            </p>
+            <p>
+            2 Personen/Woche ab 50,-€
+            </p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
   <% end %>
-</ul>
+<% end %>
+
