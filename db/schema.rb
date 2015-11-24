@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151103173612) do
+ActiveRecord::Schema.define(version: 20151123164746) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -107,20 +107,22 @@ ActiveRecord::Schema.define(version: 20151103173612) do
     t.integer  "size"
     t.integer  "n_people"
     t.integer  "add_n_people"
-    t.boolean  "activated",    default: false
+    t.boolean  "activated",         default: false
     t.string   "htype"
     t.integer  "location_id"
     t.string   "movie_url"
     t.string   "address"
     t.float    "latitude"
     t.float    "longitude"
+    t.text     "short_description"
   end
 
   create_table "locations", force: true do |t|
     t.string   "name"
-    t.string   "region_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "houses_count", default: 0
+    t.integer  "region_id"
   end
 
   create_table "page_configs", force: true do |t|
@@ -179,6 +181,7 @@ ActiveRecord::Schema.define(version: 20151103173612) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "country_id"
+    t.integer  "houses_count", default: 0
   end
 
   create_table "suitabilities", force: true do |t|
@@ -196,6 +199,7 @@ ActiveRecord::Schema.define(version: 20151103173612) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "house_id"
+    t.string   "barrier"
   end
 
 end

@@ -16,19 +16,8 @@
 
   <hr>
 
-  <div class="row jumb">
-    <div class="col-md-7">
-      <%= image_tag @picture.image_url(:jumbo), id: 'cropbox' %>
-    </div>
-    <div class="col-md-5">
-      VOrschau
-      <%= f.previewbox :image, version: :jumbo %>
-    </div>
-  </div>
-
-  <% %w[x y w h].each do |a| %>
-    <%= text_field_tag "picture[image_crop_#{a}]" %><br>
-  <% end %>
+  <%= f.cropbox :image, version: :jumbo %>
+  <%= f.previewbox :image, width: 260, height: 195, version: :jumbo %>
 
   <hr>
 

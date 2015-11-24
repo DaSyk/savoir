@@ -1,6 +1,6 @@
 class House < ActiveRecord::Base
-	belongs_to :location
-	
+	belongs_to :location, counter_cache: true
+
 	has_one :facility, :dependent => :destroy
 	has_one :suitability, :dependent => :destroy
 	has_one :pricing, :dependent => :destroy
@@ -10,7 +10,9 @@ class House < ActiveRecord::Base
 
 	geocoded_by :address
 	after_validation :geocode
-	
+
+	after_update :change_houses_count
+
 	def change_activate
 		if self.activated?
 			self.update_attributes(:activated => false)
@@ -19,5 +21,8 @@ class House < ActiveRecord::Base
 		end
 	end
 
+	def change_houses_count
+		self.location.region.change_houses_count if self.location
+	end
 
 end

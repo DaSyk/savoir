@@ -48,6 +48,12 @@
                 <%= f.input :description, :as => :ckeditor, :input_html => { :ckeditor => {:toolbar => 'mini'}}, label: 'Beschreibung' %>
               </div>
             </div>
+
+            <div class='row'>
+              <div class='col-md-12'>
+                <%= f.input :short_description, :as => :ckeditor, :input_html => { :ckeditor => {:toolbar => 'mini'}}, label: 'Kurzbeschreibung (max x Zeichen)' %>
+              </div>
+            </div>
       </div>
 
 
@@ -60,6 +66,7 @@
                 <%= s.input :family, collection: ['deaktiviert', 'ja', 'nein', 'auf Anfrage'], :include_blank => false, label: 'Familienurlaub' %>
                 <%= s.input :longtime, collection: ['deaktiviert', 'ja', 'nein', 'auf Anfrage'], :include_blank => false, label: 'Langzeiturlaub' %>
                 <%= s.input :horse, collection: ['deaktiviert', 'ja', 'nein', 'auf Anfrage'], :include_blank => false, label: 'Urlaub mit Pferden' %>
+                <%= s.input :barrier, collection: ['deaktiviert', 'ja', 'nein', 'auf Anfrage'], :include_blank => false, label: 'Barrierefreier Urlaub' %>
               </div>
               <div class='col-md-4'>
                 <h3 style='text-align: center;'> Geeignet für:</h3><hr>

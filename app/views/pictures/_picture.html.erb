@@ -5,8 +5,11 @@
     </div>
   <% end %>
 
-    <%= image_tag picture.image %>
+  <% if picture.image_url(:thumb) != nil %>
+    <%= image_tag picture.image_url(:thumb) %>
+  <% else %>
 
+  <% end %>
 	<h4 style='text-align: center;'>#<%= picture.id %> <%= picture.name %></h4><hr style="margin: 2px;">
 	<div class="row">
 	  <div class="col-md-12" style='text-align: center;font-weight: normal;'>

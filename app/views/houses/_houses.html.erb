@@ -1,30 +1,57 @@
-<% @houses.pluck(:location_id).each do |l_id| %>
-  <% l = Location.find(l_id) %>
+<% @countries.each do |c| %>
+  <% @regions.where(country_id: c.id).each do |r| %>
 
-  <%= l.region.country.name %> > <%= l.region.name %> > <%= l.name %>:
-  <% @houses.where(location_id: l_id).each do |h| %>
 
-    <%= link_to house_path(h) do %>
-      <div class="jumbotron list">
-        <div class="row">
-          <div class="col-md-4">
-            <% if h.pictures.where(default_pic: true).count > 0 %>
-              <%= image_tag h.pictures.where(default_pic: true).first.image_url(:jumbo), size: "270x270" %>
-            <% end %>
+    <h4 style="margin-bottom:3px"><%= r.name %> (in <%= c.name.upcase %>)</h4>
+    <hr style="margin-top:3px;margin-bottom:3px; border-color:black">
+
+
+    <% @locations.where(region_id: r.id).each do |l| %>
+      <% @houses.where(location_id: l.id).each do |h| %>
+
+
+         <%= link_to house_path(h) do %>
+          <div class="jumbotron list" style="margin-bottom: 3px;">
+            <div class="row">
+              <div class="col-md-4">
+                <% if h.pictures.where(default_pic: true).count > 0 %>
+                  <%= image_tag h.pictures.where(default_pic: true).first.image_url(:thumb), size: "260x195" %>
+                <% end %>
+              </div>
+              <div class="col-md-8">
+                <h3 style="margin-top: 10px"><%= h.name %> (in <%= h.location.name %>)</h3><hr style="margin:3px 0 3px 0;">
+                <div class="content">
+                  <%= h.short_description.html_safe if h.short_description %>
+                </div><hr style="margin:3px 0 3px 0;">
+                <div class="content2">
+                  <%= "max. #{h.n_people} Personen" if h.n_people %>
+                  <% if (h.n_people && h.size) %>&bull;<% end %>
+                  <%= "#{h.size} m²" if h.size %>
+                </div>
+                <div class="left" style="font-size:2em;">
+                  <span class="glyphs" data-toggle="tooltip" data-placement="top" title="Apfel: ja"><%= glyph 'apple' %></span>
+                  <span class="glyphs" data-toggle="tooltip" data-placement="top" title="Baum: nein"><%= glyph 'tree-deciduous' %><span class="cross">X</span></span>
+                </div>
+                <div class="right">
+                  <% if h.pricing.periods.where(ptype: ['geöffnet', 'Sonderangebot']).where('"to" >= ?', Date.today).first %>
+                    ab<span style="font-size:2em;padding:0px;">
+                      <%= h.pricing.periods.where(ptype: ['geöffnet', 'Sonderangebot']).where('"to" >= ?', Date.today).order(:cost_per_week).first.cost_per_week %>
+                    €</span>/Woche
+                  <% end %>
+                </div>
+                </p>
+              </div>
+            </div>
           </div>
-          <div class="col-md-8">
-            <h3><%= h.name %></h3>
-            <p>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-            </p>
-            <p>
-            2 Personen/Woche ab 50,-€
-            </p>
-          </div>
-        </div>
-      </div>
+        <% end %>
+
+
+      <% end %>
     <% end %>
+
+
+    <hr style="margin-top:3px;margin-bottom:20px; border-color:black">
+
 
   <% end %>
 <% end %>
-

@@ -70,6 +70,10 @@ $(function() {
     })
 });
 
+$(function () {
+   $('[data-toggle="tooltip"]').tooltip()
+})
+
 //call functions
 
 function setDate() {
@@ -88,3 +92,4 @@ function unavailable(date) {
         return [false, "", "Unavailable"];
     }
 }
+

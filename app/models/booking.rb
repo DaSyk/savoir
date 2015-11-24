@@ -7,10 +7,10 @@ class Booking < ActiveRecord::Base
 
   def change_accepted
     if self.accepted?
-	  self.update_attributes(:accepted => false)
-	else
-	  self.update_attributes(:accepted => true)
-	end
+	    self.update_attributes(:accepted => false)
+	 else
+	    self.update_attributes(:accepted => true)
+	 end
   end
 
 end

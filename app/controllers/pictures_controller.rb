@@ -49,6 +49,6 @@ class PicturesController < ApplicationController
     end
 
     def picture_params
-      params.require(:picture).permit(:id, :name, :house_id, :image, :default_pic, :description, :_destroy)
+      params.require(:picture).permit(:id, :name, :house_id, :image, :default_pic, :description, :image_crop_x, :image_crop_y, :image_crop_w, :image_crop_h, :_destroy)
     end
 end
