@@ -1,6 +1,7 @@
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs
+//= require jquery-ui
 //= require bootstrap-sprockets
 //= require bootstrap-datepicker/core
 //= require bootstrap-datepicker//locales/bootstrap-datepicker.de.js
@@ -65,14 +66,16 @@ $(function() {
         $.get($('#houses_search').attr('action'), $('#houses_search').serialize(), null, "script");
         return false;
     });
-    $('.carousel').carousel({
-        interval: 4000
-    })
 });
 
 $(function () {
-   $('[data-toggle="tooltip"]').tooltip()
+  $('[data-toggle="tooltip"]').tooltip()
+  $('#house_htype').autocomplete({
+    source: gon.types
+  });
 })
+
+
 
 //call functions
 

@@ -19,12 +19,13 @@
                 <% end %>
               </div>
               <div class="col-md-8">
-                <h3 style="margin-top: 10px"><%= h.name %> (in <%= h.location.name %>)</h3><hr style="margin:3px 0 3px 0;">
+                <h3 style="margin-top: 10px"><%= h.name %> (in <%= h.location.name %>)</h3><hr class="small">
                 <div class="content">
                   <%= h.short_description.html_safe if h.short_description %>
                 </div><hr style="margin:3px 0 3px 0;">
                 <div class="content2">
-                  <%= "max. #{h.n_people} Personen" if h.n_people %>
+                  <%= "#{h.n_people} Personen" if h.n_people %>
+                  <%= "(max. #{h.n_people+h.add_n_people})" if h.add_n_people %>
                   <% if (h.n_people && h.size) %>&bull;<% end %>
                   <%= "#{h.size} m²" if h.size %>
                 </div>

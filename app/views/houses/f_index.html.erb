@@ -1,10 +1,8 @@
 <div class="row">
-
-  <h2 style="text-align: center;">Feriendomizile</h2><hr>
-
   <div class="col-md-3">
+
     <div class="jumbotron lowpad">
-      <h4 style="text-align: center;">Filter</h4><hr>
+      <h4 style="text-align: center;margin:0;">Filter</h4><hr class="small">
 
         <%= search_form_for @search, url: houses_list_path, :builder => SimpleForm::FormBuilder, :id => 'houses_search' do |f| %>
 
@@ -17,21 +15,28 @@
                     <%= check_box_tag('q[location_region_id_in][]', r.id) %>
                     <%= r.name %>
                   </label><br>
+                  <% if r.name == "Provence-Alpes-Côte d’Azur" %>
+                    <% r.locations.order(:name).each do |l| %>
+                      <label class="checkbox-inline" style="margin-left: 10px;">
+                        <%= check_box_tag('q[location_name_in][]', l.name) %>
+                        <%= l.name %>
+                      </label><br>
+                    <% end %>
+                  <% end %>
                 <% end %>
               <% end %>
             </div>
-            <hr>
+            <hr class="small">
 
             <label class="string optional control-label" for="booking_lastname">Personen</label><br>
             <div class="checkbox">
                 <% House.where(activated: true).order(:n_people).pluck(:n_people).to_a.uniq.compact.each do |n| %>
-                  <label class="checkbox-inline">
-                    <%= check_box_tag('q[n_people_eq_any][]', n) %>
-                    <%= n %>
+                  <label class="checkbox-inline" style="margin-right:2px;">
+                    <%= check_box_tag('q[n_people_eq_any][]', n) %><%= n %>
                   </label>
                 <% end %>
             </div>
-            <hr>
+            <hr class="small">
 
             <label class="string optional control-label" for="booking_lastname">Ausstattung</label><br>
             <div class="row checkbox">
@@ -45,19 +50,19 @@
                   <label><%= check_box_tag('q[facility_dishwasher_eq]', "ja") %> Spülmaschine</label><br>
               </div>
             </div>
-            <hr>
+            <hr class="small">
 
             <label class="string optional control-label" for="booking_lastname">Geeignet für</label>
             <div class="row checkbox">
               <div class="col-md-12">
                   <label><%= check_box_tag('q[suitability_family_eq]', "ja") %> Familienurlaub</label><br>
                   <label><%= check_box_tag('q[suitability_barrier_eq]', "ja") %> barrierefreien Urlaub</label><br>
-                  <label><%= check_box_tag('q[suitability_allergic_eq]', "ja") %> Allergiker</label><br>
+                  <label><%= check_box_tag('q[suitability_multiple_eq]', "ja") %> Mehrfamilienurlaub</label><br>
                   <label><%= check_box_tag('q[suitability_dog_eq]', "ja") %> Urlaub mit Hund</label><br>
 
               </div>
             </div>
-            <hr>
+            <hr class="small">
 
             <label class="string optional control-label" for="booking_lastname">Objekttyp</label>
             <div class="checkbox">
@@ -67,7 +72,7 @@
                   </label><br>
                 <% end %>
             </div>
-            <hr>
+            <hr class="small">
             <div class="center-block">
                 <div class="form-group text-center">
                   <button class="btn btn-default" id="selectAll">Alle Filter entfernen</button>
@@ -78,7 +83,9 @@
 
     </div>
   </div>
+
   <div class="col-md-9" id="houses">
     <%= render 'houses' %>
   </div>
+
 </div>

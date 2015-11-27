@@ -34,6 +34,7 @@ class HousesController < ApplicationController
   end
 
   def edit
+    gon.types = House.all.pluck(:htype)
   end
 
   def create
@@ -114,7 +115,7 @@ class HousesController < ApplicationController
 
     def house_params
       params.require(:house).permit(:id, :name, :description, :location_id, :size, :n_people, :add_n_people, :htype, :movie_url, :address, :latitude, :longitude, :short_description,
-	    suitability_attributes: [:id, :pets, :allergic, :family, :horse, :dog, :senior, :baby, :monteur, :nsmoker, :longtime, :disability, :barrier, :house_id, :_destroy],
+	    suitability_attributes: [:id, :pets, :allergic, :family, :horse, :dog, :senior, :baby, :monteur, :nsmoker, :longtime, :disability, :barrier, :multiple, :house_id, :_destroy],
       facility_attributes: [:id, :internet, :tv, :pool, :garden, :terrace, :grill, :balcony, :washingmachine, :dishwasher, :babybed, :house_id, :_destroy],
 		pricing_attributes: [:id, :n_people, :surcharge_night, :surcharge_week, :house_id,
 		  periods_attributes: [:id, :from, :to, :min, :min_type, :cost_per_night, :cost_per_week, :season, :pricing_id, :ptype, :_destroy],

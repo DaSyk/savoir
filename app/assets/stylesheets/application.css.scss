@@ -11,6 +11,7 @@
  * file per style scope.
  *
  *= require jquery.jcrop
+ *= require jquery-ui
  *
  */
 
@@ -272,4 +273,12 @@ table.calendar {
     color: red;
     font-size: 1.3em;
   }
+}
+
+hr.small {
+  margin:3px 0 3px 0;
+}
+
+.checkbox {
+  margin-top:0;
 }
