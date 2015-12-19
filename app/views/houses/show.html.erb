@@ -1,119 +1,172 @@
-<h3 style='text-align: center;'><%=@house.name%> (<%=@house.location.name if @house.location%>, <%= @house.location.region.name if @house.location%>)</h3><hr>
+<% if current_admin || @house.activated == true %>
 
+  <div class="row">
+    <div class="col-md-9">
 
-<ul class='nav nav-tabs' role='tablist'>
-  <li role='presentation' class='<%= 'active' if flash[:error] == nil %>'><a href='#allgemein' aria-controls='allgemein' role='tab' data-toggle='tab'>Allgemein</a></li>
-  <li role='presentation'><a href='#images' aria-controls='images' role='tab' data-toggle='tab'>Bilder</a></li>
-  <li role='presentation'><a href='#availability' aria-controls='availability' role='tab' data-toggle='tab'>Verfügbarkeit</a></li>
-  <li role='presentation'><a href='#prices' aria-controls='prices' role='tab' data-toggle='tab'>Preisliste</a></li>
-  <% if @house.movie_url %>
-	  <li role='presentation'><a href='#video' aria-controls='video' role='tab' data-toggle='tab'>Video</a></li>
-  <% end %>
-  <li role='presentation' class="<%= 'active' if flash[:error] %>"><a href='#request' aria-controls='request' role='tab' data-toggle='tab'>Buchungsanfragen</a></li>
-</ul>
-
-<div class='tab-content'>
-  <div role='tabpanel' class='tab-pane fade <%= 'in active' if flash[:error] == nil %>' id='allgemein'>
-	<div class="fieldset">
-	  <dl>
-        <dt class="label label-default">Name</dt>
-        <dd><pre class="prettyprint"><%= @house.name %></pre></dd>
-	  </dl>
-	</div>
-	<hr>
-	<div style='width: 800px;'>
-	  <div id="map" style='width: 800px; height: 400px;'></div>
-	</div>
-	<script type="text/javascript">
-	  handler = Gmaps.build('Google');
-	  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
-	    markers = handler.addMarkers(<%=raw @hash.to_json %>);
-	    handler.bounds.extendWith(markers);
-	    handler.fitMapToBounds();
-		handler.getMap().setZoom(10);
-	  });
-	</script>
-  </div>
-
-  <div role='tabpanel' class='tab-pane fade' id='images'>
-	<% @house.pictures.each do |picture| %>
-	  <div class="jumbotron picture">
-		<%= image_tag picture.image if picture.image? %>
-		<div class="row">
-		  <div class="col-md-12" style='text-align: center;font-weight: normal;'>
-			<%= picture.description %>
-		  </div>
-		</div>
-	  </div>
-	<% end %>
-  </div>
-
-  <div role='tabpanel' class='tab-pane fade' id='availability'>
-     <table class="calendar">
-      <% cnt=0 %>
-      <% while cnt < 18 %>
-        <% if cnt== 0 || (Date.today+cnt.month).month==1 %>
-          <tr><th><%= (Date.today+cnt.month).year %></th></tr>
+      <ul class='nav nav-tabs' role='tablist'>
+        <li role='presentation' class='<%= 'active' if flash[:error] == nil %>'><a href='#allgemein' aria-controls='allgemein' role='tab' data-toggle='tab'>Allgemein</a></li>
+        <li role='presentation'><a href='#images' aria-controls='images' role='tab' data-toggle='tab'>Bilder</a></li>
+        <li role='presentation'><a href='#availability' aria-controls='availability' role='tab' data-toggle='tab'>Verfügbarkeit</a></li>
+        <li role='presentation'><a href='#prices' aria-controls='prices' role='tab' data-toggle='tab'>Preisliste</a></li>
+        <% if @house.movie_url != "" %>
+      	  <li role='presentation'><a href='#video' aria-controls='video' role='tab' data-toggle='tab'>Video</a></li>
         <% end %>
-        <tr>
-          <th><%= I18n.l((Date.today+cnt.month), format: "%B") %></th>
-          <% (Date.today.beginning_of_month+cnt.month..Date.today.beginning_of_month+1.month-1+cnt.month).each do |d| %>
-            <% if @closed_dates.include? d %>
-			  <td class="closed">
-			<% elsif @busy_dates.include? d %>
-              <td class="busy">
-			<% elsif @request_dates.include? d %>
-              <td class="request">
-			<% elsif @special_dates.include? d %>
-              <td class="special">
-            <% else %>
-              <td class="free">
-            <% end %>
-              <%= "0" if d.day < 10 %><%= d.day %></td>
+        <li role='presentation' class="<%= 'active' if flash[:error] %>"><a href='#request' aria-controls='request' role='tab' data-toggle='tab'>Buchungsanfragen</a></li>
+      </ul>
+
+      <div class='tab-content'>
+        <div role='tabpanel' class='tab-pane fade <%= 'in active' if flash[:error] == nil %>' id='allgemein'>
+          <h3>Beschreibung:</h3>
+          <%= @house.description.html_safe %>
+          <br>
+          Hier würden dann noch Glyphen hinkommen, falls wir noch welche finden:
+          Bspw.:
+          <div class="left" style="font-size:2em;">
+            <span class="glyphs" data-toggle="tooltip" data-placement="top" title="Größe"><%= glyph 'home' %> <%= @house.size %>m²</span>
+          </div>
+
+          <h3>Geeignet für:</h3>
+          <% @house.suits.where(activated:"Ja").each do |s| %>
+            <%= s.name %><br>
           <% end %>
-        </tr>
-        <% cnt+=1 %>
+
+          <h3>Ausstattung:</h3>
+          <% @house.facilities.where(activated:"Ja").each do |f| %>
+            <%= f.name %><br>
+          <% end %>
+
+
+          <h3>Lage:</h3>
+        	<div style='width: 800px;'>
+        	  <div id="map" style='width: 800px; height: 400px;'></div>
+        	</div>
+        	<script type="text/javascript">
+        	  handler = Gmaps.build('Google');
+        	  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+        	    markers = handler.addMarkers(<%=raw @hash.to_json %>);
+        	    handler.bounds.extendWith(markers);
+        	    handler.fitMapToBounds();
+        		handler.getMap().setZoom(10);
+        	  });
+        	</script>
+        </div>
+
+        <div role='tabpanel' class='tab-pane fade' id='images'>
+        	<% @house.pictures.each do |picture| %>
+          	<%= image_tag picture.image if picture.image? %>
+        	<% end %>
+        </div>
+
+        <div role='tabpanel' class='tab-pane fade' id='availability'>
+          <table class="calendar">
+            <tr>
+              <td class="closed"></td><th>Geschlossen</th>
+              <td class="busy"></td><th>Ausgebucht</th>
+              <td class="request"></td><th>Auf Anfrage</th>
+              <td class="special"></td><th>Sonderangebot</th>
+              <td class="free"></td><th>Verfügbar</th>
+            </tr>
+          </table>
+
+          <table class="calendar">
+            <% cnt=0 %>
+            <% while cnt < 18 %>
+              <% if cnt== 0 || (Date.today+cnt.month).month==1 %>
+                <tr><th><%= (Date.today+cnt.month).year %></th></tr>
+              <% end %>
+              <tr>
+                <th><%= I18n.l((Date.today+cnt.month), format: "%B") %></th>
+                <% (Date.today.beginning_of_month+cnt.month..Date.today.beginning_of_month+1.month-1+cnt.month).each do |d| %>
+                  <% if @closed_dates.include? d %>
+      			  <td class="closed">
+      			<% elsif @busy_dates.include? d %>
+                    <td class="busy">
+      			<% elsif @request_dates.include? d %>
+                    <td class="request">
+      			<% elsif @special_dates.include? d %>
+                    <td class="special">
+                  <% else %>
+                    <td class="free">
+                  <% end %>
+                    <%= "0" if d.day < 10 %><%= d.day %></td>
+                <% end %>
+              </tr>
+              <% cnt+=1 %>
+            <% end %>
+          </table>
+        </div>
+
+        <div role='tabpanel' class='tab-pane fade' id='prices'>
+          <h3>Zeiträume</h3>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Von</th>
+                <th>Bis</th>
+                <th>Preis/Woche</th>
+                <th>Saison</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @house.pricing.periods.order(:from).where(:ptype => ['geöffnet', 'Sonderangebot']).each do |p| %><tr>
+                <td><%= p.from %></td>
+                <td><%= p.to %></td>
+                <td><%= p.cost_per_week %> €</td>
+                <td><%= p.season %></td>
+              </tr><% end %>
+            </tbody>
+          </table>
+
+          <h3>Zusatzkosten</h3>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+              <th>Bezeichnung</th>
+              <th>Typ</th>
+              <th>Kosten</th>
+              <th>Optional</th>
+            </thead>
+            <tbody>
+              <% @house.pricing.costs.each do |c| %><tr>
+                <td><%= c.name %></td>
+                <td><%= c.ctype %></td>
+                <td><%= c.amount %> €</td>
+                <td><% if c.optional == true %>Ja<% else %>Nein<% end %></td>
+              </tr><% end %>
+            </tbody>
+          </table>
+        </div>
+
+      <% if @house.movie_url != "" %>
+        <div role='tabpanel' class='tab-pane fade' id='video'>
+      	<iframe width="560" height="315" src="https://www.youtube.com/embed/<%= @house.movie_url%>" frameborder="0" allowfullscreen></iframe>
+        </div>
       <% end %>
-    </table>
+
+
+      	<div role='tabpanel' class='tab-pane fade <%= 'in active' if flash[:error] %>' id='request'>
+      		<%= render 'booking_form' %>
+      	</div>
+
+      </div>
+
+    </div>
+
+    <div class="col-md-3">
+    </div>
+
   </div>
 
-  <div role='tabpanel' class='tab-pane fade' id='prices'>
-	<table class="table table-striped">
-		<thead>
-		  <tr>
-			<th>Von</th>
-			<th>Bis</th>
-			<th>Preis/Woche</th>
-			<th>Saison</th>
-		</thead>
-		<tbody>
-		  <% @house.pricing.periods.order(:from).where(:ptype => ['geöffnet', 'Sonderangebot']).each do |p| %><tr>
-		    <td><%= p.from %></td>
-		    <td><%= p.to %></td>
-		    <td><%= p.cost_per_week %> €</td>
-		    <td><%= p.season %></td>
-		  </tr><% end %>
-		</tbody>
-	</table>
+
+  <hr>
+
+  <div class='center-block'>
+    <div class='form-group text-center'>
+      <%= link_to 'Zurück', :back, :class => 'btn btn-default'  %>
+    </div>
   </div>
 
-<% if @house.movie_url %>
-  <div role='tabpanel' class='tab-pane fade' id='video'>
-	<iframe width="560" height="315" src="https://www.youtube.com/embed/<%= @house.movie_url%>" frameborder="0" allowfullscreen></iframe>
-  </div>
+<% else %>
+  Diese Seite ist momentan in Bearbeitung.
+
 <% end %>
-
-
-	<div role='tabpanel' class='tab-pane fade <%= 'in active' if flash[:error] %>' id='request'>
-		<%= render 'booking_form' %>
-	</div>
-
-</div>
-
-<hr>
-
-<div class='center-block'>
-  <div class='form-group text-center'>
-    <%= link_to 'Zurück', :back, :class => 'btn btn-default'  %>
-  </div>
-</div>

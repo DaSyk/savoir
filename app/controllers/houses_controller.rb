@@ -14,7 +14,7 @@ class HousesController < ApplicationController
     @search = House.where(activated: true).search(params[:q])
     @houses = @search.result(distinct: true)
     @locations = Location.where(id: @houses.map(&:location_id).compact.uniq).order(:name)
-    @regions = Region.where(id: @locations.map(&:region_id).compact.uniq).order(:houses_count)
+    @regions = Region.where(id: @locations.map(&:region_id).compact.uniq).order(houses_count: :desc)
     @countries = Country.all.order(:name)
   end
 
@@ -39,9 +39,7 @@ class HousesController < ApplicationController
 
   def create
     @house = House.new(name: "new house")
-    @suitability = @house.build_suitability
     @pricing = @house.build_pricing
-    @facility = @house.build_facility
     @pricing.periods.build
     @pricing.costs.build
     @house.save
@@ -115,8 +113,8 @@ class HousesController < ApplicationController
 
     def house_params
       params.require(:house).permit(:id, :name, :description, :location_id, :size, :n_people, :add_n_people, :htype, :movie_url, :address, :latitude, :longitude, :short_description,
-	    suitability_attributes: [:id, :pets, :allergic, :family, :horse, :dog, :senior, :baby, :monteur, :nsmoker, :longtime, :disability, :barrier, :multiple, :house_id, :_destroy],
-      facility_attributes: [:id, :internet, :tv, :pool, :garden, :terrace, :grill, :balcony, :washingmachine, :dishwasher, :babybed, :house_id, :_destroy],
+	    :suit_ids => [],
+      :facility_ids => [],
 		pricing_attributes: [:id, :n_people, :surcharge_night, :surcharge_week, :house_id,
 		  periods_attributes: [:id, :from, :to, :min, :min_type, :cost_per_night, :cost_per_week, :season, :pricing_id, :ptype, :_destroy],
 	      costs_attributes: [:id, :name, :ctype, :amount, :optional, :pricing_id, :_destroy]

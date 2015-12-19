@@ -23,3 +23,18 @@ Page.create(title: 'Impressum', page_config_id: 1, content: '')
 Page.create(title: 'Buchungshinweise', page_config_id: 1, content: '')
 
 Admin.create!(:name => 'root', :email => 'example@example.com', :password => 'rootroot', :password_confirmation => 'rootroot')
+
+Detail.create()
+
+Suit.create(name: "Familienurlaub", detail_id: 1)
+Suit.create(name: "barrierefreien Urlaub", detail_id: 1)
+Suit.create(name: "Mehrfamilienurlaub", detail_id: 1)
+Suit.create(name: "Urlaub mit Hund", detail_id: 1)
+
+Facility.create(name: "Internet/ WLAN", detail_id: 1)
+Facility.create(name: "Pool/Schwimmbad", detail_id: 1)
+Facility.create(name: "Garten", detail_id: 1)
+Facility.create(name: "Terrasse", detail_id: 1)
+Facility.create(name: "Balkon", detail_id: 1)
+Facility.create(name: "Waschmaschine", detail_id: 1)
+Facility.create(name: "Spülmaschine", detail_id: 1)

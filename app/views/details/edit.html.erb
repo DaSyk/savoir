@@ -1,0 +1,54 @@
+<%= simple_nested_form_for @detail, url: edit_details_path, :html => { :class => 'form-vertical' } do |f| %>
+
+  <h3 style='text-align: center;'>Eignung
+    <%= f.link_to_add :suits, :title => 'Hinzufügen', :data => { :target => '#suits' }, :class => 'btn btn-primary pull-right' do %>
+      <%= glyph 'plus' %> Neuer Eintrag
+    <% end %>
+  </h3>
+  <table class='table table-striped' id='suits'>
+    <tr><th>EIGNUNG</th><th>Aktiviert?</th><th></th></tr>
+    <%= f.fields_for :suits, :wrapper => false do |p| %>
+    <tr class='fields'>
+      <td><%= p.input :name, as: :string, :placeholder => 'Name', label: false  %></td>
+      <td><%= p.input :activated, collection: ["Ja","Nein"], :include_blank => false, label: false %></td>
+      <td>
+        <%= p.link_to_remove :title => '[-] Löschen', :class => 'btn btn-danger pull-right', :data => { :confirm => 'Sicher?' } do %>
+          <%= glyph 'remove' %> Löschen
+        <% end %>
+      </td>
+     </tr>
+    <% end %>
+  </table>
+
+  <hr>
+
+  <h3 style='text-align: center;'>Ausstattung
+    <%= f.link_to_add :facilities, :title => 'Hinzufügen', :data => { :target => '#facilities' }, :class => 'btn btn-primary pull-right' do %>
+      <%= glyph 'plus' %> Neuer Eintrag
+    <% end %>
+  </h3>
+  <table class='table table-striped' id='facilities'>
+    <tr><th>AUSSTATTUNG</th><th>Aktiviert?</th><th></th></tr>
+    <%= f.fields_for :facilities, :wrapper => false do |p| %>
+    <tr class='fields'>
+      <td><%= p.input :name, as: :string, :placeholder => 'Name', label: false  %></td>
+      <td><%= p.input :activated, collection: ["Ja","Nein"], :include_blank => false, label: false %></td>
+      <td>
+        <%= p.link_to_remove :title => '[-] Löschen', :class => 'btn btn-danger pull-right', :data => { :confirm => 'Sicher?' } do %>
+          <%= glyph 'remove' %> Löschen
+        <% end %>
+      </td>
+     </tr>
+    <% end %>
+  </table>
+
+
+  <hr>
+  <div class='center-block'>
+    <div class='form-group text-center'>
+      <%= f.button :submit, 'Speichern', :class => 'btn-primary' %> oder
+      <%= link_to 'Abbrechen', houses_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+
+<% end %>

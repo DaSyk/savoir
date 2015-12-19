@@ -71,4 +71,3 @@ gem 'pg', '~> 0.18.3'
 gem 'geocoder'
 gem 'gmaps4rails'
 gem 'underscore-rails'
-

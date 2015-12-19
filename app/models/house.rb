@@ -6,7 +6,10 @@ class House < ActiveRecord::Base
 	has_one :pricing, :dependent => :destroy
 	has_many :pictures, :dependent => :destroy
 	has_many :bookings, :dependent => :destroy
-	accepts_nested_attributes_for :suitability, :pricing, :pictures, :facility
+	has_and_belongs_to_many :suits
+	has_and_belongs_to_many :facilities
+
+	accepts_nested_attributes_for :pricing, :pictures, :facilities, :suits
 
 	geocoded_by :address
 	after_validation :geocode

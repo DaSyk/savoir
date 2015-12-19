@@ -56,6 +56,10 @@
     <%= glyph 'pencil' %> Länder/Regionen/Orte bearbeiten
 <% end %>
 
+<%= link_to edit_details_path, :class => 'btn btn-default', :title => 'Ausstattung/Eignung bearbeiten' do %>
+    <%= glyph 'pencil' %> Ausstattung/Eignung bearbeiten
+<% end %>
+
 <%= link_to edit_page_config_path, :class => 'btn btn-default', :title => 'Texte bearbeiten', data: {no_turbolink: true } do %>
     <%= glyph 'pencil' %> Texte bearbeiten
 <% end %>

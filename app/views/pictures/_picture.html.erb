@@ -1,27 +1,23 @@
+<% if picture.default_pic? %>
+<div class="jumbotron picture" style="border: 1px solid black">
+<% else %>
 <div class="jumbotron picture">
+<% end %>
   <%= link_to house_picture_path(@house, picture), :confirm => 'Are you sure?', :method => :delete do %>
     <div class="imgtxt-right" style="height: 25px; padding: 4px;">
       <%= glyph 'remove' %>
     </div>
   <% end %>
 
-  <% if picture.image_url(:thumb) != nil %>
-    <%= image_tag picture.image_url(:thumb) %>
-  <% else %>
+  <%= image_tag picture.image_url(:thumb) %>
 
-  <% end %>
 	<h4 style='text-align: center;'>#<%= picture.id %> <%= picture.name %></h4><hr style="margin: 2px;">
-	<div class="row">
-	  <div class="col-md-12" style='text-align: center;font-weight: normal;'>
-		<%= picture.description %>
-	  </div>
-	</div>
-	<hr style="margin: 2px;">
+
 	<div class="row">
 	  <div class="col-md-8">
 		<div class="left">
 		  <% if picture.default_pic? %>
-		    <div style="color:lightgreen;">Default</div>
+		    <div style="color:darkgreen;">Default</div>
 		  <% else %>
 		    <%= link_to "Als Default verwenden", { :controller => 'pictures', :action => 'set_default', :p => picture.id }, { :method => :put } %>
 		  <% end %>

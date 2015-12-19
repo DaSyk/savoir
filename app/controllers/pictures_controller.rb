@@ -18,7 +18,7 @@ class PicturesController < ApplicationController
   def set_default
     @pic = Picture.find(params[:p])
     @pic.change_to_def
-    redirect_to house_pictures_path(@house)
+    redirect_to :back
   end
 
   def edit
@@ -29,10 +29,10 @@ class PicturesController < ApplicationController
     @picture = Picture.find(params[:id])
     if @picture.update(picture_params)
       flash[:notice] = "Die Änderungen wurden gespeichert!"
-      redirect_to house_pictures_path
+      redirect_to :back
     else
       flash[:notice] = "Die Änderungen konnten nicht gespeichert werden."
-      redirect_to edit_house_picture_path(@house,@picture)
+      redirect_to :back
     end
   end
 

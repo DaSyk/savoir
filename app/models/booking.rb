@@ -1,4 +1,5 @@
 class Booking < ActiveRecord::Base
+  include ActiveModel::Validations
   belongs_to :house
 
   validates :start_date, :end_date, :lastname, :firstname, :email, presence: true

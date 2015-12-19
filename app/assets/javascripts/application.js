@@ -66,16 +66,8 @@ $(function() {
         $.get($('#houses_search').attr('action'), $('#houses_search').serialize(), null, "script");
         return false;
     });
+    $('[data-toggle="tooltip"]').tooltip();
 });
-
-$(function () {
-  $('[data-toggle="tooltip"]').tooltip()
-  $('#house_htype').autocomplete({
-    source: gon.types
-  });
-})
-
-
 
 //call functions
 

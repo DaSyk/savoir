@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151127152852) do
+ActiveRecord::Schema.define(version: 20151219162638) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,20 +83,22 @@ ActiveRecord::Schema.define(version: 20151127152852) do
     t.integer  "place_id"
   end
 
-  create_table "facilities", force: true do |t|
-    t.string   "internet"
-    t.string   "tv"
-    t.string   "pool"
-    t.string   "garden"
-    t.string   "terrace"
-    t.string   "grill"
-    t.string   "balcony"
-    t.string   "washingmachine"
-    t.string   "dishwasher"
-    t.string   "babybed"
+  create_table "details", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "house_id"
+  end
+
+  create_table "facilities", force: true do |t|
+    t.string   "name"
+    t.string   "activated"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "detail_id"
+  end
+
+  create_table "facilities_houses", id: false, force: true do |t|
+    t.integer "facility_id", null: false
+    t.integer "house_id",    null: false
   end
 
   create_table "houses", force: true do |t|
@@ -115,6 +117,11 @@ ActiveRecord::Schema.define(version: 20151127152852) do
     t.float    "latitude"
     t.float    "longitude"
     t.text     "short_description"
+  end
+
+  create_table "houses_suits", id: false, force: true do |t|
+    t.integer "house_id", null: false
+    t.integer "suit_id",  null: false
   end
 
   create_table "locations", force: true do |t|
@@ -184,23 +191,12 @@ ActiveRecord::Schema.define(version: 20151127152852) do
     t.integer  "houses_count", default: 0
   end
 
-  create_table "suitabilities", force: true do |t|
-    t.string   "pets"
-    t.string   "allergic"
-    t.string   "family"
-    t.string   "horse"
-    t.string   "dog"
-    t.string   "senior"
-    t.string   "baby"
-    t.string   "monteur"
-    t.string   "nsmoker"
-    t.string   "longtime"
-    t.string   "disability"
+  create_table "suits", force: true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "house_id"
-    t.string   "barrier"
-    t.string   "multiple"
+    t.string   "activated",  default: "Ja"
+    t.integer  "detail_id"
   end
 
 end

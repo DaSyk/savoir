@@ -20,14 +20,89 @@
 @import 'daterangepicker-bs3';
 @import 'bootstrap-datepicker3';
 
-.navbar-brand {
-  font-family: 'Matura MT Script Capitals', arial;
-  font-size: 1.8em;
+body {
+  background-color: lighten(#428bca, 40%);
+  padding-top: -20px;
 }
 
-body {
-  background-color: #C0C0C0;
-  padding-top: 55px;
+.navbar {
+  margin-bottom: 5px;
+  background-color: #428bca;
+  background: -webkit-linear-gradient(top, #3277b3 0%, #609dd2 100%);
+  background: linear-gradient(to bottom, #3277b3 0%, #609dd2 100%);
+}
+
+.navbar .divider-vertical {
+  height: 50px;
+  margin: 0;
+  border-left: 1px solid #f2f2f2;
+}
+
+.navcontainer {
+  background-color: #428bca;
+  background: -webkit-linear-gradient(top, #3277b3 0%, #609dd2 100%);
+  background: linear-gradient(to bottom, #3277b3 0%, #609dd2 100%);
+}
+
+.navbar-default .navbar-brand,
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+  font-family: 'Matura MT Script Capitals', arial;
+  font-size: 2em;
+  color: white;
+  background-color: #428bca;
+  background: -webkit-linear-gradient(top, #3277b3 0%, #609dd2 100%);
+  background: linear-gradient(to bottom, #3277b3 0%, #609dd2 100%);
+}
+
+.navbar-default {
+    font-size: 15px;
+    background-color: #428bca;
+    background: -webkit-linear-gradient(top, #3277b3 0%, #609dd2 100%);
+    background: linear-gradient(to bottom, #3277b3 0%, #609dd2 100%);
+    border-width: 1px;
+    border-radius: 2px;
+}
+.navbar-default .navbar-nav>li>a {
+    color: white;
+    background-color: #428bca;
+    background: -webkit-linear-gradient(top, #3277b3 0%, #609dd2 100%);
+    background: linear-gradient(to bottom, #3277b3 0%, #609dd2 100%);
+}
+.navbar-right  {
+    color: white;
+    background-color: #428bca;
+    background: -webkit-linear-gradient(top, #3277b3 0%, #609dd2 100%);
+    background: linear-gradient(to bottom, #3277b3 0%, #609dd2 100%);
+}
+.navbar-default .navbar-nav>li>a:hover,
+.navbar-default .navbar-nav>li>a:focus {
+    color: white;
+    background-color: #428bca;
+    background: -webkit-linear-gradient(top, #428bca 0%, #88b6dd 100%);
+    background: linear-gradient(to bottom, #428bca 0%, #88b6dd 100%);
+}
+.navbar-default .navbar-nav>.active>a,
+.navbar-default .navbar-nav>.active>a:hover,
+.navbar-default .navbar-nav>.active>a:focus {
+    color: white;
+    background-color: #428bca;
+    background: -webkit-linear-gradient(top, #428bca 0%, #88b6dd 100%);
+    background: linear-gradient(to bottom, #428bca 0%, #88b6dd 100%);
+}
+.navbar-default .navbar-toggle {
+    border-color: #ddd;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+    background-color: #ddd;
+}
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #888;
+}
+.navbar-default .navbar-toggle:hover .icon-bar,
+.navbar-default .navbar-toggle:focus .icon-bar {
+    background-color: #888;
 }
 
 .container {
@@ -38,40 +113,11 @@ body {
   clear: both;
 }
 
-.picture {
-  border: solid 1px #CCC;
-  padding: 10px;
-  float: left;
-  margin-right: 20px;
-  margin-bottom: 20px;
-
-  .name {
-    padding-top: 5px;
-    text-align: center;
-    font-weight: bold;
-  }
-
-  .actions {
-    font-size: 10px;
-    text-align: center;
-    color: #777;
-  }
-}
-
 .upload {
   border-top: solid 1px #CCC;
   width: 400px;
   padding-top: 10px;
   margin-top: 10px;
-}
-
-.close-image {
-  display: block;
-  float:right;
-  position:relative;
-  top:-10px;
-  right: -10px;
-  height: 20px;
 }
 
 ul {
@@ -96,14 +142,14 @@ form > ul.nav-tabs {
 .nav-tabs > li > a,
 .nav-tabs > li > a:visited {
   background: #DADADA;
-  border-radius: 0;
+  border-radius: 2px;
   margin-right: 4px;
   color: black;
 }
 .nav-tabs > li.active > a,
 .nav-tabs > li.active > a:hover {
   background: #F5F5F5;
-  border-radius: 0;
+  border-radius: 2px;
 }
 
 /* Tab Content */
@@ -129,6 +175,7 @@ td > div.form-group > .btn {
 
 .jumbotron {
   background: lightgray;
+  border: 1px solid #C0C0C0;
 }
 
 .jumbotron > hr,
@@ -151,14 +198,14 @@ td > div.form-group > .btn {
 }
 
 img {
-  border-radius: 4px;
-  opacity: 1;
+  border-radius: 2px;
 }
 
-div.jumbotron.picture {
+.jumbotron.picture {
   width: 31.2%;
-  border-radius: 4px;
+  border-radius: 2px;
   padding: 10px;
+  padding-bottom: 3px;
   float: left;
   margin-left: 11px;
   margin-right: 11px;
@@ -168,19 +215,20 @@ div.jumbotron.picture {
   img {
     display:block;
     margin: 0 auto;
-	width: 97%;
+	  width: 97%;
   }
   .left {
-    padding: 5px 0 5px 20px;
+    padding: 12px 0 5px 10px;
     text-align: left;
-	display: inline-block;
+	  display: inline-block;
   }
   .right {
     padding: 5px 20px 5px 0px;
     text-align: right;
-	display: inline-block;
+	  display: inline-block;
   }
-  .imgtxt-right {
+  a > .imgtxt-right,
+  a:visited > .imgtxt-right {
     position: absolute;
     width: auto;
     top: 5px;
@@ -190,12 +238,16 @@ div.jumbotron.picture {
     background: rgba(0,0,0,0.7);
     color: white;
     padding: 5px;
+    opacity: 0.8;
+  }
+  a:hover > .imgtxt-right {
+    opacity: 1;
   }
 }
 
-a > div.jumbotron.list {
+a > .jumbotron.list {
   width: 100%;
-  border-radius: 4px;
+  border-radius: 2px;
   padding: 10px;
   margin-bottom: 10px;
   color:black;
@@ -237,29 +289,24 @@ table.calendar {
   tbody > tr > th {
     padding-right: 8px;
   }
-  tbody > tr > td.free {
-    color: white;
+  tbody > tr > td {
+    width: 23px;
     padding: 3px;
+    color: white;
+  }
+  tbody > tr > td.free {
     background: limegreen;
   }
   tbody > tr > td.busy {
-    color: white;
-    padding: 3px;
     background: red;
   }
   tbody > tr > td.closed {
-    color: white;
-    padding: 3px;
     background: grey;
   }
   tbody > tr > td.special {
-    color: white;
-    padding: 3px;
     background: gold;
   }
   tbody > tr > td.request {
-    color: white;
-    padding: 3px;
     background: lightgreen;
   }
 }
@@ -282,3 +329,18 @@ hr.small {
 .checkbox {
   margin-top:0;
 }
+
+.btn {
+  margin-bottom: 0px;
+  border-radius: 2px;
+}
+
+.form-group {
+  margin-bottom: 0;
+}
+
+label {
+  margin-bottom: 0;
+  margin-top: 3px;
+}
+

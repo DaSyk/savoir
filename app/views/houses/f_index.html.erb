@@ -41,13 +41,9 @@
             <label class="string optional control-label" for="booking_lastname">Ausstattung</label><br>
             <div class="row checkbox">
               <div class="col-md-12">
-                  <label><%= check_box_tag('q[facility_internet_eq]', "ja") %> Internet/ WLAN</label><br>
-                  <label><%= check_box_tag('q[facility_pool_eq]', "ja") %> Pool/Schwimmbad</label><br>
-                  <label><%= check_box_tag('q[facility_garden_eq]', "ja") %> Garten</label><br>
-                  <label><%= check_box_tag('q[facility_terrace_eq]', "ja") %> Terrasse </label><br>
-                  <label><%= check_box_tag('q[facility_balcony_eq]', "ja") %> Balkon</label><br>
-                  <label><%= check_box_tag('q[facility_washingmachine_eq]', "ja") %> Waschmaschine</label><br>
-                  <label><%= check_box_tag('q[facility_dishwasher_eq]', "ja") %> Spülmaschine</label><br>
+                <% Facility.where(activated:"Ja").each do |f| %>
+                  <label><%= check_box_tag('q[facilities_id_eq]', f.id) %> <%= f.name %></label><br>
+                <% end %>
               </div>
             </div>
             <hr class="small">
@@ -55,11 +51,9 @@
             <label class="string optional control-label" for="booking_lastname">Geeignet für</label>
             <div class="row checkbox">
               <div class="col-md-12">
-                  <label><%= check_box_tag('q[suitability_family_eq]', "ja") %> Familienurlaub</label><br>
-                  <label><%= check_box_tag('q[suitability_barrier_eq]', "ja") %> barrierefreien Urlaub</label><br>
-                  <label><%= check_box_tag('q[suitability_multiple_eq]', "ja") %> Mehrfamilienurlaub</label><br>
-                  <label><%= check_box_tag('q[suitability_dog_eq]', "ja") %> Urlaub mit Hund</label><br>
-
+                <% Suit.where(activated:"Ja").each do |s| %>
+                  <label><%= check_box_tag('q[suits_id_eq]', s.id) %> <%= s.name %></label><br>
+                <% end %>
               </div>
             </div>
             <hr class="small">
