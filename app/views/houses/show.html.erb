@@ -21,20 +21,16 @@
         <div role='tabpanel' class='tab-pane fade <%= 'in active' if flash[:error] == nil %>' id='allgemein'>
           <%= @house.description.html_safe %>
           <br>
-          Hier würden dann noch Glyphen hinkommen, falls wir noch welche finden:
-          Bspw.:
-          <div class="left" style="font-size:2em;">
-            <span class="glyphs" data-toggle="tooltip" data-placement="top" title="Größe"><%= glyph 'home' %> <%= @house.size %>m²</span>
-          </div>
 
           <h4>Geeignet für:</h4>
-          <% @house.suits.where(activated:"Ja").each do |s| %>
-            <%= s.name %><br>
-          <% end %>
+
+            <% @house.suits.where(activated:"Ja").each do |s| %>
+              <li style="margin-left:20px;"><%= s.name %></li>
+            <% end %>
 
           <h4>Ausstattung:</h4>
           <% @house.facilities.where(activated:"Ja").each do |f| %>
-            <%= f.name %><br>
+            <li style="margin-left:20px;"><%= f.name %></li>
           <% end %>
         </div>
 
@@ -57,7 +53,9 @@
 
         <div role='tabpanel' class='tab-pane fade' id='images'>
         	<% @house.pictures.each do |picture| %>
-          	<%= image_tag picture.image if picture.image? %>
+            <div class="gallery">
+              <%= image_tag(picture.image) %>
+            </div>
         	<% end %>
         </div>
 
@@ -72,7 +70,7 @@
 
             </tr>
           </table>
-
+          <hr style="margin: 8px;">
           <table class="calendar">
             <% cnt=0 %>
             <% while cnt < 18 %>
@@ -80,15 +78,15 @@
                 <tr><th><%= (Date.today+cnt.month).year %></th></tr>
               <% end %>
               <tr>
-                <th><%= I18n.l((Date.today+cnt.month), format: "%B") %></th>
+                <th><%= I18n.l((Date.today+cnt.month), format: "%b") %></th>
                 <% (Date.today.beginning_of_month+cnt.month..Date.today.beginning_of_month+1.month-1+cnt.month).each do |d| %>
                   <% if @closed_dates.include? d %>
-      			  <td class="closed">
-      			<% elsif @busy_dates.include? d %>
+      			        <td class="closed">
+      			      <% elsif @busy_dates.include? d %>
                     <td class="busy">
-      			<% elsif @request_dates.include? d %>
+      	       		<% elsif @request_dates.include? d %>
                     <td class="request">
-      			<% elsif @special_dates.include? d %>
+      			      <% elsif @special_dates.include? d %>
                     <td class="special">
                   <% else %>
                     <td class="free">
@@ -158,6 +156,21 @@
     </div>
 
     <div class="col-md-3">
+      <div class="jumbotron color2 lowpad">
+        <h3 style="text-align: center;margin:0px;"><%= @house.name %></h3>
+        <h4 style="text-align: center;margin:0px;">(<%= @house.location.name %>)</h4>
+        <hr class="small">
+        <%= image_tag(@house.pictures.where(default_pic: true).first.image_url(:thumb), width: "100%") %>
+        <hr class="small">
+        <div style="font-size:1.5em;">
+          <span>
+            <span class="glyphs" data-toggle="tooltip" data-placement="top" title="Größe"><%= glyph 'home' %> <%= @house.size %>m²</span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span class="glyphs" data-toggle="tooltip" data-placement="top" title="Anzahl an Schlafplätzen"><%= glyph 'user' %> <%= @house.n_people %> (max. <%= @house.n_people+@house.add_n_people %>)</span>
+          </span>
+        </div>
+
+
+      </div>
     </div>
 
   </div>

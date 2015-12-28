@@ -8,7 +8,7 @@
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:region_id) %></th>
       <th>Land</th>
-      <th>Buchungen/Neue</th>
+      <th>Buchungen</th>
       <th>Aktiv?</th>
       <th>Letzte Bearbeitung</th>
       <th></th>
@@ -20,7 +20,7 @@
           <td><%= house.name %></td>
           <td><%= house.location.name if house.location_id %></td>
           <td><%= house.location.region.name if house.location_id %></td>
-          <td><%= link_to "#{house.bookings.count} - #{house.bookings.where.not('created_at > ?', current_admin.last_sign_in_at).count}", house_bookings_path(house), :class => "btn btn-default" %></td>
+          <td><%= link_to "#{house.bookings.count}", house_bookings_path(house), :class => "btn btn-xs btn-default" %></td>
           <td>
             <% if house.activated? %>
                 <span class="label label-success">Ja</span> (<%= link_to "deaktivieren", { :controller => 'houses', :action => 'activate', :h => house.id }, { :method => :put } %>)
@@ -30,16 +30,16 @@
           </td>
         <td><%=l house.updated_at, format: :short %></td>
         <td>
-          <%= link_to house_path(house), :class => 'btn btn-primary', :title => "Anzeigen" do %>
+          <%= link_to house_path(house), :class => 'btn btn-xs btn-primary', :title => "Anzeigen" do %>
               <%= glyph 'search' %>
           <%- end -%>
-          <%= link_to house_pictures_path(house), :class => 'btn btn-default', :title => "Bilder" do %>
+          <%= link_to house_pictures_path(house), :class => 'btn btn-xs btn-default', :title => "Bilder" do %>
               <%= glyph 'picture' %>
           <% end %>
-          <%= link_to edit_house_path(house), :class => 'btn btn-warning', :title => "Bearbeiten", data: {no_turbolink: true } do %>
+          <%= link_to edit_house_path(house), :class => 'btn btn-xs btn-warning', :title => "Bearbeiten", data: {no_turbolink: true } do %>
               <%= glyph 'pencil' %>
           <% end %>
-          <%= link_to house_path(house), :method => :delete, :data => { :confirm => 'Sicher?' }, :class => 'btn btn-danger', :title => "Löschen" do %>
+          <%= link_to house_path(house), :method => :delete, :data => { :confirm => 'Sicher?' }, :class => 'btn btn-xs btn-danger', :title => "Löschen" do %>
               <%= glyph 'remove' %>
           <% end %>
         </td>

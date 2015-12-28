@@ -2,7 +2,7 @@
   <% @regions.where(country_id: c.id).each do |r| %>
 
 
-    <h4 style="margin-bottom:3px"><%= r.name %> (in <%= c.name.upcase %>)</h4>
+    <h4 style="margin-bottom:3px"><%= r.name %> (<%= c.name.upcase %>)</h4>
     <hr style="margin-top:3px;margin-bottom:3px; border-color:black">
 
 
@@ -11,7 +11,7 @@
 
 
          <%= link_to house_path(h) do %>
-          <div class="jumbotron list" style="margin-bottom: 3px;">
+          <div class="jumbotron color2 list" style="margin-bottom: 3px;">
             <div class="row">
               <div class="col-md-4">
                 <% if h.pictures.where(default_pic: true).count > 0 %>
@@ -19,7 +19,7 @@
                 <% end %>
               </div>
               <div class="col-md-8">
-                <h3 style="margin-top: 10px"><%= h.name %> (in <%= h.location.name %>)</h3><hr class="small">
+                <h3 style="margin-top: 10px"><%= h.name %> (<%= h.location.name %>)</h3><hr class="small">
                 <div class="content">
                   <%= h.short_description.html_safe if h.short_description %>
                 </div><hr style="margin:3px 0 3px 0;">
@@ -29,10 +29,17 @@
                   <% if (h.n_people && h.size) %>&bull;<% end %>
                   <%= "#{h.size} m²" if h.size %>
                 </div>
-                <div class="left" style="font-size:2em;">
-                  <span class="glyphs" data-toggle="tooltip" data-placement="top" title="Apfel: ja"><%= glyph 'apple' %></span>
-                  <span class="glyphs" data-toggle="tooltip" data-placement="top" title="Baum: nein"><%= glyph 'tree-deciduous' %><span class="cross">X</span></span>
+                <div class="left">
+                  <div class="btn btn-default">
+                    <span class="glyphs" data-toggle="tooltip" data-html="true" data-placement="top" title="<% h.suits.where(activated:'Ja').each do |s| %><li style='margin-left:20px;'><%= s.name %></li><% end %>">
+                    Geeignet für</span>
+                  </div>
+                  <div class="btn btn-default">
+                    <span class="glyphs" data-toggle="tooltip" data-html="true" data-placement="top" title="<% h.facilities.where(activated:'Ja').each do |f| %><li style='margin-left:20px;'><%= f.name %></li><% end %>">
+                    Ausstattung</span>
+                  </div>
                 </div>
+
                 <div class="right">
                   <% if h.pricing.periods.where(ptype: ['geöffnet', 'Sonderangebot']).where('"to" >= ?', Date.today).first %>
                     ab<span style="font-size:2em;padding:0px;">

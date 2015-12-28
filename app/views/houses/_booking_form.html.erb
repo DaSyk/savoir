@@ -1,7 +1,7 @@
 <%= simple_form_for [@house,@booking], :html => { :class => 'form-vertical' } do |f| %>
 
     <div class='row'>
-      <div class='col-md-6'>
+      <div class='col-md-12'>
         <%= f.input :gender, :as => :radio_buttons, collection: ['Frau', 'Herr'], label: "Anrede" %>
         <div class="row">
           <div class="col-md-6"><%= f.input :lastname, label: "Nachname", required: true %></div>
@@ -34,9 +34,6 @@
             <%= link_to "Abbrechen", :back, :class => 'btn btn-default' %>
           </div>
         </div>
-      </div>
-      <div class="col-md-6">
-
       </div>
     </div>
 <% end %>
