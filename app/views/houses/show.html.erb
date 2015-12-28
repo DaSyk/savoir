@@ -160,7 +160,7 @@
         <h3 style="text-align: center;margin:0px;"><%= @house.name %></h3>
         <h4 style="text-align: center;margin:0px;">(<%= @house.location.name %>)</h4>
         <hr class="small">
-        <% if image_tag(@house.pictures.where(default_pic: true).first != nil %>
+        <% if @house.pictures.where(default_pic: true).first != nil %>
           <%= image_tag(@house.pictures.where(default_pic: true).first.image_url(:thumb), width: "100%") %>
         <% end %>
         <hr class="small">
