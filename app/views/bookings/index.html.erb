@@ -19,29 +19,28 @@
           <th>Start</th>
           <th>Ende</th>
           <th>Nachname</th>
+          <th>Email</th>
           <th>Datum</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
-        <% @bookings.where(accepted: false).each do |booking| %>
+        <% @bookings.where(accepted: false).order(:created_at).each do |booking| %>
           <tr>
             <td><%= booking.id %></td>
             <td><%= booking.start_date %></td>
             <td><%= booking.end_date %></td>
             <td><%= booking.lastname %></td>
+            <td><%= booking.email %></td>
             <td><%=l booking.created_at, format: :short %></td>
 			<td>
-			  <%= link_to "aktivieren", { :controller => 'bookings', :action => 'change_accepted', :b => booking.id }, { :method => :put, :class => 'btn btn-success' } %>	
+			  <%= link_to "aktivieren", { :controller => 'bookings', :action => 'change_accepted', :b => booking.id }, { :method => :put, :class => 'btn btn-xs btn-success' } %>
 			</td>
             <td>
-              <%= link_to house_booking_path(@house,booking), :class => 'btn btn-primary', :title => "Anzeigen" do %>
+              <%= link_to house_booking_path(@house,booking), :class => 'btn btn-xs btn-primary', :title => "Anzeigen" do %>
                 <%= glyph 'search' %>
               <%- end -%>
-              <%= link_to edit_house_booking_path(@house,booking), :class => 'btn btn-warning', :title => "Bearbeiten" do %>
-                <%= glyph 'pencil' %>
-              <%- end -%>
-              <%= link_to house_booking_path(@house,booking), :method => :delete, :data => { :confirm => "Sicher?" }, :class => 'btn btn-danger', :title => "Löschen" do %>
+              <%= link_to house_booking_path(@house,booking), :method => :delete, :data => { :confirm => "Sicher?" }, :class => 'btn btn-xs btn-danger', :title => "Löschen" do %>
                 <%= glyph 'remove' %>
               <%- end -%>
             </td>
@@ -60,29 +59,29 @@
         <th>Start</th>
         <th>Ende</th>
         <th>Nachname</th>
+        <th>Email</th>
         <th>Datum</th>
         <th></th>
       </tr>
       </thead>
       <tbody>
-      <% @bookings.where(accepted: true).each do |booking| %>
+      <% @bookings.where(accepted: true).order(:created_at).each do |booking| %>
           <tr>
             <td><%= booking.id %></td>
             <td><%= booking.start_date %></td>
             <td><%= booking.end_date %></td>
             <td><%= booking.lastname %></td>
+            <td><%= booking.email %></td>
             <td><%=l booking.created_at, format: :short %></td>
             <td>
-			  <%= link_to "deaktivieren", { :controller => 'bookings', :action => 'change_accepted', :b => booking.id }, { :method => :put, :class => 'btn btn-danger' } %>	
+			  <%= link_to "deaktivieren", { :controller => 'bookings', :action => 'change_accepted', :b => booking.id }, { :method => :put, :class => 'btn btn-xs btn-danger' } %>
 			</td>
 			<td>
-              <%= link_to house_booking_path(@house,booking), :class => 'btn btn-primary', :title => "Anzeigen" do %>
+              <%= link_to house_booking_path(@house,booking), :class => 'btn btn-xs btn-primary', :title => "Anzeigen" do %>
                   <%= glyph 'search' %>
               <%- end -%>
-              <%= link_to edit_house_booking_path(@house,booking), :class => 'btn btn-warning', :title => "Bearbeiten" do %>
-                  <%= glyph 'pencil' %>
-              <%- end -%>
-              <%= link_to house_booking_path(@house,booking), :method => :delete, :data => { :confirm => "Sicher?" }, :class => 'btn btn-danger', :title => "Löschen" do %>
+
+              <%= link_to house_booking_path(@house,booking), :method => :delete, :data => { :confirm => "Sicher?" }, :class => 'btn btn-xs btn-danger', :title => "Löschen" do %>
                   <%= glyph 'remove' %>
               <%- end -%>
             </td>
@@ -93,7 +92,7 @@
   </div>
 </div>
 
-<hr>
+<br>
 
 <%= link_to new_house_booking_path(@house), :title => "Neue Buchung", :class => 'btn btn-primary' do %>
     <%= glyph 'plus' %> Buchung hinzufügen

@@ -14,7 +14,7 @@
         <% if @house.movie_url != "" || @house.movie_url == nil %>
       	  <li role='presentation'><a href='#video' aria-controls='video' role='tab' data-toggle='tab'>Video</a></li>
         <% end %>
-        <li role='presentation' class="<%= 'active' if flash[:error] %>"><a href='#request' aria-controls='request' role='tab' data-toggle='tab'>Buchungsanfragen</a></li>
+        <li role='presentation' class="<%= 'active' if flash[:error] %>"><a href='#request' aria-controls='request' role='tab' data-toggle='tab'>Buchungsanfrage</a></li>
       </ul>
 
       <div class='tab-content'>
@@ -119,25 +119,19 @@
               </tr><% end %>
             </tbody>
           </table>
-
-          <h4>Zusatzkosten</h4>
-          <table class="table table-striped">
-            <thead>
-              <tr>
-              <th>Bezeichnung</th>
-              <th>Typ</th>
-              <th>Kosten</th>
-              <th>Optional</th>
-            </thead>
-            <tbody>
-              <% @house.pricing.costs.each do |c| %><tr>
-                <td><%= c.name %></td>
-                <td><%= c.ctype %></td>
-                <td><%= c.amount %> €</td>
-                <td><% if c.optional == true %>Ja<% else %>Nein<% end %></td>
-              </tr><% end %>
-            </tbody>
-          </table>
+          <% if @house.pricing.costs.count > 0 %>
+            <h4>Zusatzkosten</h4>
+            <table class="table table-striped">
+              <tbody>
+                <% @house.pricing.costs.each do |c| %><tr>
+                  <td><%= c.name %></td>
+                  <td><%= c.ctype %></td>
+                  <td><%= c.amount %> €</td>
+                  <td><% if c.optional == true %>optional<% else %>verpflichtend<% end %></td>
+                </tr><% end %>
+              </tbody>
+            </table>
+          <% end %>
         </div>
 
       <% if @house.movie_url != "" || @house.movie_url == nil %>
@@ -158,28 +152,31 @@
     <div class="col-md-3">
       <div class="jumbotron color2 lowpad">
         <h3 style="text-align: center;margin:0px;"><%= @house.name %></h3>
-        <h4 style="text-align: center;margin:0px;">(<%= @house.location.name %>)</h4>
+        <h5 style="text-align: center;margin:0px;"><%= @house.location.name %> - <br> <%= @house.location.region.name %> - <br> <%= @house.location.region.country.name %> </h4>
         <hr class="small">
         <% if @house.pictures.where(default_pic: true).first != nil %>
           <%= image_tag(@house.pictures.where(default_pic: true).first.image_url(:thumb), width: "100%") %>
         <% end %>
-        <hr class="small">
+        <br><br>
         <div style="font-size:1.5em;">
           <span>
             <span class="glyphs" data-toggle="tooltip" data-placement="top" title="Größe"><%= glyph 'home' %> <%= @house.size %>m²</span>&nbsp;&nbsp;&nbsp;&nbsp;
             <span class="glyphs" data-toggle="tooltip" data-placement="top" title="Anzahl an Schlafplätzen"><%= glyph 'user' %> <%= @house.n_people %> (max. <%= @house.n_people+@house.add_n_people %>)</span>
           </span>
         </div>
-
+        <div>
+          <% if @house.pricing.periods.where(ptype: ['geöffnet', 'Sonderangebot']).where('"to" >= ?', Date.today).first %>
+            ab <span style="font-size:2em;padding:0px;">
+              <%= @house.pricing.periods.where(ptype: ['geöffnet', 'Sonderangebot']).where('"to" >= ?', Date.today).order(:cost_per_week).first.cost_per_week %> €
+            </span>/Woche
+          <% end %>
+        </div>
 
       </div>
     </div>
 
   </div>
-
-
-  <hr>
-
+  <br>
   <div class='center-block'>
     <div class='form-group text-center'>
       <%= link_to 'Zurück', :back, :class => 'btn btn-default'  %>

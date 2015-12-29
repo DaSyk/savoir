@@ -63,7 +63,7 @@ body {
     background: -webkit-linear-gradient(top, #3277b3 0%, #609dd2 100%);
     background: linear-gradient(to bottom, #3277b3 0%, #609dd2 100%);
     border-width: 1px;
-    border-radius: 2px;
+    border-radius: 0px;
 }
 .navbar-default .navbar-nav>li>a {
     color: white;
@@ -146,22 +146,21 @@ form > ul.nav-tabs {
 .nav-tabs > li > a,
 .nav-tabs > li > a:visited {
   background: #DADADA;
-  border-radius: 2px;
+  border: 0px;
+  border-radius: 10px 10px 0 0;
   margin-right: 4px;
   color: black;
 }
 .nav-tabs > li.active > a,
 .nav-tabs > li.active > a:hover {
   background: #F5F5F5;
-  border-radius: 2px;
 }
 
 /* Tab Content */
 .tab-pane {
   background: #F5F5F5;
   padding: 10px;
-  border-width: 1px;
-  border-color: #ddd #ddd transparent !important;
+  border: 1px solid lightgray !important;
 }
 
 td > div.form-group > input,
@@ -192,25 +191,17 @@ td > div.form-group > .btn {
   border: 1px solid #C0C0C0;
 }
 
-
-.jumbotron > hr,
-.jumbotron > form > hr {
-  border-color: white! important;
+hr {
+  border-color: black! important;
 }
 
 .jumbotron.lowpad {
   padding: 10px;
-  border-radius: 2px;
+  border-radius: 10px;
 }
 
 .jumbotron p {
   font-size: 15px;
-}
-
-
-.jumbotron > form > div > hr,
-.jumbotron > form > hr {
-  border-top-color: #d5d5d5;
 }
 
 h2 {
@@ -219,7 +210,7 @@ h2 {
 
 .gallery {
   width: 48%;
-  border-radius: 2px;
+  border-radius: 10px;
   padding: 10px;
   padding-bottom: 3px;
   float: left;
@@ -232,13 +223,13 @@ h2 {
     display:block;
     margin: 0 auto;
     width: 97%;
-    border-radius: 2px;
+    border-radius: 10px;
   }
 }
 
 .jumbotron.picture {
   width: 31.2%;
-  border-radius: 2px;
+  border-radius: 10px;
   padding: 10px;
   padding-bottom: 3px;
   float: left;
@@ -251,7 +242,7 @@ h2 {
     display:block;
     margin: 0 auto;
 	  width: 97%;
-    border-radius: 2px;
+    border-radius: 10px;
   }
   .left {
     padding: 12px 0 5px 10px;
@@ -283,7 +274,7 @@ h2 {
 
 a > .jumbotron.list {
   width: 100%;
-  border-radius: 2px;
+  border-radius: 10px;
   padding: 10px;
   margin-bottom: 10px;
   color:black;
@@ -375,7 +366,7 @@ hr.small {
 
 .btn {
   margin-bottom: 0px;
-  border-radius: 2px;
+  border-radius: 10px;
 }
 
 .form-group {

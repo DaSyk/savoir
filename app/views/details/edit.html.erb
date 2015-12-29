@@ -6,7 +6,7 @@
     <% end %>
   </h3>
   <table class='table table-striped' id='suits'>
-    <tr><th>EIGNUNG</th><th>Aktiviert?</th><th></th></tr>
+    <tr><th></th><th>Aktiviert?</th><th></th></tr>
     <%= f.fields_for :suits, :wrapper => false do |p| %>
     <tr class='fields'>
       <td><%= p.input :name, as: :string, :placeholder => 'Name', label: false  %></td>
@@ -28,7 +28,7 @@
     <% end %>
   </h3>
   <table class='table table-striped' id='facilities'>
-    <tr><th>AUSSTATTUNG</th><th>Aktiviert?</th><th></th></tr>
+    <tr><th></th><th>Aktiviert?</th><th></th></tr>
     <%= f.fields_for :facilities, :wrapper => false do |p| %>
     <tr class='fields'>
       <td><%= p.input :name, as: :string, :placeholder => 'Name', label: false  %></td>
@@ -42,8 +42,6 @@
     <% end %>
   </table>
 
-
-  <hr>
   <div class='center-block'>
     <div class='form-group text-center'>
       <%= f.button :submit, 'Speichern', :class => 'btn-primary' %> oder

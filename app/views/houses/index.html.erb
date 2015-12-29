@@ -20,7 +20,7 @@
           <td><%= house.name %></td>
           <td><%= house.location.name if house.location_id %></td>
           <td><%= house.location.region.name if house.location_id %></td>
-          <td><%= link_to "#{house.bookings.count}", house_bookings_path(house), :class => "btn btn-xs btn-default" %></td>
+          <td><%= link_to "#{house.bookings.where(accepted: true).count} (#{house.bookings.count})", house_bookings_path(house), :class => "btn btn-xs btn-default" %></td>
           <td>
             <% if house.activated? %>
                 <span class="label label-success">Ja</span> (<%= link_to "deaktivieren", { :controller => 'houses', :action => 'activate', :h => house.id }, { :method => :put } %>)
@@ -47,7 +47,9 @@
     <% end %>
   </tbody>
 </table>
-<hr>
+
+<br>
+
 <%= link_to houses_path, method: :post, :class => 'btn btn-primary', :title => 'Haus hinzufügen' do %>
     <%= glyph 'plus' %> Haus hinzufügen
 <% end %>
