@@ -23,15 +23,26 @@
 
 /* Rahmen */
 body {
-  background-color: lighten(#428bca, 40%);
+  background-color: white;
   padding-top: -20px;
+}
+
+footer,
+footer > div.container {
+  background: -webkit-linear-gradient(top, #39F1FF 0%, #06BED7 100%);
+  background: linear-gradient(to bottom, #39F1FF 0%, #06BED7 100%);
+  color: white;
+}
+
+.container.main {
+    outline: 1px solid lightgray;
 }
 
 .navbar {
   margin-bottom: 5px;
   background-color: #428bca;
-  background: -webkit-linear-gradient(top, #3277b3 0%, #609dd2 100%);
-  background: linear-gradient(to bottom, #3277b3 0%, #609dd2 100%);
+  background: -webkit-linear-gradient(top, #06BED7 0%, #39F1FF 100%);
+  background: linear-gradient(to bottom, #06BED7 0%, #39F1FF 100%);
 }
 
 .navbar .divider-vertical {
@@ -42,8 +53,8 @@ body {
 
 .navcontainer {
   background-color: #428bca;
-  background: -webkit-linear-gradient(top, #3277b3 0%, #609dd2 100%);
-  background: linear-gradient(to bottom, #3277b3 0%, #609dd2 100%);
+  background: -webkit-linear-gradient(top, #06BED7 0%, #39F1FF 100%);
+  background: linear-gradient(to bottom, #06BED7 0%, #39F1FF 100%);
 }
 
 .navbar-default .navbar-brand,
@@ -53,44 +64,44 @@ body {
   font-size: 2em;
   color: white;
   background-color: #428bca;
-  background: -webkit-linear-gradient(top, #3277b3 0%, #609dd2 100%);
-  background: linear-gradient(to bottom, #3277b3 0%, #609dd2 100%);
+  background: -webkit-linear-gradient(top, #06BED7 0%, #39F1FF 100%);
+  background: linear-gradient(to bottom, #06BED7 0%, #39F1FF 100%);
 }
 
 .navbar-default {
     font-size: 15px;
     background-color: #428bca;
-    background: -webkit-linear-gradient(top, #3277b3 0%, #609dd2 100%);
-    background: linear-gradient(to bottom, #3277b3 0%, #609dd2 100%);
+    background: -webkit-linear-gradient(top, #06BED7 0%, #39F1FF 100%);
+    background: linear-gradient(to bottom, #06BED7 0%, #39F1FF 100%);
     border-width: 1px;
     border-radius: 0px;
 }
 .navbar-default .navbar-nav>li>a {
     color: white;
     background-color: #428bca;
-    background: -webkit-linear-gradient(top, #3277b3 0%, #609dd2 100%);
-    background: linear-gradient(to bottom, #3277b3 0%, #609dd2 100%);
+    background: -webkit-linear-gradient(top, #06BED7 0%, #39F1FF 100%);
+    background: linear-gradient(to bottom, #06BED7 0%, #39F1FF 100%);
 }
 .navbar-right  {
     color: white;
     background-color: #428bca;
-    background: -webkit-linear-gradient(top, #3277b3 0%, #609dd2 100%);
-    background: linear-gradient(to bottom, #3277b3 0%, #609dd2 100%);
+    background: -webkit-linear-gradient(top, #06BED7 0%, #39F1FF 100%);
+    background: linear-gradient(to bottom, #06BED7 0%, #39F1FF 100%);
 }
 .navbar-default .navbar-nav>li>a:hover,
 .navbar-default .navbar-nav>li>a:focus {
     color: white;
     background-color: #428bca;
-    background: -webkit-linear-gradient(top, #428bca 0%, #88b6dd 100%);
-    background: linear-gradient(to bottom, #428bca 0%, #88b6dd 100%);
+    background: -webkit-linear-gradient(top, #00A4BD 0%, #1FD7F0 100%);
+    background: linear-gradient(to bottom, #00A4BD 0%, #1FD7F0 100%);
 }
 .navbar-default .navbar-nav>.active>a,
 .navbar-default .navbar-nav>.active>a:hover,
 .navbar-default .navbar-nav>.active>a:focus {
     color: white;
     background-color: #428bca;
-    background: -webkit-linear-gradient(top, #428bca 0%, #88b6dd 100%);
-    background: linear-gradient(to bottom, #428bca 0%, #88b6dd 100%);
+    background: -webkit-linear-gradient(top, #00A4BD 0%, #1FD7F0 100%);
+    background: linear-gradient(to bottom, #00A4BD 0%, #1FD7F0 100%);
 }
 .navbar-default .navbar-toggle {
     border-color: #ddd;
@@ -145,20 +156,22 @@ form > ul.nav-tabs {
 
 .nav-tabs > li > a,
 .nav-tabs > li > a:visited {
-  background: #DADADA;
+  background: #FFDD54;
   border: 0px;
   border-radius: 10px 10px 0 0;
   margin-right: 4px;
   color: black;
 }
 .nav-tabs > li.active > a,
-.nav-tabs > li.active > a:hover {
-  background: #F5F5F5;
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li > a:hover,
+.nav-tabs > li > a:focus {
+  background: #F6FAA5;
 }
 
 /* Tab Content */
 .tab-pane {
-  background: #F5F5F5;
+  background: #F6FAA5;
   padding: 10px;
   border: 1px solid lightgray !important;
 }
@@ -281,7 +294,7 @@ a > .jumbotron.list {
   position: relative;
   .content{
     width: 100%;
-    height: 70px;
+    height: 98px;
   }
   .content2{
     width: 100%;

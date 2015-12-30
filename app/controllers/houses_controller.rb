@@ -6,7 +6,7 @@ class HousesController < ApplicationController
   respond_to :html
 
   def index
-    @houses = House.all.order(:id)
+    @regions = Region.all
     respond_with(@houses)
   end
 

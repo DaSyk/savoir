@@ -29,7 +29,7 @@ class PicturesController < ApplicationController
     @picture = Picture.find(params[:id])
     if @picture.update(picture_params)
       flash[:notice] = "Die Änderungen wurden gespeichert!"
-      redirect_to :back
+      redirect_to house_pictures_path
     else
       flash[:notice] = "Die Änderungen konnten nicht gespeichert werden."
       redirect_to :back
@@ -49,6 +49,6 @@ class PicturesController < ApplicationController
     end
 
     def picture_params
-      params.require(:picture).permit(:id, :name, :house_id, :image, :default_pic, :description, :image_crop_x, :image_crop_y, :image_crop_w, :image_crop_h, :_destroy)
+      params.require(:picture).permit(:id, :name, :house_id, :image, :default_pic, :description, :image_crop_x, :image_crop_y, :image_crop_w, :image_crop_h, :order_no, :_destroy)
     end
 end

@@ -40,6 +40,9 @@
               <%= link_to house_booking_path(@house,booking), :class => 'btn btn-xs btn-primary', :title => "Anzeigen" do %>
                 <%= glyph 'search' %>
               <%- end -%>
+              <%= link_to edit_house_booking_path(@house,booking), :class => 'btn btn-xs btn-warning', :title => "Bearbeiten" do %>
+                <%= glyph 'pencil' %>
+              <%- end -%>
               <%= link_to house_booking_path(@house,booking), :method => :delete, :data => { :confirm => "Sicher?" }, :class => 'btn btn-xs btn-danger', :title => "Löschen" do %>
                 <%= glyph 'remove' %>
               <%- end -%>
@@ -79,6 +82,9 @@
 			<td>
               <%= link_to house_booking_path(@house,booking), :class => 'btn btn-xs btn-primary', :title => "Anzeigen" do %>
                   <%= glyph 'search' %>
+              <%- end -%>
+              <%= link_to edit_house_booking_path(@house,booking), :class => 'btn btn-xs btn-warning', :title => "Bearbeiten" do %>
+                <%= glyph 'pencil' %>
               <%- end -%>
 
               <%= link_to house_booking_path(@house,booking), :method => :delete, :data => { :confirm => "Sicher?" }, :class => 'btn btn-xs btn-danger', :title => "Löschen" do %>

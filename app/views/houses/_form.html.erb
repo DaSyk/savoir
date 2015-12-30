@@ -144,7 +144,7 @@
                     <td><%= c.input :name, label: false, placeholder: 'Bezeichung' %></td>
                     <td><%= c.input :amount, label: false, placeholder: 'Preis in EUR'  %></td>
                     <td><%= c.input :ctype, label: false, default: 1,  collection: [ 'inklusive', 'einmalig', 'pro Person', 'pro Nacht', 'pro kWh', 'pro Liter'] %></td>
-                    <td><%= c.input :optional, as: :select, default: 1, collection: [['ja',true],['nein',false]], label: false %></td>
+                    <td><%= c.input :optional, label: false, collection: ['verpflichtend', 'optional', 'nach Verbrauch' ] %></td>
                     <td>
                       <%= c.link_to_remove :title => '[-] Löschen', :class => 'btn btn-danger pull-right' ,:data => { :confirm => 'Sicher?' } do %>
                           <%= glyph 'remove' %> Löschen

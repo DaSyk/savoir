@@ -6,6 +6,7 @@
     <div class="col-md-6">
       <%= f.input :name %>
       <%= f.input :description, label:"Beschreibung", :input_html => {:rows => 8} %>
+      <%= f.input :order_no %>
     </div>
     <div class="col-md-3">
       <label class="string optional control-label" for="booking_lastname">Thumb:</label><br>
@@ -30,7 +31,7 @@
   <div class='center-block'>
     <div class='form-group text-center'>
       <%= f.button :submit, 'Änderungen speichern', :class => 'btn-primary' %> oder
-      <%= link_to 'Zurück', house_pictures_path, :class => 'btn btn-default' %>
+      <%= link_to 'Zurück', :back, :class => 'btn btn-default' %>
     </div>
   </div>
 

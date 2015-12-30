@@ -6,7 +6,7 @@
 
         <%= search_form_for @search, url: houses_list_path, :builder => SimpleForm::FormBuilder, :id => 'houses_search' do |f| %>
 
-            <label class="string optional control-label" for="booking_lastname">Regionen</label><br>
+            <label class="string optional control-label" for="booking_lastname">Regionen/Ferienorte</label><br>
             <div class="checkbox">
               <% Country.where(id: House.where(activated:true).map(&:location).map(&:region).map(&:country).compact.uniq).each do |c| %>
                 <div style="text-decoration: underline;"><%= c.name %></div>

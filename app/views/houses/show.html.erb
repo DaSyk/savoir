@@ -52,7 +52,7 @@
         <% end %>
 
         <div role='tabpanel' class='tab-pane fade' id='images'>
-        	<% @house.pictures.each do |picture| %>
+        	<% @house.pictures.order(:order_no).each do |picture| %>
             <div class="gallery">
               <%= image_tag(picture.image) %>
             </div>
@@ -126,8 +126,8 @@
                 <% @house.pricing.costs.each do |c| %><tr>
                   <td><%= c.name %></td>
                   <td><%= c.ctype %></td>
-                  <td><%= c.amount %> €</td>
-                  <td><% if c.optional == true %>optional<% else %>verpflichtend<% end %></td>
+                  <td><%= c.amount %><%= "€" if c.amount != nil %></td>
+                  <td><%= c.optional %></td>
                 </tr><% end %>
               </tbody>
             </table>
@@ -152,23 +152,19 @@
     <div class="col-md-3">
       <div class="jumbotron color2 lowpad">
         <h3 style="text-align: center;margin:0px;"><%= @house.name %></h3>
-        <h5 style="text-align: center;margin:0px;"><%= @house.location.name %> - <br> <%= @house.location.region.name %> - <br> <%= @house.location.region.country.name %> </h4>
+        <h5 style="text-align: center;margin:0px;"><%= @house.location.name %> - <br> <%= @house.location.region.name %> </h4>
         <hr class="small">
         <% if @house.pictures.where(default_pic: true).first != nil %>
           <%= image_tag(@house.pictures.where(default_pic: true).first.image_url(:thumb), width: "100%") %>
         <% end %>
         <br><br>
-        <div style="font-size:1.5em;">
+        <div style="font-size:1.3em;">
           <span>
-            <span class="glyphs" data-toggle="tooltip" data-placement="top" title="Größe"><%= glyph 'home' %> <%= @house.size %>m²</span>&nbsp;&nbsp;&nbsp;&nbsp;
-            <span class="glyphs" data-toggle="tooltip" data-placement="top" title="Anzahl an Schlafplätzen"><%= glyph 'user' %> <%= @house.n_people %> (max. <%= @house.n_people+@house.add_n_people %>)</span>
-          </span>
-        </div>
-        <div>
+            <span class="glyphs"><%= glyph 'home' %> <%= @house.size %>m²</span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span class="glyphs"><%= glyph 'user' %> <%= @house.n_people %> (max. <%= @house.n_people+@house.add_n_people if @house.n_people != nil && @house.add_n_people %>)</span>
+          </span><br>
           <% if @house.pricing.periods.where(ptype: ['geöffnet', 'Sonderangebot']).where('"to" >= ?', Date.today).first %>
-            ab <span style="font-size:2em;padding:0px;">
-              <%= @house.pricing.periods.where(ptype: ['geöffnet', 'Sonderangebot']).where('"to" >= ?', Date.today).order(:cost_per_week).first.cost_per_week %> €
-            </span>/Woche
+            ab <%= @house.pricing.periods.where(ptype: ['geöffnet', 'Sonderangebot']).where('"to" >= ?', Date.today).order(:cost_per_week).first.cost_per_week %> €/Woche
           <% end %>
         </div>
 

@@ -1,0 +1,39 @@
+<%= simple_form_for [@house,@booking], :html => { :class => 'form-vertical' } do |f| %>
+
+    <div class='row'>
+      <div class='col-md-12'>
+        <%= f.input :gender, :as => :radio_buttons, collection: ['Frau', 'Herr'], label: "Anrede" %>
+        <div class="row">
+          <div class="col-md-6"><%= f.input :lastname, label: "Nachname", required: true %></div>
+          <div class="col-md-6"><%= f.input :firstname, label: "Vorname", required: true %></div>
+        </div>
+        <div class="row">
+          <div class="col-md-6"><%= f.input :email, required: true %></div>
+          <div class="col-md-6"><%= f.input :phone, label: "Telefon" %></div>
+        </div>
+
+        <div class="form-group">
+          <label class="string optional control-label" for="booking_lastname">Zeitraum</label>
+          <%= text_field_tag 'date', '', class: 'form-control daterange' %>
+          <%= f.input :start_date, as: :hidden %>
+          <%= f.input :end_date, as: :hidden %>
+
+        </div>
+
+        <div class='row'>
+            <div class='col-md-12'>
+              <%= f.input :message, label: "Mitteilung" %>
+            </div>
+        </div>
+        <br>
+        <div class="center-block">
+          <div class="form-group text-center">
+            <%= f.button :submit, "Abschicken", :class => 'btn-primary' %> oder
+            <%= link_to "Abbrechen", :back, :class => 'btn btn-default' %>
+          </div>
+        </div>
+      </div>
+    </div>
+<% end %>
+
+

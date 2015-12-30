@@ -19,7 +19,7 @@
                 <% end %>
               </div>
               <div class="col-md-8">
-                <h3 style="margin-top: 10px"><%= h.name %> (<%= h.location.name %>)</h3><hr class="small">
+                <h4 style="margin-top: 0px; margin-bottom: 0px;"><%= h.name %> (<%= h.location.name %>)</h4><hr class="small">
                 <div class="content">
                   <%= h.short_description.html_safe if h.short_description %>
                 </div><hr style="margin:3px 0 3px 0;">
@@ -31,21 +31,24 @@
                 </div>
                 <div class="left">
                   <div class="btn btn-default">
-                    <span class="glyphs" data-toggle="tooltip" data-html="true" data-placement="bottom" title="<% h.suits.where(activated:'Ja').each do |s| %><li style='margin-left:20px;'><%= s.name %></li><% end %>">
+                    <span class="glyphs" data-toggle="tooltip" data-html="true" data-placement="top" title="<% h.suits.where(activated:'Ja').each do |s| %><li style='margin-left:20px;'><%= s.name %></li><% end %>">
                     Geeignet für</span>
                   </div>
                   <div class="btn btn-default">
-                    <span class="glyphs" data-toggle="tooltip" data-html="true" data-placement="bottom" title="<% h.facilities.where(activated:'Ja').each do |f| %><li style='margin-left:20px;'><%= f.name %></li><% end %>">
+                    <span class="glyphs" data-toggle="tooltip" data-html="true" data-placement="top" title="<% h.facilities.where(activated:'Ja').each do |f| %><li style='margin-left:20px;'><%= f.name %></li><% end %>">
                     Ausstattung</span>
                   </div>
                 </div>
 
                 <div class="right">
-                  <% if h.pricing.periods.where(ptype: ['geöffnet', 'Sonderangebot']).where('"to" >= ?', Date.today).first %>
-                    ab<span style="font-size:2em;padding:0px;">
+                  <div style="font-size: 1.5em;">
+                    <% if h.pricing.periods.where(ptype: ['geöffnet', 'Sonderangebot']).where('"to" >= ?', Date.today).first %>
+                      ab
                       <%= h.pricing.periods.where(ptype: ['geöffnet', 'Sonderangebot']).where('"to" >= ?', Date.today).order(:cost_per_week).first.cost_per_week %>
-                    €</span>/Woche
-                  <% end %>
+                      €/Woche
+
+                    <% end %>
+                  </div>
                 </div>
                 </p>
               </div>

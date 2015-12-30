@@ -58,7 +58,7 @@
       </div>
     </nav>
 
-    <div class="container">
+    <div class="container main">
       <div class="row">
         <div class="col-md-12">
           <br>
@@ -66,19 +66,24 @@
           <%= yield %>
         </div>
       </div><!--/row-->
-      <hr>
-      <footer>
-        <div class="center-block">
-          <div class="text-center">
-            www.savoir-vivre-feriendomizile.de by   <span style="padding-left:8px; font-family: 'Matura MT Script Capitals', arial;">savoir-vivre Feriendomizile</span><br>
-            <%= link_to 'Startseite', root_url %> |
-            <%= link_to 'Buchungshinweise', notes_path %> |
-            <%= link_to 'Impressum', impressum_path %>
-          </div>
-        </div>
-      </footer>
+    </div><br>
+  </body>
 
-    </div> <!-- /container -->
+  <footer>
+    <div class="container">
+      <div class="center-block">
+        <div class="text-center">
+          <br>
+          www.savoir-vivre-feriendomizile.de by   <span style="padding-left:8px; font-family: 'Matura MT Script Capitals', arial;">savoir-vivre Feriendomizile</span><br>
+          <%= link_to 'Startseite', root_url %> |
+          <%= link_to 'Buchungshinweise', notes_path %> |
+          <%= link_to 'Impressum', impressum_path %>
+
+          <br><br>
+        </div>
+      </div>
+    </div>
+  </footer>
 
 	<script type="text/javascript">
   $(document).ready(function() {
