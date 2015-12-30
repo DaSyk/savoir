@@ -58,19 +58,22 @@
       </div>
     </nav>
 
-    <div class="container main">
-      <div class="row">
-        <div class="col-md-12">
-          <br>
-          <%= bootstrap_flash %>
-          <%= yield %>
-        </div>
-      </div><!--/row-->
-    </div><br>
-  </body>
+    <div class="main">
+      <div class="container outline">
+        <div class="row">
+          <div class="col-md-12">
+            <br>
+            <%= bootstrap_flash %>
+            <%= yield %>
+            <br><br>
+          </div>
+        </div><!--/row-->
+      </div>
+      <div class="push"></div>
+    </div>
+    <br>
 
-  <footer>
-    <div class="container">
+    <div class="footer">
       <div class="center-block">
         <div class="text-center">
           <br>
@@ -78,12 +81,9 @@
           <%= link_to 'Startseite', root_url %> |
           <%= link_to 'Buchungshinweise', notes_path %> |
           <%= link_to 'Impressum', impressum_path %>
-
-          <br><br>
         </div>
       </div>
     </div>
-  </footer>
 
 	<script type="text/javascript">
   $(document).ready(function() {

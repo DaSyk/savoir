@@ -22,20 +22,35 @@
 
 
 /* Rahmen */
-body {
-  background-color: white;
-  padding-top: -20px;
+* {
+    margin: 0;
 }
 
-footer,
-footer > div.container {
+html, body {
+  background-color: white;
+  height: 100%;
+}
+
+.main {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -80px;
+}
+
+.outline {
+  outline: 1px solid lightgray;
+}
+
+.footer {
   background: -webkit-linear-gradient(top, #39F1FF 0%, #06BED7 100%);
   background: linear-gradient(to bottom, #39F1FF 0%, #06BED7 100%);
+  height: 80px; /* .push must be the same height as .footer */
   color: white;
 }
 
-.container.main {
-    outline: 1px solid lightgray;
+.push {
+  height: 80px; /* .push must be the same height as .footer */
 }
 
 .navbar {
