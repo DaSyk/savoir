@@ -45,7 +45,7 @@
           	    markers = handler.addMarkers(<%=raw @hash.to_json %>);
           	    handler.bounds.extendWith(markers);
           	    handler.fitMapToBounds();
-          		handler.getMap().setZoom(10);
+          		  handler.getMap().setZoom(10);
           	  });
           	</script>
           </div>
@@ -70,7 +70,7 @@
 
             </tr>
           </table>
-          <hr style="margin: 8px;">
+          <hr style="margin: 8px 0 8px 0;">
           <table class="calendar">
             <% cnt=0 %>
             <% while cnt < 18 %>
@@ -126,7 +126,7 @@
                 <% @house.pricing.costs.each do |c| %><tr>
                   <td><%= c.name %></td>
                   <td><%= c.ctype %></td>
-                  <td><%= c.amount %><%= "€" if c.amount != nil %></td>
+                  <td><%= ("%.2f" % c.amount).tr(".",",") %> <%= "€" if c.amount != nil %></td>
                   <td><%= c.optional %></td>
                 </tr><% end %>
               </tbody>
