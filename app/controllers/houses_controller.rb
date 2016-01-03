@@ -6,7 +6,7 @@ class HousesController < ApplicationController
   respond_to :html
 
   def index
-    @regions = Region.all
+    @houses = House.all
     respond_with(@houses)
   end
 
@@ -20,7 +20,11 @@ class HousesController < ApplicationController
 
   def activate
     @house = House.find(params[:h])
-    @house.change_activate
+    if @house.change_activate
+      flash[:notice] = "#{@house.name} wurde aktiviert/deaktiviert."
+    else
+      flash[:error] = "#{@house.name} konnte nicht aktiviert werden."
+    end
     redirect_to houses_path
   end
 

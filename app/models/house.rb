@@ -1,8 +1,8 @@
 class House < ActiveRecord::Base
 	belongs_to :location, counter_cache: true
 
-	has_one :facility, :dependent => :destroy
-	has_one :suitability, :dependent => :destroy
+	has_one :facility
+	has_one :suitability
 	has_one :pricing, :dependent => :destroy
 	has_many :pictures, :dependent => :destroy
 	has_many :bookings, :dependent => :destroy
@@ -20,7 +20,11 @@ class House < ActiveRecord::Base
 		if self.activated?
 			self.update_attributes(:activated => false)
 		else
-			self.update_attributes(:activated => true)
+			if self.location
+				self.update_attributes(:activated => true)
+			else
+				return false
+			end
 		end
 	end
 

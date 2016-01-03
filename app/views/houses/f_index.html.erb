@@ -28,14 +28,20 @@
             </div>
             <hr class="small">
 
-            <label class="string optional control-label" for="booking_lastname">Personen</label><br>
+            <label class="string optional control-label" for="booking_lastname">Personen (max.)</label><br>
+
+            <div class="form-group">
+              <%= f.search_field :add_n_people_gteq, class: 'form-control', style: 'width: auto;', :size => 1 %>
+            </div>
+
+            <!--
             <div class="checkbox">
                 <% House.where(activated: true).order(:n_people).pluck(:n_people).to_a.uniq.compact.each do |n| %>
                   <label class="checkbox-inline" style="margin-right:2px;">
                     <%= check_box_tag('q[n_people_eq_any][]', n) %><%= n %>
                   </label>
                 <% end %>
-            </div>
+            </div> -->
             <hr class="small">
 
             <label class="string optional control-label" for="booking_lastname">Ausstattung</label><br>
@@ -62,8 +68,10 @@
             <div class="checkbox">
                 <% House.where(activated: true).pluck(:htype).compact.uniq.each do |t| %>
                   <label>
+                  <% if t != "" %>
                     <%= check_box_tag('q[htype_eq_any][]', t) %> <%= t %>
-                  </label><br>
+                    </label><br>
+                  <% end %>
                 <% end %>
             </div>
             <hr class="small">

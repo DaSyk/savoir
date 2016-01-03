@@ -59,6 +59,10 @@ $(function() {
         $.get($('#houses_search').attr('action'), $('#houses_search').serialize(), null, "script");
         return false;
     });
+    $('#houses_search input').keyup(function(){
+        $.get($('#houses_search').attr('action'), $('#houses_search').serialize(), null, "script");
+        return false;
+    });
     $('#selectAll').click(function() {
         $('#houses_search input').each(function() {
             this.checked = false;

@@ -151,8 +151,8 @@
 
     <div class="col-md-3">
       <div class="jumbotron color2 lowpad">
-        <h3 style="text-align: center;margin:0px;"><%= @house.name %></h3>
-        <h5 style="text-align: center;margin:0px;"><%= @house.location.name %> - <br> <%= @house.location.region.name %> </h4>
+        <h3 style="text-align: center;margin:0px;"><%= @house.name if @house.name %></h3>
+        <h5 style="text-align: center;margin:0px;"><%= @house.location.name if @house.location %> - <br> <%= @house.location.region.name if @house.location && @house.location.region %> </h4>
         <hr class="small">
         <% if @house.pictures.where(default_pic: true).first != nil %>
           <%= image_tag(@house.pictures.where(default_pic: true).first.image_url(:thumb), width: "100%") %>
@@ -161,7 +161,7 @@
         <div style="font-size:1.3em;">
           <span>
             <span class="glyphs"><%= glyph 'home' %> <%= @house.size %>m²</span>&nbsp;&nbsp;&nbsp;&nbsp;
-            <span class="glyphs"><%= glyph 'user' %> <%= @house.n_people %> (max. <%= @house.n_people+@house.add_n_people if @house.n_people != nil && @house.add_n_people %>)</span>
+            <span class="glyphs"><%= glyph 'user' %> <%= @house.n_people %> (max. <%= @house.add_n_people if @house.add_n_people %>)</span>
           </span><br>
           <% if @house.pricing.periods.where(ptype: ['geöffnet', 'Sonderangebot']).where('"to" >= ?', Date.today).first %>
             ab <%= @house.pricing.periods.where(ptype: ['geöffnet', 'Sonderangebot']).where('"to" >= ?', Date.today).order(:cost_per_week).first.cost_per_week %> €/Woche

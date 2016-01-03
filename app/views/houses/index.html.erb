@@ -15,9 +15,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @regions.all.order(:houses_count).each do |r| %>
-      <% r.locations.order(:name).each do |l| %>
-        <% l.houses.order(:name).each do |house| %>
+    <% @houses.order(:location_id).each do |house| %>
           <tr>
               <td><%= house.name %></td>
               <td><%= house.location.name if house.location_id %></td>
@@ -46,8 +44,7 @@
               <% end %>
             </td>
           </tr>
-        <% end %>
-      <% end %>
+
     <% end %>
   </tbody>
 </table>
