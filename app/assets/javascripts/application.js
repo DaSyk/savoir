@@ -71,6 +71,9 @@ $(function() {
         return false;
     });
     $('[data-toggle="tooltip"]').tooltip();
+    $('#tab_location').on('shown.bs.tab', function (e) {
+      google.maps.event.trigger(map, 'resize');
+    });
 });
 
 //call functions
