@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-md-3">
 
-    <div class="jumbotron color1 lowpad">
+    <div class="jumbotron color1 lowpad" style="font-size:0.85em">
       <h4 style="text-align: center;margin:0;">Suchkriterien</h4><hr class="small">
 
         <%= search_form_for @search, url: houses_list_path, :builder => SimpleForm::FormBuilder, :id => 'houses_search' do |f| %>
@@ -31,7 +31,7 @@
             <label class="string optional control-label" for="booking_lastname">Personen (max.)</label><br>
 
             <div class="form-group">
-              <%= f.search_field :add_n_people_gteq, class: 'form-control', style: 'width: auto;', :size => 1 %>
+              <%= f.search_field :add_n_people_gteq, class: 'form-control', size: 1 %>
             </div>
 
             <!--
@@ -45,22 +45,18 @@
             <hr class="small">
 
             <label class="string optional control-label" for="booking_lastname">Ausstattung</label><br>
-            <div class="row checkbox">
-              <div class="col-md-12">
-                <% Facility.where(activated:"Ja").each do |f| %>
-                  <label><%= check_box_tag('q[facilities_id_eq]', f.id) %> <%= f.name %></label><br>
-                <% end %>
-              </div>
+            <div class="checkbox">
+              <% Facility.where(activated:"Ja").each do |f| %>
+                <label><%= check_box_tag('q[facilities_id_eq]', f.id) %> <%= f.name %></label><br>
+              <% end %>
             </div>
             <hr class="small">
 
             <label class="string optional control-label" for="booking_lastname">Geeignet für</label>
-            <div class="row checkbox">
-              <div class="col-md-12">
-                <% Suit.where(activated:"Ja").each do |s| %>
-                  <label><%= check_box_tag('q[suits_id_eq]', s.id) %> <%= s.name %></label><br>
-                <% end %>
-              </div>
+            <div class="checkbox">
+              <% Suit.where(activated:"Ja").each do |s| %>
+                <label><%= check_box_tag('q[suits_id_eq]', s.id) %> <%= s.name %></label><br>
+              <% end %>
             </div>
             <hr class="small">
 

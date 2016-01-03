@@ -385,10 +385,6 @@ hr.small {
   margin:3px 0 3px 0;
 }
 
-.checkbox {
-  margin-top:0;
-}
-
 .btn {
   margin-bottom: 0px;
   border-radius: 10px;
@@ -399,14 +395,36 @@ hr.small {
 }
 
 label {
-  margin-bottom: 0;
-  margin-top: 3px;
+  margin: 0;
 }
 
 .tooltip-inner {
-    white-space:pre-wrap;
-    text-align:left;
-    margin: 0px;
-    padding: 3px;
-    min-width: 150px;
+  white-space:pre-wrap;
+  text-align:left;
+  margin: 0px;
+  padding: 3px;
+  min-width: 150px;
+}
+
+
+/*Search-Form*/
+form#houses_search > div.form-group > input {
+  height: 20px;
+  width: 30px;
+  padding: 2px 7px;
+  font-size: 12px;
+}
+
+input[type="checkbox"] {
+  margin: 0;
+  padding: 0;
+}
+
+.checkbox {
+  margin: 0;
+}
+
+.checkbox label {
+  min-height: 1px;
+
 }

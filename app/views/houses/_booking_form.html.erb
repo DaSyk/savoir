@@ -6,11 +6,11 @@
         <div class="row">
           <div class="col-md-6"><%= f.input :lastname, label: "Nachname", required: true %></div>
           <div class="col-md-6"><%= f.input :firstname, label: "Vorname", required: true %></div>
-        </div>
+        </div><br>
         <div class="row">
           <div class="col-md-6"><%= f.input :email, required: true %></div>
           <div class="col-md-6"><%= f.input :phone, label: "Telefon" %></div>
-        </div>
+        </div><br>
 
         <div class="form-group">
           <label class="string optional control-label" for="booking_lastname">Zeitraum</label>
@@ -18,7 +18,7 @@
           <%= f.input :start_date, as: :hidden %>
           <%= f.input :end_date, as: :hidden %>
 
-        </div>
+        </div><br>
 
         <div class='row'>
             <div class='col-md-12'>
