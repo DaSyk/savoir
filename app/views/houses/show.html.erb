@@ -126,7 +126,7 @@
                 <% @house.pricing.costs.each do |c| %><tr>
                   <td><%= c.name %></td>
                   <td><%= c.ctype %></td>
-                  <td><%= ("%.2f" % c.amount).tr(".",",") %> <%= "€" if c.amount != nil %></td>
+                  <td><%= ("%.2f" % c.amount).tr(".",",") if c.amount != nil %> <%= "€" if c.amount != nil %></td>
                   <td><%= c.optional %></td>
                 </tr><% end %>
               </tbody>

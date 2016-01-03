@@ -10,7 +10,7 @@
       <% @houses.where(location_id: l.id).each do |h| %>
 
 
-         <%= link_to house_path(h) do %>
+         <%= link_to house_path(h), data: {no_turbolink: true } do %>
           <div class="jumbotron color2 list" style="margin-bottom: 3px;">
             <div class="row">
               <div class="col-md-4">
