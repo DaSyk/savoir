@@ -6,23 +6,21 @@
         <div class="row">
           <div class="col-md-6"><%= f.input :lastname, label: "Nachname", required: true %></div>
           <div class="col-md-6"><%= f.input :firstname, label: "Vorname", required: true %></div>
-        </div>
+        </div><br>
         <div class="row">
           <div class="col-md-6"><%= f.input :email, required: true %></div>
           <div class="col-md-6"><%= f.input :phone, label: "Telefon" %></div>
-        </div>
+        </div><br>
 
         <div class="form-group">
-          <label class="string optional control-label" for="booking_lastname">Zeitraum</label>
-          <%= text_field_tag 'date', '', class: 'form-control daterange' %>
-          <%= f.input :start_date, as: :hidden %>
-          <%= f.input :end_date, as: :hidden %>
+          <%= f.input :start_date, label: "Start" %>
+          <%= f.input :end_date, label: "Ende" %>
 
-        </div>
+        </div><br>
 
         <div class='row'>
             <div class='col-md-12'>
-              <%= f.input :message, label: "Mitteilung" %>
+              <%= f.input :message, label: "Mitteilung", :as => :text, :input_html => { :rows => 10, :style => 'resize: none;' } %>
             </div>
         </div>
         <br>

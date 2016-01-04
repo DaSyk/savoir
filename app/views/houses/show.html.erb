@@ -22,16 +22,25 @@
           <%= @house.description.html_safe %>
           <br>
 
-          <h4>Geeignet für:</h4>
+          <div class="row">
+            <div class="col-md-6">
+              <h4>Geeignet für:</h4>
+              <% @house.suits.where(activated:"Ja").each do |s| %>
+                <li style="margin-left:20px;"><%= s.name %></li>
+              <% end %>
+            </div>
+            <div class="col-md-6">
+              <h4>Ausstattung:</h4>
+              <% @house.facilities.where(activated:"Ja").each do |f| %>
+                <li style="margin-left:20px;"><%= f.name %></li>
+              <% end %>
+            </div>
+          </div>
 
-            <% @house.suits.where(activated:"Ja").each do |s| %>
-              <li style="margin-left:20px;"><%= s.name %></li>
-            <% end %>
 
-          <h4>Ausstattung:</h4>
-          <% @house.facilities.where(activated:"Ja").each do |f| %>
-            <li style="margin-left:20px;"><%= f.name %></li>
-          <% end %>
+
+
+
         </div>
 
         <% if @house.address != "" || @house.address == nil %>
@@ -46,6 +55,7 @@
           	    handler.bounds.extendWith(markers);
           	    handler.fitMapToBounds();
           		  handler.getMap().setZoom(10);
+                handler.map.centerOn({ lat: markers[0].lat, lng: markers[0].lng });
           	  });
           	</script>
           </div>

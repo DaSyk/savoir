@@ -12,13 +12,12 @@
  *
  *= require jquery.jcrop
  *= require jquery-ui
+ *= require jquery.comiseo.daterangepicker.css
  *
  */
 
 @import 'bootstrap-sprockets';
 @import 'bootstrap-custom';
-@import 'daterangepicker-bs3';
-@import 'bootstrap-datepicker3';
 
 
 /* Rahmen */
@@ -431,4 +430,36 @@ input[type="checkbox"] {
 .checkbox label {
   min-height: 1px;
 
+}
+
+input.error, input.error:focus {
+    border: 2px solid #f00;
+}
+
+.error {
+  color: #f00;
+}
+
+.valid {
+    border: 2px solid green;
+}
+
+.daterange {
+  display: none;
+}
+
+.comiseo-daterangepicker {
+  border: 1px solid lightgray !important;
+}
+
+.comiseo-daterangepicker-presets {
+  display: none;
+}
+
+.ui-widget-content {
+  border: 0;
+}
+
+.clear-button {
+  display: none;
 }

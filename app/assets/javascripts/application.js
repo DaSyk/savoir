@@ -1,13 +1,16 @@
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs
-//= require jquery-ui
 //= require bootstrap-sprockets
 //= require bootstrap-datepicker/core
-//= require bootstrap-datepicker//locales/bootstrap-datepicker.de.js
+//= require bootstrap-datepicker/locales/bootstrap-datepicker.de.js
+//= require jquery-ui
 //= require moment
 //= require underscore
 //= require gmaps/google
+//= require jquery.validate
+//= require jquery.validate.additional-methods
+//= require jquery.validate.localization/messages_de
 //= require jquery.jcrop
 //= require jquery-fileupload/basic
 //= require jquery-fileupload/vendor/tmpl
@@ -27,33 +30,44 @@ $(document).on('nested:fieldAdded', function(event){
     });
 });
 
-$(document).ready(function(){
-    $('.daterange').attr("value", "");
-});
-
-
 $(function() {
+    $('#new_booking').validate({
+      ignore: "",
+      rules: {
+        'booking[lastname]': { required: true },
+        'booking[firstname]': { required: true },
+        'booking[email]': { required: true },
+        'booking[start_date]': { required: true },
+      },
+      messages: {
+        'booking[start_date]': 'Bitten wählen Sie einen zulässigen Zeitraum aus!',
+      }
+    });
     $('.datepicker').datepicker({
             language: "de-DE"
     });
-    $('.daterange').daterangepicker({
-            'startDate': false,
-            'endDate': false,
-            'minDate': setDate(),
-            'autoApply': true,
-            "opens": "center",
-            "locale": {
-                "format": "DD.MM.YYYY",
-                "separator": " - ",
-                "daysOfWeek": ["So","Mo","Di", "Mi", "Do", "Fr", "Sa"],
-                "monthNames": ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"],
-                "firstDay": 1
-            }
-        },
-        function(start, end, label) {
-            $("#booking_start_date").val(start.format("DD.MM.YYYY"));
-            $("#booking_end_date").val(end.format("DD.MM.YYYY"));
+    $('#daterange').daterangepicker({
+      applyButtonText: 'Annehmen',
+      clearButtonText: 'Löschen',
+      cancelButtonText: 'Abbrechen',
+      dateFormat: 'dd. M. yy',
+      initialText : 'Wählen Sie einen Zeitraum aus!',
+      datepickerOptions: {
+        dateFormat: 'dd.mm.yy',
+        monthNames: ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'],
+        dayNames: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag','Samstag'],
+        dayNamesMin: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
+        minDate: 0,
+        maxDate: null
+      },
+      onChange: function() {
+        var range = $('#daterange').daterangepicker("getRange");
+        var start = range.start;
+        var end = range.end
 
+        $("#booking_start_date").val(start);
+        $("#booking_end_date").val(end);
+      }
     });
     $('#houses_search input').change(function(){
         $.get($('#houses_search').attr('action'), $('#houses_search').serialize(), null, "script");

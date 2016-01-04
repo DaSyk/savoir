@@ -20,7 +20,6 @@ class BookingsController < ApplicationController
   end
 
   def edit
-    gon.bookingdate = "#{@booking.start_date} - #{@booking.end_date}"
   end
 
   def change_accepted
@@ -39,7 +38,7 @@ class BookingsController < ApplicationController
         redirect_to houses_list_path
       end
     else
-      redirect_to @house, :flash => { :error => "Es wurden nicht alle Pflichtfelder ausgefüllt!" }
+      redirect_to @house, :flash => { :error => "Es ist ein Fehler aufgetreten!" }
     end
   end
 
