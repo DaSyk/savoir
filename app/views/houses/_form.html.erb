@@ -63,18 +63,22 @@
             <h3>Eignung</h3><hr>
             <%= hidden_field_tag("house[suit_ids][]", nil) %>
             <% Suit.all.where(activated: "Ja").each do |s| %>
-              <label class="checkbox-inline">
-                <%= check_box_tag("house[suit_ids][]", s.id, s.id.in?(@house.suits.collect(&:id))) %> <%= s.name %>
-              </label><br>
+              <% if s.name != "" || nil %>
+                <label class="checkbox-inline">
+                  <%= check_box_tag("house[suit_ids][]", s.id, s.id.in?(@house.suits.collect(&:id))) %> <%= s.name %>
+                </label><br>
+              <% end %>
              <% end %>
           </div>
           <div class="col-md-6">
             <h3>Ausstattung</h3><hr>
             <%= hidden_field_tag("house[facility_ids][]", nil) %>
             <% Facility.all.where(activated: "Ja").each do |f| %>
-              <label class="checkbox-inline">
-                <%= check_box_tag("house[facility_ids][]", f.id, f.id.in?(@house.facilities.collect(&:id))) %> <%= f.name %>
-              </label><br>
+              <% if f.name != "" || nil %>
+                <label class="checkbox-inline">
+                  <%= check_box_tag("house[facility_ids][]", f.id, f.id.in?(@house.facilities.collect(&:id))) %> <%= f.name %>
+                </label><br>
+              <% end %>
             <% end %>
           </div>
         </div>

@@ -1,10 +1,11 @@
 //= require jquery
+//= require jquery-ui
 //= require jquery.turbolinks
 //= require jquery_ujs
-//= require bootstrap-sprockets
-//= require bootstrap-datepicker/core
-//= require bootstrap-datepicker/locales/bootstrap-datepicker.de.js
-//= require jquery-ui
+//= require bootstrap/tooltip
+//= require bootstrap/tab
+//= require bootstrap/modal
+//= require bootstrap/alert
 //= require moment
 //= require underscore
 //= require gmaps/google
@@ -26,7 +27,13 @@ $(document).on('nested:fieldAdded', function(event){
     var dateField = field.find('.date');
     // and activate datepicker on it
     dateField.datepicker({
-        language: "de-DE"
+      numberOfMonths: 3,
+      dateFormat: 'dd.mm.yy',
+      monthNames: ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'],
+      dayNames: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag','Samstag'],
+      dayNamesMin: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
+      minDate: null,
+      maxDate: null
     });
 });
 
@@ -44,7 +51,13 @@ $(function() {
       }
     });
     $('.datepicker').datepicker({
-            language: "de-DE"
+      numberOfMonths: 3,
+      dateFormat: 'dd.mm.yy',
+      monthNames: ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'],
+      dayNames: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag','Samstag'],
+      dayNamesMin: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
+      minDate: 0,
+      maxDate: null
     });
     $('#daterange').daterangepicker({
       applyButtonText: 'Annehmen',
