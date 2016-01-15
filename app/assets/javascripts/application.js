@@ -55,9 +55,7 @@ $(function() {
       dateFormat: 'dd.mm.yy',
       monthNames: ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'],
       dayNames: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag','Samstag'],
-      dayNamesMin: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
-      minDate: 0,
-      maxDate: null
+      dayNamesMin: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa']
     });
     $('#daterange').daterangepicker({
       applyButtonText: 'Annehmen',

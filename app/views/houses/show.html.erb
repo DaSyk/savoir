@@ -60,15 +60,23 @@
           </div>
         <% end %>
 
+
         <div role='tabpanel' class='tab-pane fade' id='images'>
-        	<% @house.pictures.order(:order_no).each do |picture| %>
-            <div class="gallery">
-              <%= image_tag(picture.image) %>
-            </div>
-        	<% end %>
+        	<div>
+            <% @house.pictures.order(:order_no).each do |picture| %>
+              <div class="gallery">
+                <%= image_tag(picture.image) %>
+                  <div class="row">
+                    <div class="col-md-12" style="font-weight: normal; margin: 0 10px;">
+                      <%= picture.description %>
+                    </div>
+                  </div>
+              </div>
+          	<% end %>
+          </div>
         </div>
 
-        <div role='tabpanel' class='tab-pane fade' id='availability'>
+        <div role='tabpanel' class='tab-pane fade' id='availability' style="font-size:0.9em;">
           <table class="calendar">
             <tr>
               <td class="free"></td><th style="padding-right: 50px">frei</th>
@@ -116,6 +124,7 @@
                 <th>Von</th>
                 <th>Bis</th>
                 <th>Preis/Woche</th>
+                <th>Kosten pro zusätzliche Person/Woche</th>
                 <th>Saison</th>
               </tr>
             </thead>
@@ -124,6 +133,7 @@
                 <td><%= p.from %></td>
                 <td><%= p.to %></td>
                 <td><%= p.cost_per_week %> €</td>
+                <td><%= p.cost_add_person_week %> €</td>
                 <td><%= p.season %></td>
               </tr><% end %>
             </tbody>

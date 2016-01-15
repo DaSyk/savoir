@@ -93,13 +93,15 @@
                 <%= glyph 'plus' %> Zeitraum hinzufügen
               <% end %>
             </h3>
-            <table class='table table-striped' id='periods'>
+            <table class='table table-striped' id='periods' style="font-size: 0.8em;">
               <tr>
                 <th>Von</th>
                 <th>Bis</th>
                 <th colspan='2'>Mindestaufenthalt</th>
                 <th>Kosten/Nacht</th>
+                <th>zus. Person/Nacht</th>
                 <th>Kosten/Woche</th>
+                <th>zus. Person/Woche</th>
 				<th>Typ</th>
                 <th>Saison</th>
                 <th></th>
@@ -111,12 +113,14 @@
                     <td><%= p.input :min, label: false, :placeholder => 'Min' %></td>
                     <td><%= p.input :min_type, label: false, collection: ['Tage','Wochen'], default: 1 %></td>
                     <td><%= p.input :cost_per_night, label: false, :placeholder => 'Kosten in EUR'  %></td>
+                    <td><%= p.input :cost_add_person, label: false, :placeholder => 'Kosten extra Person'  %></td>
                     <td><%= p.input :cost_per_week, label: false, :placeholder => 'Kosten in EUR' %></td>
+                    <td><%= p.input :cost_add_person_week, label: false, :placeholder => 'Kosten extra Person'  %></td>
 					<td><%= p.input :ptype, label: false, collection: ['geöffnet', 'geschlossen', 'auf Anfrage', 'Sonderangebot'], default: 1 %></td>
                     <td><%= p.input :season, label: false, :placeholder => 'Saison' %></td>
                     <td>
-                      <%= p.link_to_remove :title => '[-] Löschen', :class => 'btn btn-danger pull-right', :data => { :confirm => 'Sicher?' } do %>
-                        <%= glyph 'remove' %> Löschen
+                      <%= p.link_to_remove :title => '[-] Löschen', :class => 'btn btn-xs btn-danger pull-right ', :data => { :confirm => 'Sicher?' } do %>
+                        <%= glyph 'remove' %>
                       <% end %>
                     </td>
                   </tr>

@@ -120,7 +120,7 @@ class HousesController < ApplicationController
 	    :suit_ids => [],
       :facility_ids => [],
 		pricing_attributes: [:id, :n_people, :surcharge_night, :surcharge_week, :house_id,
-		  periods_attributes: [:id, :from, :to, :min, :min_type, :cost_per_night, :cost_per_week, :season, :pricing_id, :ptype, :_destroy],
+		  periods_attributes: [:id, :from, :to, :min, :min_type, :cost_per_night, :cost_per_week, :season, :pricing_id, :ptype, :cost_add_person, :cost_add_person_week, :_destroy],
 	      costs_attributes: [:id, :name, :ctype, :amount, :optional, :pricing_id, :_destroy]
 		],
 		pictures_attributes: [:id, :name, :house_id, :image, :_destroy],
