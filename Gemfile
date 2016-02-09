@@ -66,10 +66,8 @@ gem 'devise'
 gem 'ransack'
 gem 'will_paginate'
 
-group :production do
-	gem 'rails_12factor'
-	gem 'pg', '~> 0.18.3'	
-end	
+gem 'rails_12factor'
+gem 'pg'	
 
 gem 'geocoder'
 gem 'gmaps4rails'
