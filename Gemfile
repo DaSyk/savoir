@@ -67,7 +67,7 @@ gem 'ransack'
 gem 'will_paginate'
 
 gem 'rails_12factor'
-gem 'pg'	
+gem 'pg'
 
 gem 'geocoder'
 gem 'gmaps4rails'
