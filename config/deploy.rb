@@ -1,5 +1,5 @@
 # Change these
-server '217.160.14.233', port: 81, roles: [:web, :app, :db], primary: true
+server '217.160.14.233', port: 80, roles: [:web, :app, :db], primary: true
 
 set :repo_url,        'git@github.com:dasyk/savoir.git'
 set :application,     'savoir'
