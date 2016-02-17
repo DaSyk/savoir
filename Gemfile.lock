@@ -252,6 +252,7 @@ DEPENDENCIES
   puma
   rails (= 4.1.8)
   rails_12factor
+  rake (~> 10.5.0)
   ransack
   rmagick
   sass-rails (~> 5.0.1)

@@ -82,3 +82,4 @@ group :development do
 end
 
 gem 'puma'
+gem 'rake', '~> 10.5.0'
