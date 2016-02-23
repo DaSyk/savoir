@@ -4,8 +4,8 @@ Country.create(name: 'Frankreich', place_id: 1)
 Country.create(name: 'Italien', place_id: 1)
 Country.create(name: 'Spanien', place_id: 1)
 
-Region.create(name: 'Provence-Alpes-Cote d’Azur', country_id: 1)
-Region.create(name: 'Midi-Pyrenäen', country_id: 1)
+Region.create(name: 'Provence-Alpes-Cote d Azur', country_id: 1)
+Region.create(name: 'Midi-Pyrenaen', country_id: 1)
 
 Region.create(name: 'Lombardei', country_id: 2)
 
@@ -37,4 +37,4 @@ Facility.create(name: "Garten", detail_id: 1)
 Facility.create(name: "Terrasse", detail_id: 1)
 Facility.create(name: "Balkon", detail_id: 1)
 Facility.create(name: "Waschmaschine", detail_id: 1)
-Facility.create(name: "Spülmaschine", detail_id: 1)
+Facility.create(name: "Spuelmaschine", detail_id: 1)
