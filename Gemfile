@@ -74,6 +74,8 @@ gem 'gmaps4rails'
 gem 'underscore-rails'
 
 group :development do
+    gem 'pg', '~> 0.18.3'
+
     gem 'capistrano',         require: false
     gem 'capistrano-rvm',     require: false
     gem 'capistrano-rails',   require: false
@@ -83,6 +85,7 @@ end
 
 group :production do
 	gem 'bcrypt', '~> 3.1.9'
+  gem 'pg', '~> 0.18.3'
 end
 
 gem 'puma'
