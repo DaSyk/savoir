@@ -67,7 +67,6 @@ gem 'ransack'
 gem 'will_paginate'
 
 gem 'rails_12factor'
-gem 'pg', '~> 0.18.3'
 
 gem 'geocoder'
 gem 'gmaps4rails'
@@ -85,7 +84,7 @@ end
 
 group :production do
 	gem 'bcrypt', '~> 3.1.9'
-  gem 'pg', '~> 0.18.3'
+	gem 'pg', '~> 0.18.3'
 end
 
 gem 'puma'
