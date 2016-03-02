@@ -82,10 +82,8 @@ group :development do
     gem 'capistrano3-puma',   require: false
 end
 
-group :production do
-	gem 'bcrypt', '~> 3.1.9'
-	gem 'pg', '~> 0.18.3'
-end
+gem 'bcrypt', '~> 3.1.9'
+gem 'pg', '~> 0.18.3'
 
 gem 'puma'
 gem 'rake', '~> 10.5.0'
