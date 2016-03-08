@@ -15,7 +15,7 @@
                     <%= check_box_tag('q[location_region_id_in][]', r.id) %>
                     <%= r.name %>
                   </label><br>
-                  <% if r.name == "Provence-Alpes-Côte d’Azur" %>
+
                     <% r.locations.order(:name).each do |l| %>
                       <% if l.houses.count > 0 %>
                         <label class="checkbox-inline" style="margin-left: 10px;">
@@ -24,7 +24,7 @@
                         </label><br>
                       <% end %>
                     <% end %>
-                  <% end %>
+
                 <% end %>
               <% end %>
             </div>
