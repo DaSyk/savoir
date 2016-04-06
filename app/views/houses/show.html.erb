@@ -133,9 +133,9 @@
               <% @house.pricing.periods.order(:from).where(:ptype => ['geöffnet', 'Sonderangebot']).each do |p| %><tr>
                 <td><%= p.from %></td>
                 <td><%= p.to %></td>
-                <td><%= p.cost_per_week+" €" if p.cost_per_week!=nil %></td>
-				<td><%= p.cost_per_night+" €" if p.cost_per_night!=nil %></td>
-                <td><%= p.cost_add_person_week+" €" if p.cost_per_night!=nil %></td>
+                <td><%= p.cost_per_week.to_s+" €" if p.cost_per_week!=nil %></td>
+				<td><%= p.cost_per_night.to_s+" €" if p.cost_per_night!=nil %></td>
+                <td><%= p.cost_add_person_week.to_s+" €" if p.cost_per_night!=nil %></td>
                 <td><%= p.season %></td>
               </tr><% end %>
             </tbody>
