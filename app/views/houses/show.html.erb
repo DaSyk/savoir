@@ -121,10 +121,11 @@
           <table class="table table-hover">
             <thead>
               <tr>
-                <th>Von</th>
-                <th>Bis</th>
+                <th>von</th>
+                <th>bis</th>
                 <th>Preis/Woche</th>
-                <th>Kosten pro zusätzliche Person/Woche</th>
+				<th>Preis/Nacht<th>
+                <th>zusätzl. Person/Woche</th>
                 <th>Saison</th>
               </tr>
             </thead>
@@ -132,8 +133,9 @@
               <% @house.pricing.periods.order(:from).where(:ptype => ['geöffnet', 'Sonderangebot']).each do |p| %><tr>
                 <td><%= p.from %></td>
                 <td><%= p.to %></td>
-                <td><%= p.cost_per_week %> €</td>
-                <td><%= p.cost_add_person_week %> €</td>
+                <td><%= p.cost_per_week+" €" if p.cost_per_week!=nil %></td>
+				<td><%= p.cost_per_night+" €" if p.cost_per_night!=nil %></td>
+                <td><%= p.cost_add_person_week+" €" if p.cost_per_night!=nil %></td>
                 <td><%= p.season %></td>
               </tr><% end %>
             </tbody>

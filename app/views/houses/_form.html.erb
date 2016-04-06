@@ -44,13 +44,13 @@
 
             <div class='row'>
               <div class='col-md-12'>
-                <%= f.input :description, :as => :ckeditor, :input_html => { :ckeditor => {:toolbar => 'mini'}}, label: 'Beschreibung' %>
+                <%= f.input :description, :as => :ckeditor, :input_html => { :ckeditor => {:toolbar => 'Full'}}, label: 'Beschreibung' %>
               </div>
             </div>
 
             <div class='row'>
               <div class='col-md-12'>
-                <%= f.input :short_description, :as => :ckeditor, :input_html => { :ckeditor => {:toolbar => 'mini'}}, label: 'Kurzbeschreibung' %>
+                <%= f.input :short_description, :as => :ckeditor, :input_html => { :ckeditor => {:toolbar => 'Full'}}, label: 'Kurzbeschreibung' %>
               </div>
             </div>
       </div>
@@ -98,9 +98,9 @@
                 <th>Von</th>
                 <th>Bis</th>
                 <th colspan='2'>Mindestaufenthalt</th>
-                <th>Kosten/Nacht</th>
+                <th>Preis/Nacht</th>
                 <th>zus. Person/Nacht</th>
-                <th>Kosten/Woche</th>
+                <th>Preis/Woche</th>
                 <th>zus. Person/Woche</th>
 				<th>Typ</th>
                 <th>Saison</th>
@@ -112,10 +112,10 @@
                     <td><%= p.input :to, as: :string, :placeholder => 'Bis', input_html: { class: 'date datepicker', value: p.object.to.to_s}, label: false %></td>
                     <td><%= p.input :min, label: false, :placeholder => 'Min' %></td>
                     <td><%= p.input :min_type, label: false, collection: ['Tage','Wochen'], default: 1 %></td>
-                    <td><%= p.input :cost_per_night, label: false, :placeholder => 'Kosten in EUR'  %></td>
-                    <td><%= p.input :cost_add_person, label: false, :placeholder => 'Kosten extra Person'  %></td>
-                    <td><%= p.input :cost_per_week, label: false, :placeholder => 'Kosten in EUR' %></td>
-                    <td><%= p.input :cost_add_person_week, label: false, :placeholder => 'Kosten extra Person'  %></td>
+                    <td><%= p.input :cost_per_night, label: false, :placeholder => 'Preis in EUR'  %></td>
+                    <td><%= p.input :cost_add_person, label: false, :placeholder => 'Preis extra Person'  %></td>
+                    <td><%= p.input :cost_per_week, label: false, :placeholder => 'Preis in EUR' %></td>
+                    <td><%= p.input :cost_add_person_week, label: false, :placeholder => 'Preis extra Person'  %></td>
 					<td><%= p.input :ptype, label: false, collection: ['geöffnet', 'geschlossen', 'auf Anfrage', 'Sonderangebot'], default: 1 %></td>
                     <td><%= p.input :season, label: false, :placeholder => 'Saison' %></td>
                     <td>

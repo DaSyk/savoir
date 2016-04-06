@@ -6,7 +6,17 @@ class HousesController < ApplicationController
   respond_to :html
 
   def index
-    @houses = House.all
+    @houses = []
+	Region.all.order(:name).each do |region|
+		region.locations.order(:name).each do |location|
+			location.houses.order(:name).each do |house|
+				@houses << house
+			end
+		end	
+	end
+	House.all.where(location_id: nil).each do |house|
+		@houses << house
+	end	
     respond_with(@houses)
   end
 

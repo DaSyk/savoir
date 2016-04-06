@@ -41,7 +41,7 @@
                 </div>
 
                 <div class="right">
-                  <div style="font-size: 1.5em;">
+                  <div style="font-size: 1.2em;">
                     <% if h.pricing.periods.where(ptype: ['geöffnet', 'Sonderangebot']).where('"to" >= ?', Date.today).first %>
                       ab
                       <%= h.pricing.periods.where(ptype: ['geöffnet', 'Sonderangebot']).where('"to" >= ?', Date.today).order(:cost_per_week).first.cost_per_week %>

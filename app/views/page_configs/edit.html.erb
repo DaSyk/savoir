@@ -6,7 +6,7 @@
     <% @page_config.pages.order(:title).each do |pp| %>
         <%= f.fields_for :pages, pp do |p| %>
             <label class="string optional control-label" for="house_name"><%= pp.title %></label>
-            <%= p.input :content, label: false, :as => :ckeditor, :input_html => { :ckeditor => {:toolbar => 'mini'}} %>
+            <%= p.input :content, label: false, :as => :ckeditor, :input_html => { :ckeditor => {:toolbar => 'Full'}} %>
         <% end %>
     <% end %>
 

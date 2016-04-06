@@ -13,8 +13,10 @@
         </div><br>
 
         <div class="form-group">
-          <%= f.input :start_date, label: "Start" %>
-          <%= f.input :end_date, label: "Ende" %>
+          <label class="string optional control-label required" for="booking_lastname">Zeitraum</label><br>
+          <input id="daterange" name="daterange">
+          <br><%= f.hidden_field :start_date %>
+          <br><%= f.hidden_field :end_date %>
 
         </div><br>
 
