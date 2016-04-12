@@ -18,7 +18,8 @@
 
 @import 'bootstrap-sprockets';
 @import 'bootstrap-custom';
-
+@import 'blueimp-gallery.min.css';
+@import 'bootstrap-image-gallery.min.css';
 
 /* Rahmen */
 * {
@@ -206,12 +207,17 @@ td > div.form-group > .btn {
 }
 
 .jumbotron.color1 {
-  background: #FFDD54;
+ background: #FFDD54;
+  /* background: -webkit-linear-gradient(top, #F6FAA5 0%, #FFFFBF 100%);
+  background: linear-gradient(to bottom, #F6FAA5 0%, #FFFFBF 100%); */
   border: 1px solid #C0C0C0;
 }
+ 
 
 .jumbotron.color2 {
-  background: #F6FAA5;
+  /* background: -webkit-linear-gradient(top, #FFDD54 0%, #FFF76E 100%);
+  background: linear-gradient(to bottom, #FFDD54 0%, #FFF76E 100%);*/
+  background: #F6FAA5; 
   border: 1px solid #C0C0C0;
 }
 
@@ -233,7 +239,7 @@ h2 {
 }
 
 .gallery {
-  width: 48%;
+  width: 50%;
   border-radius: 10px;
   padding: 10px;
   padding-bottom: 3px;
@@ -253,6 +259,7 @@ h2 {
 
 .jumbotron.picture {
   width: 31.2%;
+  min-height: 300px;
   border-radius: 10px;
   padding: 10px;
   padding-bottom: 3px;

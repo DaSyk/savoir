@@ -6,6 +6,8 @@
 //= require bootstrap/tab
 //= require bootstrap/modal
 //= require bootstrap/alert
+//= require jquery.blueimp-gallery.min.js
+//= require bootstrap-image-gallery.min.js
 //= require moment
 //= require underscore
 //= require gmaps/google

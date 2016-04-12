@@ -36,11 +36,6 @@
               <% end %>
             </div>
           </div>
-
-
-
-
-
         </div>
 
         <% if @house.address != "" || @house.address == nil %>
@@ -62,15 +57,15 @@
 
 
         <div role='tabpanel' class='tab-pane fade' id='images'>
-        	<div>
+          <div style="height: <%= (@house.pictures.count.to_f/2).ceil*370 %>px;" id="links">
             <% @house.pictures.order(:order_no).each do |picture| %>
-              <div class="gallery">
+			       	<div class="gallery" style="height: 350px;">
                 <%= image_tag(picture.image) %>
-                  <div class="row">
-                    <div class="col-md-12" style="font-weight: normal; margin: 0 10px;">
-                      <%= picture.description %>
-                    </div>
+                <div class="row">
+                  <div class="col-md-12" style="font-weight: normal; margin: 0 10px;">
+                    <%= picture.description %>
                   </div>
+                </div>
               </div>
           	<% end %>
           </div>
@@ -135,7 +130,7 @@
                 <td><%= p.to %></td>
                 <td><%= p.cost_per_week.to_s+" €" if (p.cost_per_week!=nil && p.cost_per_week!="") %></td>
 				<td><%= p.cost_per_night.to_s+" €" if (p.cost_per_night!=nil && p.cost_per_night!="") %></td>
-                <td><%= p.cost_add_person_week.to_s+" €" if (p.cost_per_night!=nil && p.cost_per_night!="") %></td>
+                <td><%= p.cost_add_person_week.to_s+" €" if (p.cost_add_person_week!=nil && p.cost_add_person_week!="") %></td>
                 <td><%= p.season %></td>
               </tr><% end %>
             </tbody>
