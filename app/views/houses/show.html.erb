@@ -60,7 +60,7 @@
           <div style="height: <%= (@house.pictures.count.to_f/2).ceil*370 %>px;" id="links">
             <% @house.pictures.order(:order_no).each do |picture| %>
 			       	<div class="gallery" style="height: 350px;">
-                <%= image_tag(picture.image) %>
+                <%= image_tag picture.image_url(:thumb) %>
                 <div class="row">
                   <div class="col-md-12" style="font-weight: normal; margin: 0 10px;">
                     <%= picture.description %>
