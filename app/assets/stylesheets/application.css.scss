@@ -212,12 +212,12 @@ td > div.form-group > .btn {
   background: linear-gradient(to bottom, #F6FAA5 0%, #FFFFBF 100%); */
   border: 1px solid #C0C0C0;
 }
- 
+
 
 .jumbotron.color2 {
   /* background: -webkit-linear-gradient(top, #FFDD54 0%, #FFF76E 100%);
   background: linear-gradient(to bottom, #FFDD54 0%, #FFF76E 100%);*/
-  background: #F6FAA5; 
+  background: #F6FAA5;
   border: 1px solid #C0C0C0;
 }
 
@@ -239,20 +239,10 @@ h2 {
 }
 
 .gallery {
-  width: 50%;
-  border-radius: 10px;
-  padding: 10px;
-  padding-bottom: 3px;
-  float: left;
-  margin-left: 0;
-  margin-right: 0;
-  margin-bottom: 22px;
-  font-weight: bold;
-  position:relative;
+  padding-bottom: 30px;
   img {
-    display:block;
     margin: 0 auto;
-    width: 97%;
+    width: 100%;
     border-radius: 10px;
   }
 }
@@ -375,6 +365,12 @@ table.calendar {
   tbody > tr > td.request {
     background: lightgreen;
   }
+  tbody > tr > td.start {
+    background: linear-gradient(50deg, limegreen 50%, red 50%);;
+  }
+  tbody > tr > td.end {
+    background: linear-gradient(50deg, red 50%, limegreen 50%);
+  }
 }
 
 .glyphs {
@@ -486,4 +482,8 @@ table#periods > tbody > tr.fields > td > a.btn {
   font-size: 10px;
   padding: 3px;
   line-height: 1.2;
+}
+
+img {
+  border-radius: 10px;
 }

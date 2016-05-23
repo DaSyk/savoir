@@ -12,11 +12,11 @@ class HousesController < ApplicationController
 			location.houses.order(:name).each do |house|
 				@houses << house
 			end
-		end	
+		end
 	end
 	House.all.where(location_id: nil).each do |house|
 		@houses << house
-	end	
+	end
     respond_with(@houses)
   end
 
@@ -83,30 +83,34 @@ class HousesController < ApplicationController
     end
 
   def set_dates
-    disabled_dates = []
+    #disabled_dates = []
     @busy_dates = []
 	  @closed_dates = []
 	  @request_dates = []
 	  @special_dates = []
+    @start_dates = []
+    @end_dates = []
 
 	  @house.pricing.periods.where(ptype: "geschlossen").each do |p|
 	    if p.from && p.to
         (p.from..p.to).each do |d|
-  		    disabled_dates << d.to_s
+  		    #disabled_dates << d.to_s
   		    @closed_dates << d
   	    end
       end
 	  end
 
     @house.bookings.where(accepted: true).each do |b|
+      @start_dates << b.start_date if b.start_date
+      @end_dates << b.end_date if b.end_date
       if b.start_date && b.end_date
         (b.start_date+1..b.end_date-1).each do |d|
-          disabled_dates << d.to_s
+          #disabled_dates << d.to_s
           @busy_dates << d
         end
       end
     end
-    gon.dates = disabled_dates
+    #gon.dates = disabled_dates
 
 	  @house.pricing.periods.where(ptype: "auf Anfrage").each do |p|
 	    if p.from && p.to
