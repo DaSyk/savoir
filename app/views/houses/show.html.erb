@@ -45,7 +45,7 @@
         <div role='tabpanel' class='tab-pane fade' id='images'>
           <div>
             <% @house.pictures.order(:order_no).each do |picture| %>
-              <% if @house.pictures.index(picture).even? %>
+              <% if @house.pictures.order(:order_no).index(picture).even? %>
                 <div class="row">
               <% end %>
               <div class="col-md-6 gallery">
@@ -53,7 +53,7 @@
                     <%= picture.description %>
 
               </div>
-              <% if @house.pictures.index(picture).odd? || picture == @house.pictures.last %>
+              <% if @house.pictures.order(:order_no).index(picture).odd? || picture == @house.pictures.order(:order_no).last %>
                 </div>
               <% end %>
           	<% end %>
