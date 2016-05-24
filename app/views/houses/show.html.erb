@@ -47,7 +47,7 @@
             <% n=0 %>
             <% @house.pictures.order(:order_no).each do |picture| %>
               <% n+=1 %>
-              <% if n.odd %>
+              <% if n.odd? %>
                 <div class="row">
               <% end %>
 
