@@ -44,23 +44,22 @@
 
         <div role='tabpanel' class='tab-pane fade' id='images'>
           <div>
-            <% n=0 %>
-            <% @house.pictures.order(:order_no).each do |picture| %>
-              <% n+=1 %>
-              <% if n.odd? %>
-                <div class="row">
-              <% end %>
-
-              <div class="col-md-6 gallery">
-                <%= image_tag picture.image_url(:thumb) %>
-                <%= picture.description %>
-              </div>
-
-              <% if n.even? || picture == @house.pictures.order(:order_no).last %>
+			<% n=0 %>
+            <div class="row">	
+			  <% @house.pictures.order(:order_no).each do |picture| %>
+				<% n+=1 %>
+                <div class="col-md-6 gallery">
+                  <%= image_tag picture.image_url(:thumb) %>
+                  <%= picture.description %><br>
+				  <%= n %>
                 </div>
-              <% end %>
-          	<% end %>
-          </div>
+				<% if n.even? %>
+				  <br style="clear:both">
+			    <% end %>	
+           	  <% end %>
+
+			</div>
+		  </div>
         </div>
 
         <div role='tabpanel' class='tab-pane fade' id='availability' style="font-size:0.9em;">
