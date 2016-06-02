@@ -103,8 +103,11 @@
               <% cnt+=1 %>
             <% end %>
           </table>
-          <hr style="margin: 8px 0 8px 0;">
-          <%= @house.pricing.note.html_safe %>
+          <% if @house.pricing.note.html_safe != (nil || "") %>
+            <hr style="margin: 8px 0 8px 0;">
+            <h4>Buchungshinweise:</h4>
+            <%= @house.pricing.note.html_safe %>
+          <% end %>
         </div>
 
         <div role='tabpanel' class='tab-pane fade' id='prices'>
