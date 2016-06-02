@@ -5,13 +5,13 @@
 
       <ul class='nav nav-tabs' role='tablist'>
         <li role='presentation' class='<%= 'active' if flash[:error] == nil %>'><a href='#allgemein' aria-controls='allgemein' role='tab' data-toggle='tab'>Beschreibung</a></li>
-        <% if @house.address != ("" && nil) %>
+        <% if @house.address != ("" || nil) %>
           <li role='presentation'><a id='tab_location' href='#location' aria-controls='location' role='tab' data-toggle='tab'>Lage</a></li>
         <% end %>
         <li role='presentation'><a href='#images' aria-controls='images' role='tab' data-toggle='tab'>Bilder</a></li>
         <li role='presentation'><a href='#availability' aria-controls='availability' role='tab' data-toggle='tab'>Verfügbarkeit</a></li>
         <li role='presentation'><a href='#prices' aria-controls='prices' role='tab' data-toggle='tab'>Preisliste</a></li>
-        <% if @house.movie_url != ("" && nil) %>
+        <% if @house.movie_url != ("" || nil) %>
       	  <li role='presentation'><a href='#video' aria-controls='video' role='tab' data-toggle='tab'>Video</a></li>
         <% end %>
         <li role='presentation' class="<%= 'active' if flash[:error] %>"><a href='#request' aria-controls='request' role='tab' data-toggle='tab'>Buchungsanfrage</a></li>
@@ -25,7 +25,7 @@
           <% end %>
         </div>
 
-        <% if @house.address != ("" && nil) %>
+        <% if @house.address != ("" || nil) %>
           <div role='tabpanel' class='tab-pane fade' id='location'>
             <div style='width: 800px;'>
           	  <div id="map" style='width: 800px; height: 400px;'></div>
@@ -105,7 +105,7 @@
             <% end %>
           </table>
 
-          <% if @house.pricing.note != (nil && "")  %>
+          <% if @house.pricing.note != (nil || "")  %>
             <hr style="margin: 8px 0 8px 0;">
             <h4>Buchungshinweise:</h4>
             <%= @house.pricing.note.html_safe %>
@@ -151,7 +151,7 @@
           <% end %>
         </div>
 
-      <% if @house.movie_url != ("" && nil) %>
+      <% if @house.movie_url != ("" || nil) %>
         <div role='tabpanel' class='tab-pane fade' id='video'>
       	<iframe width="560" height="315" src="https://www.youtube.com/embed/<%= @house.movie_url%>" frameborder="0" allowfullscreen></iframe>
         </div>
