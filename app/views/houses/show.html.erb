@@ -103,7 +103,7 @@
               <% cnt+=1 %>
             <% end %>
           </table>
-          <% if @house.pricing.note.html_safe != (nil || "") %>
+          <% if @house.pricing.note != (nil || "") %>
             <hr style="margin: 8px 0 8px 0;">
             <h4>Buchungshinweise:</h4>
             <%= @house.pricing.note.html_safe %>
