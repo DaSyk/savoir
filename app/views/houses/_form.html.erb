@@ -102,7 +102,7 @@
                 <th>zus. Person/Nacht</th>
                 <th>Preis/Woche</th>
                 <th>zus. Person/Woche</th>
-				<th>Typ</th>
+				        <th>Typ</th>
                 <th>Saison</th>
                 <th></th>
               </tr>
@@ -116,7 +116,7 @@
                     <td><%= p.input :cost_add_person, label: false, :placeholder => 'Preis extra Person'  %></td>
                     <td><%= p.input :cost_per_week, label: false, :placeholder => 'Preis in EUR' %></td>
                     <td><%= p.input :cost_add_person_week, label: false, :placeholder => 'Preis extra Person'  %></td>
-					<td><%= p.input :ptype, label: false, collection: ['geöffnet', 'geschlossen', 'auf Anfrage', 'Sonderangebot'], default: 1 %></td>
+					          <td><%= p.input :ptype, label: false, collection: ['geöffnet', 'geschlossen', 'auf Anfrage', 'Sonderangebot'], default: 1 %></td>
                     <td><%= p.input :season, label: false, :placeholder => 'Saison' %></td>
                     <td>
                       <%= p.link_to_remove :title => '[-] Löschen', :class => 'btn btn-xs btn-danger pull-right ', :data => { :confirm => 'Sicher?' } do %>
@@ -126,7 +126,10 @@
                   </tr>
               <% end %>
             </table>
+            <hr>
+            <%= pr.input :note, :as => :ckeditor, :input_html => { :ckeditor => {:toolbar => 'Full'}}, label: 'Bemerkung' %>
         <% end %>
+
       </div>
 
 

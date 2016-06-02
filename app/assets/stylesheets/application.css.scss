@@ -178,7 +178,8 @@ form > ul.nav-tabs {
 .nav-tabs > li.active > a:hover,
 .nav-tabs > li > a:hover,
 .nav-tabs > li > a:focus {
-  background: #F6FAA5;
+  background: #F6FAA5 !important;
+  color: black;
 }
 
 /* Tab Content */

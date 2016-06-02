@@ -45,7 +45,7 @@
         <div role='tabpanel' class='tab-pane fade' id='images'>
           <div>
 			<% n=0 %>
-            <div class="row">	
+            <div class="row">
 			  <% @house.pictures.order(:order_no).each do |picture| %>
 				<% n+=1 %>
                 <div class="col-md-6 gallery">
@@ -54,7 +54,7 @@
                 </div>
 				<% if n.even? %>
 				  <br style="clear:both">
-			    <% end %>	
+			    <% end %>
            	  <% end %>
 
 			</div>
@@ -103,6 +103,8 @@
               <% cnt+=1 %>
             <% end %>
           </table>
+          <hr style="margin: 8px 0 8px 0;">
+          <%= @house.pricing.note.html_safe %>
         </div>
 
         <div role='tabpanel' class='tab-pane fade' id='prices'>

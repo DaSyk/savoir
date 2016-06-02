@@ -43,7 +43,7 @@ class HousesController < ApplicationController
       marker.lat house.latitude
       marker.lng house.longitude
     end
-	@booking = @house.bookings.build
+    @booking = @house.bookings.build
     respond_with(@house)
   end
 
@@ -133,7 +133,7 @@ class HousesController < ApplicationController
       params.require(:house).permit(:id, :name, :description, :location_id, :size, :n_people, :add_n_people, :htype, :movie_url, :address, :latitude, :longitude, :short_description,
 	    :suit_ids => [],
       :facility_ids => [],
-		pricing_attributes: [:id, :n_people, :surcharge_night, :surcharge_week, :house_id,
+		pricing_attributes: [:id, :n_people, :surcharge_night, :surcharge_week, :house_id, :note,
 		  periods_attributes: [:id, :from, :to, :min, :min_type, :cost_per_night, :cost_per_week, :season, :pricing_id, :ptype, :cost_add_person, :cost_add_person_week, :_destroy],
 	      costs_attributes: [:id, :name, :ctype, :amount, :optional, :pricing_id, :_destroy]
 		],

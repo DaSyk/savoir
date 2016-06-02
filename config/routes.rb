@@ -7,8 +7,14 @@ Rails.application.routes.draw do
   get '/impressum', :to => 'pages#impressum', :as => 'impressum'
   get '/notes', :to => 'pages#notes', :as => 'notes'
 
+  get '/h/:id', :to => 'houses#show', :as => 'house'
+  put '/h/:id', :to => 'houses#update'
+  patch '/h/:id', :to => 'houses#update'
+  delete '/h/:id', :to => 'houses#destroy'
+
   devise_for :admins
-  resources :houses do
+
+  resources :houses, :except => [:show, :update, :destroy] do
       resources :pictures
       resources :bookings
   end
