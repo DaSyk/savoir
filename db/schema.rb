@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160530105248) do
+ActiveRecord::Schema.define(version: 20160622090530) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -159,6 +159,7 @@ ActiveRecord::Schema.define(version: 20160530105248) do
     t.string   "ptype"
     t.integer  "cost_add_person"
     t.integer  "cost_add_person_week"
+    t.integer  "cost_add_week"
   end
 
   create_table "pictures", force: true do |t|

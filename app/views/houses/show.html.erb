@@ -105,11 +105,6 @@
             <% end %>
           </table>
 
-          <% if @house.pricing.note != nil && @house.pricing.note != "" %>
-            <hr style="margin: 8px 0 8px 0;">
-            <h4>Buchungshinweise:</h4>
-            <%= @house.pricing.note.html_safe %>
-          <% end %>
         </div>
 
         <div role='tabpanel' class='tab-pane fade' id='prices'>
@@ -117,12 +112,15 @@
           <table class="table table-hover">
             <thead>
               <tr>
-                <th>von</th>
-                <th>bis</th>
-                <th>Preis/Woche</th>
-				        <th>Preis/Nacht</th>
+                <th rowspan="2">von</th>
+                <th rowspan="2">bis</th>
+                <th colspan="3" style="text-align: center;">Preis</th>
+                <th rowspan="2">Saison</th>
+              </tr>
+              <tr>
+                <th>für erste Woche</th>
+                <th>ab zweiter Woche</th>
                 <th>zusätzl. Person/Woche</th>
-                <th>Saison</th>
               </tr>
             </thead>
             <tbody>
@@ -130,7 +128,7 @@
                 <td><%= p.from %></td>
                 <td><%= p.to %></td>
                 <td><%= p.cost_per_week.to_s+" €" if (p.cost_per_week!=nil && p.cost_per_week!="") %></td>
-				<td><%= p.cost_per_night.to_s+" €" if (p.cost_per_night!=nil && p.cost_per_night!="") %></td>
+				        <td><%= p.cost_add_week.to_s+" €" if (p.cost_add_week!=nil && p.cost_add_week!="") %></td>
                 <td><%= p.cost_add_person_week.to_s+" €" if (p.cost_add_person_week!=nil && p.cost_add_person_week!="") %></td>
                 <td><%= p.season %></td>
               </tr><% end %>
@@ -149,6 +147,13 @@
               </tbody>
             </table>
           <% end %>
+
+          <% if @house.pricing.note != nil && @house.pricing.note != "" %>
+            <hr style="margin: 8px 0 8px 0;">
+            <h4>Buchungshinweise:</h4>
+            <%= @house.pricing.note.html_safe %>
+          <% end %>
+
         </div>
 
       <% if @house.movie_url != "" && @house.movie_url != nil %>
