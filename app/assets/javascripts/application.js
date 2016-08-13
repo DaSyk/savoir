@@ -6,8 +6,7 @@
 //= require bootstrap/tab
 //= require bootstrap/modal
 //= require bootstrap/alert
-//= require jquery.blueimp-gallery.min.js
-//= require bootstrap-image-gallery.min.js
+//= require bootstrap/collapse
 //= require moment
 //= require underscore
 //= require gmaps/google
@@ -100,25 +99,9 @@ $(function() {
     $('[data-toggle="tooltip"]').tooltip();
     $('#tab_location').on('shown.bs.tab', function (e) {
       google.maps.event.trigger(map, 'resize');
+
+      // var myLatlng = {lat: gon.lat, lng: gon.lng};
+      // var map = document.getElementById('map');
+      // map.setCenter(myLatlng);
     });
 });
-
-//call functions
-
-function setDate() {
-    var d = new Date();
-    var month = d.getMonth() + 1;
-    var day = d.getDate();
-    var output = (('' + day).length < 2 ? '0' : '') + day + '.' + (('' + month).length < 2 ? '0' : '') + month + '.' + d.getFullYear();
-    return output;
-}
-
-function unavailable(date) {
-    dmy = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
-    if($.inArray(dmy, gon.dates) == -1) {
-        return [true, ""];
-    }else {
-        return [false, "", "Unavailable"];
-    }
-}
-

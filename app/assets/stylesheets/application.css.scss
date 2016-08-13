@@ -16,8 +16,6 @@
  *
  */
 
-@import 'bootstrap-sprockets';
-@import 'bootstrap-custom';
 @import 'blueimp-gallery.min.css';
 @import 'bootstrap-image-gallery.min.css';
 
@@ -78,7 +76,7 @@ html, body {
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus {
   font-family: 'Matura MT Script Capitals', arial;
-  font-size: 2em;
+  font-size: 1.75em;
   color: white;
   background: -webkit-linear-gradient(top, #0863c4 0%, #3b96f7 100%);
   background: linear-gradient(to bottom, #0863c4 0%, #3b96f7 100%);
@@ -95,6 +93,9 @@ html, body {
     color: white;
     background: -webkit-linear-gradient(top, #0863c4 0%, #3b96f7 100%);
     background: linear-gradient(to bottom, #0863c4 0%, #3b96f7 100%);
+    border-style: solid;
+    border-width: 0 1px 0px 1px;
+    border-color: white;
 }
 .navbar-right  {
     color: white;
@@ -149,6 +150,12 @@ html, body {
 
 ul {
   list-style-type: none;
+}
+
+ul.mobile-tab > li > a {
+  font-size: 0.75em;
+  padding: 2px 3px;
+  margin: 1px;
 }
 
 ul.nav-tabs {
@@ -305,6 +312,9 @@ a > .jumbotron.list {
     width: 100%;
     height: 98px;
   }
+  .content-mobile{
+    width: 100%;
+  }
   .content2{
     width: 100%;
     height: 50px;
@@ -371,6 +381,17 @@ table.calendar {
   }
   tbody > tr > td.end {
     background: linear-gradient(50deg, red 50%, limegreen 50%);
+  }
+}
+
+table.calendar-mobile {
+  tbody > tr > th {
+    padding-right: 0;
+  }
+  tbody > tr > td {
+    width: 13px;
+    padding: 1.5px 0 0 0.5px;
+    color: white;
   }
 }
 

@@ -7,8 +7,8 @@ class HousesController < ApplicationController
 
   def index
     @houses = []
-	Region.all.order(:name).each do |region|
-		region.locations.order(:name).each do |location|
+  Region.all.order(:name).each do |region|
+    region.locations.order(:name).each do |location|
 			location.houses.order(:name).each do |house|
 				@houses << house
 			end
@@ -44,6 +44,8 @@ class HousesController < ApplicationController
       marker.lng house.longitude
     end
     @booking = @house.bookings.build
+    gon.lat = 5
+    gon.lng = @house.longitude
     respond_with(@house)
   end
 
@@ -91,14 +93,14 @@ class HousesController < ApplicationController
     @start_dates = []
     @end_dates = []
 
-	  @house.pricing.periods.where(ptype: "geschlossen").each do |p|
-	    if p.from && p.to
-        (p.from..p.to).each do |d|
-  		    #disabled_dates << d.to_s
-  		    @closed_dates << d
-  	    end
+  @house.pricing.periods.where(ptype: 'geschlossen').each do |p|
+    if p.from && p.to
+      (p.from..p.to).each do |d|
+        # disabled_dates << d.to_s
+        @closed_dates << d
       end
-	  end
+    end
+  end
 
     @house.bookings.where(accepted: true).each do |b|
       @start_dates << b.start_date if b.start_date

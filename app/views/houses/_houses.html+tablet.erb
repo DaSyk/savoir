@@ -1,0 +1,80 @@
+<% @countries.each do |c| %>
+  <% @regions.where(country_id: c.id).each do |r| %>
+
+
+    <h4 style="margin-bottom:3px"><%= r.name %> (<%= c.name.upcase %>)</h4>
+    <hr style="margin-top:3px;margin-bottom:3px; border-color:black">
+
+
+    <% @locations.where(region_id: r.id).each do |l| %>
+      <% @houses.where(location_id: l.id).each do |h| %>
+
+
+         <%= link_to house_path(h), data: {no_turbolink: true } do %>
+          <div class="jumbotron color2 list" style="margin-bottom: 3px;">
+
+            <div class="row">
+              <div class="col-sm-7">
+                <% if h.pictures.where(default_pic: true).count > 0 %>
+                  <%= image_tag h.pictures.where(default_pic: true).first.image_url(:thumb), width: "100%" %>
+                <% end %>
+              </div>
+              <div class="col-sm-5" style="padding-left:0;">
+
+                <h4 style="margin-top: 0px; margin-bottom: 0px;"><%= h.name %>(<%= h.location.name %>)</h4><hr class="small">
+
+                <div class="content2">
+                  <%= "#{h.n_people} Personen" if h.n_people %>
+                  <%= "(max. #{h.add_n_people})" if h.add_n_people %>
+                  <% if (h.n_people && h.size) %>&bull;<% end %>
+                  <%= "#{h.size} m²" if h.size %>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-6">
+                    <h4 style="font-size: 1.3em;">Geeignet für:</h4>
+                    <% h.suits.where(activated:"Ja").each do |s| %>
+                      <li style="margin-left:5px;"><%= s.name %></li>
+                    <% end %>
+                  </div>
+                  <div class="col-sm-6">
+                    <h4 style="font-size: 1.3em;">Ausstattung:</h4>
+                    <% h.facilities.where(activated:"Ja").each do |f| %>
+                      <li style="margin-left:5px;"><%= f.name %></li>
+                    <% end %>
+                  </div>
+                </div>
+
+                <div style="font-size: 1.2em;">
+                  <% if h.pricing.periods.where(ptype: ['geöffnet', 'Sonderangebot']).where('"to" >= ?', Date.today).first %>
+                    ab
+                    <%= h.pricing.periods.where(ptype: ['geöffnet', 'Sonderangebot']).where('"to" >= ?', Date.today).order(:cost_per_week).first.cost_per_week %>
+                    €/Woche
+                  <% end %>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-sm-12">
+                <hr style="margin:3px 0 3px 0;">
+                <div class="content-mobile">
+                  <%= h.short_description.html_safe if h.short_description %>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        <% end %>
+
+
+      <% end %>
+    <% end %>
+
+
+    <hr style="margin-top:3px;margin-bottom:20px; border-color:black">
+
+
+  <% end %>
+<% end %>

@@ -85,3 +85,5 @@ gem 'pg', '0.18.3'
 
 gem 'puma'
 gem 'rake', '10.5.0'
+
+gem 'browser'

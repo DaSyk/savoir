@@ -1,0 +1,99 @@
+<div class="row">
+  <div class="col-sm-4">
+
+    <div class="jumbotron color1 lowpad" style="font-size:0.85em">
+      <h4 style="text-align: center;margin:0;">Suchkriterien</h4><hr class="small">
+
+        <%= search_form_for @search, url: houses_list_path, :builder => SimpleForm::FormBuilder, :id => 'houses_search' do |f| %>
+
+            <label class="string optional control-label" for="booking_lastname">Regionen/Ferienorte</label><br>
+            <div class="checkbox">
+              <% Country.where(id: House.where(activated:true).map(&:location).map(&:region).map(&:country).compact.uniq).each do |c| %>
+                <div style="text-decoration: underline;"><%= c.name %></div>
+                <% Region.where(country_id: c.id).where(id: House.where(activated:true).map(&:location).map(&:region_id).compact.uniq).each do |r| %>
+                  <label class="checkbox-inline">
+                    <%= check_box_tag('q[location_region_id_in][]', r.id) %>
+                    <%= r.name %>
+                  </label><br>
+
+                    <% r.locations.order(:name).each do |l| %>
+                      <% if l.houses.count > 0 %>
+                        <label class="checkbox-inline" style="margin-left: 10px;">
+                          <%= check_box_tag('q[location_name_in][]', l.name) %>
+                          <%= l.name %>
+                        </label><br>
+                      <% end %>
+                    <% end %>
+
+                <% end %>
+              <% end %>
+            </div>
+            <hr class="small">
+
+            <label class="string optional control-label" for="booking_lastname">Personen (max.)</label><br>
+
+            <div class="form-group">
+              <%= f.search_field :add_n_people_gteq, class: 'form-control', size: 1 %>
+            </div>
+
+            <!--
+            <div class="checkbox">
+                <% House.where(activated: true).order(:n_people).pluck(:n_people).to_a.uniq.compact.each do |n| %>
+                  <label class="checkbox-inline" style="margin-right:2px;">
+                    <%= check_box_tag('q[n_people_eq_any][]', n) %><%= n %>
+                  </label>
+                <% end %>
+            </div> -->
+            <hr class="small">
+
+            <label class="string optional control-label" for="booking_lastname">Ausstattung</label><br>
+            <div class="checkbox">
+              <% Facility.where(activated:"Ja").each do |f| %>
+                <% if f.name != (nil || "") %>
+                  <label>
+                    <%= check_box_tag('q[facilities_id_eq]', f.id) %> <%= f.name %>
+                  </label><br>
+                <% end %>
+              <% end %>
+            </div>
+            <hr class="small">
+
+            <label class="string optional control-label" for="booking_lastname">Geeignet für</label>
+            <div class="checkbox">
+              <% Suit.where(activated:"Ja").each do |s| %>
+                <% if s.name != (nil || "") %>
+                  <label>
+                    <%= check_box_tag('q[suits_id_eq]', s.id) %> <%= s.name %>
+                  </label><br>
+                <% end %>
+              <% end %>
+            </div>
+            <hr class="small">
+
+            <label class="string optional control-label" for="booking_lastname">Objekttyp</label>
+            <div class="checkbox">
+                <% House.where(activated: true).pluck(:htype).compact.uniq.each do |t| %>
+                  <% if t != "" %>
+                    <label>
+                      <%= check_box_tag('q[htype_eq_any][]', t) %> <%= t %>
+                    </label><br>
+                  <% end %>
+                <% end %>
+            </div>
+            <hr class="small">
+            <div class="center-block">
+                <div class="form-group text-center">
+                  <button class="btn btn-default" id="selectAll">Alle Filter entfernen</button>
+                </div>
+            </div>
+      <% end %>
+
+
+    </div>
+  </div>
+
+  <div class="col-sm-8" id="houses">
+    <%= render 'houses' %>
+  </div>
+
+</div>

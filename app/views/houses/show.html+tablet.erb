@@ -1,7 +1,7 @@
 <% if current_admin || @house.activated == true %>
 
   <div class="row">
-    <div class="col-md-9">
+    <div class="col-xs-9">
 
       <ul class='nav nav-tabs' role='tablist'>
         <li role='presentation' class='<%= 'active' if flash[:error] == nil %>'><a href='#allgemein' aria-controls='allgemein' role='tab' data-toggle='tab'>Beschreibung</a></li>
@@ -49,7 +49,7 @@
             <div class="row">
 			  <% @house.pictures.order(:order_no).each do |picture| %>
 				<% n+=1 %>
-                <div class="col-md-6 gallery">
+                <div class="col-xs-6 gallery">
                   <%= image_tag picture.image_url(:thumb) %>
                   <%= picture.description %>
                 </div>
@@ -168,7 +168,7 @@
 
     </div>
 
-    <div class="col-md-3">
+    <div class="col-xs-3">
       <div class="jumbotron color2 lowpad">
         <h3 style="text-align: center;margin:0px;"><%= @house.name if @house.name %></h3>
         <h5 style="text-align: center;margin:0px;"><%= @house.location.name if @house.location %> - <br> <%= @house.location.region.name if @house.location && @house.location.region %> </h4>

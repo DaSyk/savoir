@@ -1,9 +1,58 @@
 <% if current_admin || @house.activated == true %>
 
   <div class="row">
-    <div class="col-md-9">
+    <div class="col-xs-12">
+      <div class="jumbotron color2 lowpad">
+        <h3 style="text-align: center;margin:0px;"><%= @house.name if @house.name %></h3>
+        <h5 style="text-align: center;margin:0px;"><%= @house.location.name if @house.location %> - <br> <%= @house.location.region.name if @house.location && @house.location.region %> </h5>
 
-      <ul class='nav nav-tabs' role='tablist'>
+        <br>
+
+        <% if @house.pictures.where(default_pic: true).first != nil %>
+          <%= image_tag(@house.pictures.where(default_pic: true).first.image_url(:thumb), width: "100%") %>
+        <% end %>
+
+        <br><br>
+
+        <div>
+          <div class="row" style="font-size: 1.3em;">
+            <div class="col-xs-3">
+              <span class="glyphs"><%= glyph 'home' %> <%= @house.size %>m²</span>
+            </div>
+            <div class="col-xs-4">
+              <span class="glyphs"><%= glyph 'user' %> <%= @house.n_people %> (max. <%= @house.add_n_people if @house.add_n_people %>)</span>
+            </div>
+            <div class="col-xs-5">
+              <% if @house.pricing.periods.where(ptype: ['geöffnet', 'Sonderangebot']).where('"to" >= ?', Date.today).first %>
+                ab <%= @house.pricing.periods.where(ptype: ['geöffnet', 'Sonderangebot']).where('"to" >= ?', Date.today).order(:cost_per_week).first.cost_per_week %> €/Woche
+              <% end %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-6">
+              <h4 style="font-size: 1.3em;">Geeignet für:</h4>
+              <% @house.suits.where(activated:"Ja").each do |s| %>
+                <li style="margin-left:5px;"><%= s.name %></li>
+              <% end %>
+            </div>
+            <div class="col-xs-6">
+              <h4 style="font-size: 1.3em;">Ausstattung:</h4>
+              <% @house.facilities.where(activated:"Ja").each do |f| %>
+                <li style="margin-left:5px;"><%= f.name %></li>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+
+      <ul class='nav nav-tabs mobile-tab' role='tablist'>
         <li role='presentation' class='<%= 'active' if flash[:error] == nil %>'><a href='#allgemein' aria-controls='allgemein' role='tab' data-toggle='tab'>Beschreibung</a></li>
         <% if @house.address != "" && @house.address != nil %>
           <li role='presentation'><a id='tab_location' href='#location' aria-controls='location' role='tab' data-toggle='tab'>Lage</a></li>
@@ -18,7 +67,6 @@
       </ul>
 
       <div class='tab-content'>
-
         <div role='tabpanel' class='tab-pane fade <%= 'in active' if flash[:error] == nil %>' id='allgemein'>
           <% if @house.description? %>
             <%= @house.description.html_safe %>
@@ -28,7 +76,7 @@
         <% if @house.address != "" && @house.address != nil %>
           <div role='tabpanel' class='tab-pane fade' id='location'>
             <div style='width: 800px;'>
-          	  <div id="map" style='width: 800px; height: 400px;'></div>
+          	  <div id="map" style='width: 410px; height: 410px;'></div>
           	</div>
           	<script type="text/javascript">
           	  handler = Gmaps.build('Google');
@@ -44,37 +92,29 @@
 
 
         <div role='tabpanel' class='tab-pane fade' id='images'>
-          <div>
-			<% n=0 %>
+          <% @house.pictures.order(:order_no).each do |picture| %>
             <div class="row">
-			  <% @house.pictures.order(:order_no).each do |picture| %>
-				<% n+=1 %>
-                <div class="col-md-6 gallery">
-                  <%= image_tag picture.image_url(:thumb) %>
-                  <%= picture.description %>
-                </div>
-				<% if n.even? %>
-				  <br style="clear:both">
-			    <% end %>
-           	  <% end %>
+              <div class="col-xs-12 gallery">
+                <%= image_tag picture.image_url(:thumb) %>
+                <%= picture.description %>
+              </div>
+            </div>
+       	  <% end %>
+  			</div>
 
-			</div>
-		  </div>
-        </div>
 
-        <div role='tabpanel' class='tab-pane fade' id='availability' style="font-size:0.9em;">
-          <table class="calendar">
+        <div role='tabpanel' class='tab-pane fade' id='availability' style="font-size:0.6em;">
+          <table class="calendar" style="font-size:1.2em;">
             <tr>
-              <td class="free"></td><th style="padding-right: 50px">frei</th>
-              <td class="request"></td><th style="padding-right: 50px">auf Anfrage</th>
-              <td class="busy"></td><th style="padding-right: 50px">belegt</th>
-              <td class="closed"></td><th style="padding-right: 50px">geschlossen</th>
-              <td class="special"></td><th style="padding-right: 50px">Sonderangebot</th>
-
+              <td class="free"></td><th style="padding-right: 10px">frei</th>
+              <td class="request"></td><th style="padding-right: 10px">auf Anfrage</th>
+              <td class="busy"></td><th style="padding-right: 10px">belegt</th>
+              <td class="closed"></td><th style="padding-right: 10px">geschlossen</th>
+              <td class="special"></td><th style="padding-right: 10px">Sonderangebot</th>
             </tr>
           </table>
           <hr style="margin: 8px 0 8px 0;">
-          <table class="calendar">
+          <table class="calendar calendar-mobile">
             <% cnt=0 %>
             <% while cnt < 18 %>
               <% if cnt== 0 || (Date.today+cnt.month).month==1 %>
@@ -104,7 +144,6 @@
               <% cnt+=1 %>
             <% end %>
           </table>
-
         </div>
 
         <div role='tabpanel' class='tab-pane fade' id='prices'>
@@ -150,14 +189,13 @@
             <h4>Preishinweise:</h4>
             <%= @house.pricing.note.html_safe %>
           <% end %>
-
         </div>
 
-      <% if @house.movie_url != "" && @house.movie_url != nil %>
-        <div role='tabpanel' class='tab-pane fade' id='video'>
-      	<iframe width="560" height="315" src="https://www.youtube.com/embed/<%= @house.movie_url%>" frameborder="0" allowfullscreen></iframe>
-        </div>
-      <% end %>
+        <% if @house.movie_url != "" && @house.movie_url != nil %>
+          <div role='tabpanel' class='tab-pane fade' id='video'>
+        	  <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= @house.movie_url%>" frameborder="0" allowfullscreen></iframe>
+          </div>
+        <% end %>
 
 
       	<div role='tabpanel' class='tab-pane fade <%= 'in active' if flash[:error] %>' id='request'>
@@ -165,48 +203,11 @@
       	</div>
 
       </div>
-
     </div>
-
-    <div class="col-md-3">
-      <div class="jumbotron color2 lowpad">
-        <h3 style="text-align: center;margin:0px;"><%= @house.name if @house.name %></h3>
-        <h5 style="text-align: center;margin:0px;"><%= @house.location.name if @house.location %> - <br> <%= @house.location.region.name if @house.location && @house.location.region %> </h4>
-        <!-- <hr class="small"> -->
-        <br>
-        <% if @house.pictures.where(default_pic: true).first != nil %>
-          <%= image_tag(@house.pictures.where(default_pic: true).first.image_url(:thumb), width: "100%") %>
-        <% end %>
-        <br><br>
-        <table>
-          <tr style="font-size:1.3em;">
-            <td style="width:50%;"><span class="glyphs"><%= glyph 'home' %> <%= @house.size %>m²</span></td>
-            <td style="width:50%;"><span class="glyphs"><%= glyph 'user' %> <%= @house.n_people %> (max. <%= @house.add_n_people if @house.add_n_people %>)</span></td>
-          </tr>
-          <tr><td colspan="2">
-            <% if @house.pricing.periods.where(ptype: ['geöffnet', 'Sonderangebot']).where('"to" >= ?', Date.today).first %>
-              ab <%= @house.pricing.periods.where(ptype: ['geöffnet', 'Sonderangebot']).where('"to" >= ?', Date.today).order(:cost_per_week).first.cost_per_week %> €/Woche
-            <% end %>
-          </td></tr>
-          <tr><td colspan="2">
-            <h4>Geeignet für:</h4>
-            <% @house.suits.where(activated:"Ja").each do |s| %>
-              <li style="margin-left:20px;"><%= s.name %></li>
-            <% end %>
-          </td></tr>
-          <tr><td colspan="2">
-            <h4>Ausstattung:</h4>
-            <% @house.facilities.where(activated:"Ja").each do |f| %>
-              <li style="margin-left:20px;"><%= f.name %></li>
-            <% end %>
-          </td></tr>
-        </table>
-
-      </div>
-    </div>
-
   </div>
+
   <br>
+
   <div class='center-block'>
     <div class='form-group text-center'>
       <%= link_to 'Zurück', :back, :class => 'btn btn-default'  %>
