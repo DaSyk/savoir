@@ -48,7 +48,7 @@ gem 'nested_form'
 
 gem 'ckeditor'
 gem 'coffee-script-source', '1.8.0'
-gem 'carrierwave' #, github:'carrierwaveuploader/carrierwave'
+gem 'carrierwave' # , github:'carrierwaveuploader/carrierwave'
 gem 'carrierwave-crop'
 gem 'rmagick'
 gem 'mini_magick'
@@ -80,11 +80,10 @@ group :development do
     gem 'capistrano3-puma',   require: false
 end
 
-gem 'bcrypt', '3.1.9'
-gem 'pg', '0.18.3'
-
+gem 'bcrypt'
+gem 'pg'
 gem 'puma'
-gem 'rake', '10.5.0'
+gem 'rake'
 
 gem 'browser'
 gem 'utf8-cleaner'
