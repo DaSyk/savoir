@@ -48,7 +48,7 @@ gem 'nested_form'
 
 gem 'ckeditor'
 gem 'coffee-script-source', '1.8.0'
-gem 'carrierwave', github:'carrierwaveuploader/carrierwave'
+gem 'carrierwave' #, github:'carrierwaveuploader/carrierwave'
 gem 'carrierwave-crop'
 gem 'rmagick'
 gem 'mini_magick'
@@ -87,3 +87,4 @@ gem 'puma'
 gem 'rake', '10.5.0'
 
 gem 'browser'
+gem 'utf8-cleaner'
