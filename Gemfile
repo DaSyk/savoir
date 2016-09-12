@@ -58,7 +58,7 @@ gem 'gon'
 
 gem 'jquery-ui-rails'
 gem 'jquery-fileupload-rails'
-gem 'jquery-turbolinks'
+#gem 'jquery-turbolinks'
 gem 'jquery-validation-rails'
 
 gem 'devise'

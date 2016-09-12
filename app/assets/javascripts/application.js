@@ -1,6 +1,5 @@
 //= require jquery
 //= require jquery-ui
-//= require jquery.turbolinks
 //= require jquery_ujs
 //= require bootstrap/tooltip
 //= require bootstrap/tab
@@ -98,9 +97,5 @@ $(function() {
     $('[data-toggle="tooltip"]').tooltip();
     $('#tab_location').on('shown.bs.tab', function (e) {
       google.maps.event.trigger(map, 'resize');
-
-      // var myLatlng = {lat: gon.lat, lng: gon.lng};
-      // var map = document.getElementById('map');
-      // map.setCenter(myLatlng);
     });
 });

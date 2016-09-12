@@ -44,8 +44,6 @@ class HousesController < ApplicationController
       marker.lng house.longitude
     end
     @booking = @house.bookings.build
-    gon.lat = 5
-    gon.lng = @house.longitude
     respond_with(@house)
   end
 
