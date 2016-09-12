@@ -18,7 +18,6 @@
 //= require jquery-fileupload/vendor/tmpl
 //= require jquery_nested_form
 //= require ckeditor/init
-//= require turbolinks
 //= require_tree .
 
 $(document).on('nested:fieldAdded', function(event){
